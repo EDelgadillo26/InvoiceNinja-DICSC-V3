@@ -26,9 +26,9 @@ export class ClientsPage {
 
     // ========== FILTER AND CONTROL SELECTORS ==========
     private readonly filterInput = 'input#filter[placeholder="Filter"]';
-    private readonly lifecycleDropdown = 'div:has(span:has-text("Lifecycle:"))';
-    private readonly lifecycleValue = 'span:has-text("Active")';
-    private readonly lifecycleArrow = 'div:has(span:has-text("Active")) svg[viewBox="0 0 20 20"]';
+    private readonly lifecycleDropdown = '//div[.//span[contains(text(),"Lifecycle")]]//div[@class="sm:w-auto w-full css-b62m3t-container"]';
+    private readonly lifecycleValue = (columnName: string) => `//span[text()="${columnName}"]/preceding::input[@type="checkbox"][1]`;
+    private readonly applylifecycleButton = 'div.flex.w-full.px-3.space-x-2 > button:nth-child(2)';
     private readonly columnsButton = 'button:has(span:has-text("Columns"))';
     private readonly columnsIcon = 'button:has(svg[viewBox="0 0 12 12"]:has(line[x1="6"][y1="1.25"]))';
     private readonly importButton = 'a[href="#/clients/import"]';
@@ -52,6 +52,7 @@ export class ClientsPage {
     private readonly contextMenuEdit = 'button:has-text("Edit")';
     private readonly contextMenuArchiveDeletePurgeOption = (option: 'Archive' | 'Delete' | 'Purge') => `//button[div[contains(text(),"${option}")]]`;
     private readonly confirmationContinueButton = '//button[contains(text(),"Continue")]';
+   
     // ========== TABLE ROW SELECTORS ==========
     private readonly tableRowsAll = 'tbody tr.table-row';
     private readonly clientCheckboxes = 'tbody input[type="checkbox"][data-cy="dataTableCheckbox"]';
@@ -216,10 +217,32 @@ export class ClientsPage {
     }
 
     /**
+     * Clicks the lifecycle dropdown and select option
+     */
+    async clickLifecycleDropdownAndSelectOption(option: string): Promise<void> {
+        await this.page.locator(this.lifecycleDropdown).click();
+        await this.page.locator(this.lifecycleValue(option)).check();
+    }
+
+    /**
+     * Clicks the lifecycle dropdown and select all options
+     */
+    async clickLifecycleDropdownAndSelectAllOptions(): Promise<void> {
+        await this.page.locator(this.lifecycleDropdown).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.lifecycleDropdown).click();
+        await this.page.locator(this.lifecycleValue('Active')).check();
+        await this.page.locator(this.lifecycleValue('Archived')).check();
+        await this.page.locator(this.lifecycleValue('Deleted')).check();
+        await this.page.locator(this.applylifecycleButton).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.applylifecycleButton).click();
+        await this.page.waitForLoadState('networkidle');
+    }
+
+    /**
      * Gets the current lifecycle value
      */
-    async getLifecycleValue(): Promise<string> {
-        return await this.page.locator(this.lifecycleValue).textContent() || '';
+    async getLifecycleValue(option:string): Promise<string> {
+        return await this.page.locator(this.lifecycleValue(option)).textContent() || '';
     }
 
     /**
@@ -458,6 +481,19 @@ export class ClientsPage {
       console.log('Getting purge confirmation text', new Date());
       try {
           await this.page.getByText('Successfully purged Client').waitFor({ state: 'visible', timeout: 2000 });
+          return true;
+      } catch {
+          return false;
+      }
+    }
+
+   /**
+     * Gets the Archive Confirmation text
+     */
+    async isArchiveConfirmationTextVisible(): Promise<boolean> {
+      console.log('Getting archive confirmation text', new Date());
+      try {
+          await this.page.getByText('Successfully archived Client').waitFor({ state: 'visible', timeout: 2000 });
           return true;
       } catch {
           return false;
