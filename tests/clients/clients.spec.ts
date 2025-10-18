@@ -38,7 +38,7 @@ test.describe('Login Tests', () => {
     }
   });
 
-    test.only('IN-16: Admin > Clients > Crear Cliente con los compos minimos requeridos', {
+    test.only('IN-16: Admin > Clients > Crear Cliente con los campos minimos requeridos', {
       tag: ['@smoke', '@clients']
     }, async () => {
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
