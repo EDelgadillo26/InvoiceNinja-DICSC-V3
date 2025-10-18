@@ -28,7 +28,7 @@ export class BaseNavigationPage {
     protected readonly dashboardText = 'span:has-text("Dashboard")';
 
     // Clients
-    protected readonly clientsLink = 'a[href="#/clients"]';
+    protected readonly clientsLink = '//a[@href="#/clients" and .//span[text()="Clients"]]';
     protected readonly clientsCreateLink = 'a[href="#/clients/create"]';
     protected readonly clientsIcon = 'svg[viewBox="0 0 18 18"]:has(circle[cx="6.5"])';
     protected readonly clientsText = 'span:has-text("Clients")';
@@ -181,6 +181,7 @@ export class BaseNavigationPage {
     }
 
     async clickClients(): Promise<void> {
+        await this.page.locator(this.clientsLink).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.clientsLink).click();
         await this.page.waitForLoadState('networkidle');
 

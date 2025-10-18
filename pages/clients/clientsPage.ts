@@ -33,7 +33,7 @@ export class ClientsPage {
     private readonly columnsIcon = 'button:has(svg[viewBox="0 0 12 12"]:has(line[x1="6"][y1="1.25"]))';
     private readonly importButton = 'a[href="#/clients/import"]';
     private readonly importIcon = 'svg[viewBox="0 0 18 18"]:has(path[d*="M12.28,8.97"])';
-    private readonly newClientButton = 'a[href="#/clients/create"]:has-text("New Client")';
+    private readonly newClientButton = '//a[contains(@href, "#/clients/create") and contains(text(), "New Client")]';
 
     // ========== DATA TABLE SELECTORS ==========
     private readonly dataTable = '[data-cy="dataTable"]';
@@ -44,35 +44,24 @@ export class ClientsPage {
 
     // ========== TABLE HEADER COLUMN SELECTORS ==========
     private readonly headerCheckbox = 'thead input[type="checkbox"]';
-    private readonly headerName = 'th:has(span:has-text("Name"))';
-    private readonly headerContactEmail = 'th:has(span:has-text("Contact Email"))';
-    private readonly headerIdNumber = 'th:has(span:has-text("ID Number"))';
-    private readonly headerBalance = 'th:has(span:has-text("Balance"))';
-    private readonly headerPaidToDate = 'th:has(span:has-text("Paid to Date"))';
-    private readonly headerDateCreated = 'th:has(span:has-text("Date Created"))';
-    private readonly headerLastLogin = 'th:has(span:has-text("Last Login"))';
-    private readonly headerWebsite = 'th:has(span:has-text("Website"))';
+    private readonly headerName = (columnName: string) => `th:has(span:has-text("${columnName}"))`; 
     private readonly headerActions = 'th:last-child';
 
+    // ========== Context Menu  (Actions Button) ==========
+    private readonly contextMenu = 'div[role="menu"]';
+    private readonly contextMenuEdit = 'button:has-text("Edit")';
+    private readonly contextMenuArchiveDeletePurgeOption = (option: 'Archive' | 'Delete' | 'Purge') => `//button[div[contains(text(),"${option}")]]`;
+    private readonly confirmationContinueButton = '//button[contains(text(),"Continue")]';
     // ========== TABLE ROW SELECTORS ==========
-    private readonly tableRows = 'tbody tr.table-row';
-    private readonly firstClientRow = 'tbody tr:first-child';
+    private readonly tableRowsAll = 'tbody tr.table-row';
     private readonly clientCheckboxes = 'tbody input[type="checkbox"][data-cy="dataTableCheckbox"]';
     private readonly clientNames = 'tbody td a[href*="/clients/"]';
-    private readonly clientEmails = 'tbody td:nth-child(3)';
-    private readonly clientIdNumbers = 'tbody td:nth-child(4)';
     private readonly clientBalances = 'tbody td:nth-child(5)';
-    private readonly clientPaidToDates = 'tbody td:nth-child(6)';
     private readonly clientDateCreated = 'tbody td:nth-child(7)';
-    private readonly clientLastLogin = 'tbody td:nth-child(8)';
-    private readonly clientWebsites = 'tbody td:nth-child(9)';
-    private readonly clientActionButtons = 'tbody button[data-cy="chevronDownButton"]';
+    private readonly actionsButtonSelector = (clientName: string) => `//tbody//tr[td[2]/a[contains(text(),"${clientName}")]]//button[@data-cy="chevronDownButton"]`;
 
     // ========== SPECIFIC CLIENT DATA SELECTORS ==========
-    private readonly pabloClientLink = 'a[href="#/clients/MvbmQzyEbY"]:has-text("Pablo")';
-    private readonly cristinaClientLink = 'a[href="#/clients/JxboQByAeg"]:has-text("Cristina Steuber")';
-    private readonly websiteLinks = 'a[href^="https://"][target="_blank"]';
-    private readonly websiteIcons = 'svg[viewBox="0 0 20 20"]:has(polyline[points="17 8 17 3 12 3"])';
+    private readonly clientNameGeneric = (name: string) => `//tbody//td/a[contains(@href, "/clients/") and contains(text(), "${name}")]`;
 
     // ========== PAGINATION SELECTORS ==========
     private readonly paginationContainer = 'div:has(span:has-text("Total results:"))';
@@ -84,8 +73,6 @@ export class ClientsPage {
     private readonly lastPageButton = 'div:has(svg[viewBox="0 0 12 12"]:has(path[d*="m6.25,10.75c-.192,0-.384-.073-.53-.22"]))';
     private readonly rowsPerPageDropdown = 'div:has(span:has-text("rows:"))';
     private readonly rowsPerPageValue = 'div.css-ood9ll-singleValue:has-text("10")';
-
-    // ========== PAGE HEADER METHODS ==========
 
     /**
      * Gets the page title text
@@ -283,6 +270,7 @@ export class ClientsPage {
      * Clicks the new client button
      */
     async clickNewClientButton(): Promise<void> {
+        await this.page.locator(this.newClientButton).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.newClientButton).click();
     }
 
@@ -329,7 +317,7 @@ export class ClientsPage {
      * Gets the number of table rows
      */
     async getTableRowCount(): Promise<number> {
-        return await this.page.locator(this.tableRows).count();
+        return await this.page.locator(this.tableRowsAll).count();
     }
 
     // ========== TABLE HEADER METHODS ==========
@@ -354,32 +342,18 @@ export class ClientsPage {
     /**
      * Clicks the Name column header
      */
-    async clickNameHeader(): Promise<void> {
-        await this.page.locator(this.headerName).click();
-    }
-
-    /**
-     * Clicks the Balance column header
-     */
-    async clickBalanceHeader(): Promise<void> {
-        await this.page.locator(this.headerBalance).click();
+    async clickNameHeader(columnName: string): Promise<void> {
+        await this.page.locator(this.headerName(columnName)).click();
     }
 
     /**
      * Checks if all table headers are visible
      * @returns {Promise<boolean>} True if all headers are visible, false otherwise
      */
-    async areTableHeadersVisible(): Promise<boolean> {
+    async areTableHeadersVisible(columnName: string): Promise<boolean> {
         console.log('Validating all table headers visibility', new Date());
         const headers = [
-            this.headerName,
-            this.headerContactEmail,
-            this.headerIdNumber,
-            this.headerBalance,
-            this.headerPaidToDate,
-            this.headerDateCreated,
-            this.headerLastLogin,
-            this.headerWebsite
+            this.headerName(columnName),
         ];
 
         for (const header of headers) {
@@ -464,73 +438,59 @@ export class ClientsPage {
     }
 
     /**
-     * Clicks the action button for the first client
+     * Clicks the action button for the specific client
      */
-    async clickFirstClientActionButton(): Promise<void> {
-        await this.page.locator(this.clientActionButtons).first().click();
+    async clickClientActionButton(name: string): Promise<void> {
+        await this.page.locator(this.actionsButtonSelector(name)).click();
+    }
+
+    /**
+     * Clicks the action button for the specific client
+     */
+    async confirmPurgeClient(): Promise<void> {
+        await this.page.locator(this.confirmationContinueButton).click();
+    }
+
+    /**
+     * Gets the Purge Confirmation text
+     */
+    async isPurgeConfirmationTextVisible(): Promise<boolean> {
+      console.log('Getting purge confirmation text', new Date());
+      try {
+          await this.page.getByText('Successfully purged Client').waitFor({ state: 'visible', timeout: 2000 });
+          return true;
+      } catch {
+          return false;
+      }
     }
 
     /**
      * Checks if client action buttons are visible
      * @returns {Promise<boolean>} True if client action buttons are visible, false otherwise
      */
-    async areClientActionButtonsVisible(): Promise<boolean> {
+    async areClientActionButtonsVisible(name: string): Promise<boolean> {
         console.log('Validating client action buttons visibility', new Date());
-        await this.page.locator(this.clientActionButtons).first().waitFor({ state: 'visible', timeout: 10000 });
-        return await this.page.locator(this.clientActionButtons).first().isVisible();
+        await this.page.locator(this.actionsButtonSelector(name)).first().waitFor({ state: 'visible', timeout: 10000 });
+        return await this.page.locator(this.actionsButtonSelector(name)).first().isVisible();
     }
 
     // ========== SPECIFIC CLIENT METHODS ==========
 
     /**
-     * Clicks the Pablo client link
+     * Clicks the Specific client link
      */
-    async clickPabloClient(): Promise<void> {
-        await this.page.locator(this.pabloClientLink).click();
+    async clickSpecificClient(clientName: string): Promise<void> {
+        await this.page.locator(this.clientNameGeneric(clientName)).click();
     }
 
     /**
-     * Checks if the Pablo client is visible
-     * @returns {Promise<boolean>} True if Pablo client is visible, false otherwise
+     * Checks if the Specific client is visible
+     * @returns {Promise<boolean>} True if Specific client is visible, false otherwise
      */
-    async isPabloClientVisible(): Promise<boolean> {
-        console.log('Validating Pablo client visibility', new Date());
-        await this.page.locator(this.pabloClientLink).waitFor({ state: 'visible', timeout: 10000 });
-        return await this.page.locator(this.pabloClientLink).isVisible();
-    }
-
-    /**
-     * Clicks the Cristina client link
-     */
-    async clickCristinaClient(): Promise<void> {
-        await this.page.locator(this.cristinaClientLink).click();
-    }
-
-    /**
-     * Checks if the Cristina client is visible
-     * @returns {Promise<boolean>} True if Cristina client is visible, false otherwise
-     */
-    async isCristinaClientVisible(): Promise<boolean> {
-        console.log('Validating Cristina client visibility', new Date());
-        await this.page.locator(this.cristinaClientLink).waitFor({ state: 'visible', timeout: 10000 });
-        return await this.page.locator(this.cristinaClientLink).isVisible();
-    }
-
-    /**
-     * Gets the count of website links
-     */
-    async getWebsiteLinksCount(): Promise<number> {
-        return await this.page.locator(this.websiteLinks).count();
-    }
-
-    /**
-     * Checks if website icons are visible
-     * @returns {Promise<boolean>} True if website icons are visible, false otherwise
-     */
-    async areWebsiteIconsVisible(): Promise<boolean> {
-        console.log('Validating website icons visibility', new Date());
-        await this.page.locator(this.websiteIcons).first().waitFor({ state: 'visible', timeout: 10000 });
-        return await this.page.locator(this.websiteIcons).first().isVisible();
+    async isSpecificClientVisible(clientName: string): Promise<boolean> {
+        console.log(`Validating ${clientName} client visibility`, new Date());
+        await this.page.locator(this.clientNameGeneric(clientName)).waitFor({ state: 'visible', timeout: 10000 });
+        return await this.page.locator(this.clientNameGeneric(clientName)).isVisible();
     }
 
     // ========== PAGINATION METHODS ==========
@@ -601,6 +561,14 @@ export class ClientsPage {
         await this.page.locator(this.rowsPerPageDropdown).click();
     }
 
+
+    /**
+     * Clicks the contextMenuArchiveDeletePurge per page dropdown
+     */
+    async clickOnContextMenuArchiveDeletePurge(option: 'Archive' | 'Delete' | 'Purge'): Promise<void> {
+        await this.page.locator(this.contextMenuArchiveDeletePurgeOption(option)).click();
+    }
+
     // ========== UTILITY METHODS ==========
 
     /**
@@ -643,7 +611,7 @@ export class ClientsPage {
      */
     async hasClientsInTable(): Promise<boolean> {
         console.log('Validating clients in table', new Date());
-        await this.page.locator(this.tableRows).first().waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.tableRowsAll).first().waitFor({ state: 'visible', timeout: 10000 });
         const rowCount = await this.getTableRowCount();
         return rowCount > 0;
     }
@@ -660,7 +628,7 @@ export class ClientsPage {
         dateCreated: string;
         lastLogin: string;
     }> {
-        const row = this.page.locator(this.tableRows).nth(rowIndex);
+        const row = this.page.locator(this.tableRowsAll).nth(rowIndex);
         
         return {
             name: await row.locator('td:nth-child(2) a').textContent() || '',

@@ -17,7 +17,7 @@ export class CreateClientsPage {
     private readonly searchShortcut = 'p:has-text("Ctrl+K")';
     private readonly notificationButton = 'button:has(svg[viewBox="0 0 24 24"]:has(path[d="M18 8A6 6 0"]))';
     private readonly upgradeButton = 'button:has-text("Unlock Pro"), button:has-text("Upgrade")';
-    private readonly saveButton = 'button:has-text("Save")';
+    private readonly saveButton = '//button[contains(@class,"sc-gjcoXW") and contains(text(),"Save")]';
 
     // ========== BREADCRUMB SELECTORS ==========
     private readonly breadcrumbContainer = 'nav[aria-label="Breadcrumb"]';
@@ -38,7 +38,7 @@ export class CreateClientsPage {
     private readonly companyDetailsTitle = 'h3:has-text("Company Details")';
     
     // Company Details Form Fields
-    private readonly nameField = 'input[type="text"]:near(span:has-text("Name"))';
+    private readonly nameField = '//dt[span[text()="Name"]]/following-sibling::dd//input[@type="text"]';
     private readonly numberField = 'input[type="text"]:near(span:has-text("Number"))';
     private readonly groupDropdown = 'div:has(#react-select-9-input)';
     private readonly assignedUserDropdown = 'div:has(#react-select-10-input)';
@@ -149,9 +149,22 @@ export class CreateClientsPage {
         return await this.page.locator(this.saveButton).textContent() || '';
     }
 
+    /**
+     * Gets the Create Confirmation text
+     */
+    async isCreateConfirmationTextVisible(): Promise<boolean> {
+    console.log('Getting create confirmation text', new Date());
+        try {
+            await this.page.getByText('Successfully created client').waitFor({ state: 'visible', timeout: 2000 });
+            return true;
+        } catch {
+            return false;
+        }
+    }
+    
     // ========== BREADCRUMB METHODS ==========
 
-    /**
+    /**            
      * Checks if the breadcrumb container is visible
      */
     async isBreadcrumbVisible(): Promise<boolean> {
@@ -270,6 +283,7 @@ export class CreateClientsPage {
      */
     async fillNameField(name: string): Promise<void> {
         console.log('Filling name field', new Date());
+        await this.page.locator(this.nameField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.nameField).fill(name);
     }
 
@@ -492,6 +506,7 @@ export class CreateClientsPage {
      */
     async fillFirstNameField(firstName: string): Promise<void> {
         console.log('Filling first name field', new Date());
+        await this.page.locator(this.firstNameField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.firstNameField).fill(firstName);
     }
 
@@ -509,6 +524,7 @@ export class CreateClientsPage {
      */
     async fillLastNameField(lastName: string): Promise<void> {
         console.log('Filling last name field', new Date());
+        await this.page.locator(this.lastNameField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.lastNameField).fill(lastName);
     }
 
