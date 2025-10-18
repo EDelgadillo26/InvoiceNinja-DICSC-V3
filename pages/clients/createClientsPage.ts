@@ -6,12 +6,7 @@ export class ClientsPage {
 
   constructor(page: Page) {
     this.page = page;
-
   }
 
-  //Selectores
-
-  //Metodos
-
-
+  
 }

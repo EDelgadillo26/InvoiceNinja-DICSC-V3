@@ -1,11 +1,13 @@
 import { Page } from "@playwright/test";
-import { LoginPage } from "../pages/loginPage";
-import { ClientsPage } from "../pages/clientsPage";
+import { LoginPage } from "./login/loginPage";
+import { ClientsPage } from "./clients/clientsPage";
+import { BaseNavigationPage } from "./baseNavigationPage";
 
 export class PageManager {
     readonly page: Page;
     private readonly loginPage: LoginPage;
     private readonly clientsPage: ClientsPage;
+    private readonly baseNavigationPage: BaseNavigationPage;
 
 
   /**   
@@ -16,6 +18,7 @@ export class PageManager {
     this.page = page;
     this.loginPage = new LoginPage(page);
     this.clientsPage = new ClientsPage(page);
+    this.baseNavigationPage = new BaseNavigationPage(page);
   }
 
 
@@ -34,5 +37,13 @@ export class PageManager {
    */
   Clients(): ClientsPage {
     return this.clientsPage;
+  }
+
+  /**
+   * Get the BaseNavigationPage object
+   * @returns BaseNavigationPage instance
+   */
+  BaseNavigationPage(): BaseNavigationPage {
+    return this.baseNavigationPage;
   }
 }
