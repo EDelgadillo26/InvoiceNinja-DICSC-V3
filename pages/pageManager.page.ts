@@ -1,14 +1,21 @@
 import { Page } from "@playwright/test";
+import { BaseNavigationPage } from "./baseNavigationPage";
 import { LoginPage } from "./login/loginPage";
 import { ClientsPage } from "./clients/clientsPage";
-import { BaseNavigationPage } from "./baseNavigationPage";
+import { SettingsClientsPage } from "./clients/settingsClientsPage";
+import { CreateClientsPage } from "./clients/createClientsPage";
+import { LocationsClientsPage } from "./clients/locationsClientsPage";
+import { DocumentsClientsPage } from "./clients/documentsClientsPage";
 
 export class PageManager {
     readonly page: Page;
     private readonly loginPage: LoginPage;
     private readonly clientsPage: ClientsPage;
     private readonly baseNavigationPage: BaseNavigationPage;
-
+    private readonly settingsClientsPage: SettingsClientsPage;
+    private readonly createClientsPage: CreateClientsPage;
+    private readonly locationsClientsPage: LocationsClientsPage;
+    private readonly documentsClientsPage: DocumentsClientsPage;
 
   /**   
    * Constructor for Playwright PageManager class
@@ -19,6 +26,10 @@ export class PageManager {
     this.loginPage = new LoginPage(page);
     this.clientsPage = new ClientsPage(page);
     this.baseNavigationPage = new BaseNavigationPage(page);
+    this.settingsClientsPage = new SettingsClientsPage(page);
+    this.createClientsPage = new CreateClientsPage(page);
+    this.locationsClientsPage = new LocationsClientsPage(page);
+    this.documentsClientsPage = new DocumentsClientsPage(page);
   }
 
 
@@ -32,6 +43,14 @@ export class PageManager {
   }
 
   /**
+   * Get the BaseNavigationPage object
+   * @returns BaseNavigationPage instance
+   */
+  BaseNavigationPage(): BaseNavigationPage {
+    return this.baseNavigationPage;
+  }
+
+  /**
    * Get the ClientsPage object
    * @returns ClientsPage instance
    */
@@ -40,10 +59,33 @@ export class PageManager {
   }
 
   /**
-   * Get the BaseNavigationPage object
-   * @returns BaseNavigationPage instance
+   * Get the SettingsClientsPage object
+   * @returns SettingsClientsPage instance
    */
-  BaseNavigationPage(): BaseNavigationPage {
-    return this.baseNavigationPage;
+  SettingsClients(): SettingsClientsPage {
+    return this.settingsClientsPage;
   }
+  
+  /**
+   * Get the CreateClientsPage object
+   * @returns CreateClientsPage instance
+   */
+  CreateClients(): CreateClientsPage {
+    return this.createClientsPage;
+  }
+
+  /**
+   * Get the LocationsClientsPage object
+   * @returns LocationsClientsPage instance
+   */
+  LocationsClients(): LocationsClientsPage {
+    return this.locationsClientsPage;
+  }
+  /**
+   * Get the DocumentsClientsPage object
+   * @returns DocumentsClientsPage instance
+   */
+  DocumentsClients(): DocumentsClientsPage {
+    return this.documentsClientsPage;
+  }  
 }
