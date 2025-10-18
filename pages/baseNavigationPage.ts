@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 
-export class baseNavigationPage {
+export class BaseNavigationPage {
 
   private page: Page;
 
@@ -28,7 +28,7 @@ export class baseNavigationPage {
     protected readonly dashboardText = 'span:has-text("Dashboard")';
 
     // Clients
-    protected readonly clientsLink = 'a[href="#/clients"]';
+    protected readonly clientsLink = '//a[@href="#/clients" and .//span[text()="Clients"]]';
     protected readonly clientsCreateLink = 'a[href="#/clients/create"]';
     protected readonly clientsIcon = 'svg[viewBox="0 0 18 18"]:has(circle[cx="6.5"])';
     protected readonly clientsText = 'span:has-text("Clients")';
@@ -148,19 +148,30 @@ export class baseNavigationPage {
     
     /**
      * Validates that the sidebar navigation is visible and accessible
+     * @returns {Promise<boolean>} True if sidebar is visible, false otherwise
      */
-    async validateSidebarIsVisible(): Promise<void> {
-        await expect(this.page.locator(this.sidebarContainer)).toBeVisible();
-        await expect(this.page.locator(this.navigationBar)).toBeVisible();
+    async isSidebarVisible(): Promise<boolean> {
+        console.log('Validating sidebar visibility', new Date());
+        await this.page.locator(this.sidebarContainer).waitFor({ state: 'visible', timeout: 10000 });
+        return await this.page.locator(this.sidebarContainer).isVisible();
     }
 
     /**
      * Validates that the company header section is visible
+     * @returns {Promise<boolean>} True if company header is visible, false otherwise
      */
-    async validateCompanyHeaderIsVisible(): Promise<void> {
-        await expect(this.page.locator(this.companyHeader)).toBeVisible();
-        await expect(this.page.locator(this.companyLogo)).toBeVisible();
-        await expect(this.page.locator(this.companyName)).toBeVisible();
+    async isCompanyHeaderVisible(): Promise<boolean> {
+        try {
+            console.log('Validating company header visibility', new Date());
+            await this.page.locator(this.companyHeader).waitFor({ state: 'visible', timeout: 10000 });
+            const headerVisible = await this.page.locator(this.companyHeader).isVisible();
+            const logoVisible = await this.page.locator(this.companyLogo).isVisible();
+            const nameVisible = await this.page.locator(this.companyName).isVisible();
+            return headerVisible && logoVisible && nameVisible;
+        } catch (error) {
+            console.log('Company header is not visible:', error);
+            return false;
+        }
     }
 
     // ========== NAVIGATION CLICK METHODS ==========
@@ -170,7 +181,10 @@ export class baseNavigationPage {
     }
 
     async clickClients(): Promise<void> {
+        await this.page.locator(this.clientsLink).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.clientsLink).click();
+        await this.page.waitForLoadState('networkidle');
+
     }
 
     async clickCreateClient(): Promise<void> {
@@ -295,14 +309,52 @@ export class baseNavigationPage {
         await this.page.locator(this.companyDropdownButton).click();
     }
 
-    async validateCompanyName(expectedName: string): Promise<void> {
-        await expect(this.page.locator(this.companyName)).toHaveText(expectedName);
+    /**
+     * Gets the company name text
+     * @returns {Promise<string>} The company name text
+     */
+    async getCompanyName(): Promise<string> {
+        try {
+            console.log('Getting company name', new Date());
+            await this.page.locator(this.companyName).waitFor({ state: 'visible', timeout: 10000 });
+            return await this.page.locator(this.companyName).textContent() || '';
+        } catch (error) {
+            console.log('Could not get company name:', error);
+            return '';
+        }
+    }
+
+    /**
+     * Validates company name matches expected value
+     * @param expectedName Expected company name
+     * @returns {Promise<boolean>} True if names match, false otherwise
+     */
+    async validateCompanyName(expectedName: string): Promise<boolean> {
+        try {
+            console.log('Validating company name', new Date());
+            const actualName = await this.getCompanyName();
+            return actualName === expectedName;
+        } catch (error) {
+            console.log('Could not validate company name:', error);
+            return false;
+        }
     }
 
     // ========== BOTTOM NAVIGATION METHODS ==========
 
-    async validateBottomNavigationIsVisible(): Promise<void> {
-        await expect(this.page.locator(this.bottomNavbar)).toBeVisible();
+    /**
+     * Validates that the bottom navigation is visible
+     * @returns {Promise<boolean>} True if bottom navigation is visible, false otherwise
+     */
+    async isBottomNavigationVisible(): Promise<boolean> {
+        try {
+            console.log('Validating bottom navigation visibility', new Date());
+            await this.page.locator(this.bottomNavbar).waitFor({ state: 'visible', timeout: 10000 });
+            return await this.page.locator(this.bottomNavbar).isVisible();
+        } catch (error) {
+            console.log('Bottom navigation is not visible:', error);
+            return false;
+        }
     }
 
     async clickMailIcon(): Promise<void> {
@@ -333,64 +385,96 @@ export class baseNavigationPage {
 
     /**
      * Validates that a specific navigation item is highlighted/active
+     * @param itemSelector The selector for the navigation item
+     * @returns {Promise<boolean>} True if item is active, false otherwise
      */
-    async validateNavigationItemIsActive(itemSelector: string): Promise<void> {
-        const item = this.page.locator(itemSelector).locator('..');
-        await expect(item).toHaveClass(/border-l-4/);
+    async isNavigationItemActive(itemSelector: string): Promise<boolean> {
+        try {
+            console.log('Validating navigation item is active', new Date());
+            const item = this.page.locator(itemSelector).locator('..');
+            await item.waitFor({ state: 'visible', timeout: 10000 });
+            const classAttribute = await item.getAttribute('class');
+            return classAttribute?.includes('border-l-4') || false;
+        } catch (error) {
+            console.log('Navigation item is not active:', error);
+            return false;
+        }
     }
 
     /**
      * Validates that all main navigation items are visible
+     * @returns {Promise<boolean>} True if all navigation items are visible, false otherwise
      */
-    async validateAllNavigationItemsAreVisible(): Promise<void> {
-        const navigationItems = [
-            this.dashboardLink,
-            this.clientsLink,
-            this.productsLink,
-            this.invoicesLink,
-            this.recurringInvoicesLink,
-            this.paymentsLink,
-            this.quotesLink,
-            this.creditsLink,
-            this.projectsLink,
-            this.tasksLink,
-            this.vendorsLink,
-            this.purchaseOrdersLink,
-            this.expensesLink,
-            this.recurringExpensesLink,
-            this.transactionsLink,
-            this.reportsLink,
-            this.settingsLink
-        ];
+    async areAllNavigationItemsVisible(): Promise<boolean> {
+        try {
+            console.log('Validating all navigation items are visible', new Date());
+            const navigationItems = [
+                this.dashboardLink,
+                this.clientsLink,
+                this.productsLink,
+                this.invoicesLink,
+                this.recurringInvoicesLink,
+                this.paymentsLink,
+                this.quotesLink,
+                this.creditsLink,
+                this.projectsLink,
+                this.tasksLink,
+                this.vendorsLink,
+                this.purchaseOrdersLink,
+                this.expensesLink,
+                this.recurringExpensesLink,
+                this.transactionsLink,
+                this.reportsLink,
+                this.settingsLink
+            ];
 
-        for (const item of navigationItems) {
-            await expect(this.page.locator(item)).toBeVisible();
+            for (const item of navigationItems) {
+                const isVisible = await this.page.locator(item).isVisible();
+                if (!isVisible) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (error) {
+            console.log('Not all navigation items are visible:', error);
+            return false;
         }
     }
 
     /**
      * Validates that all add buttons (+) are visible for entities that support creation
+     * @returns {Promise<boolean>} True if all add buttons are visible, false otherwise
      */
-    async validateAllAddButtonsAreVisible(): Promise<void> {
-        const addButtons = [
-            this.clientsAddButton,
-            this.productsAddButton,
-            this.invoicesAddButton,
-            this.recurringInvoicesAddButton,
-            this.paymentsAddButton,
-            this.quotesAddButton,
-            this.creditsAddButton,
-            this.projectsAddButton,
-            this.tasksAddButton,
-            this.vendorsAddButton,
-            this.purchaseOrdersAddButton,
-            this.expensesAddButton,
-            this.recurringExpensesAddButton,
-            this.transactionsAddButton
-        ];
+    async areAllAddButtonsVisible(): Promise<boolean> {
+        try {
+            console.log('Validating all add buttons are visible', new Date());
+            const addButtons = [
+                this.clientsAddButton,
+                this.productsAddButton,
+                this.invoicesAddButton,
+                this.recurringInvoicesAddButton,
+                this.paymentsAddButton,
+                this.quotesAddButton,
+                this.creditsAddButton,
+                this.projectsAddButton,
+                this.tasksAddButton,
+                this.vendorsAddButton,
+                this.purchaseOrdersAddButton,
+                this.expensesAddButton,
+                this.recurringExpensesAddButton,
+                this.transactionsAddButton
+            ];
 
-        for (const button of addButtons) {
-            await expect(this.page.locator(button)).toBeVisible();
+            for (const button of addButtons) {
+                const isVisible = await this.page.locator(button).isVisible();
+                if (!isVisible) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (error) {
+            console.log('Not all add buttons are visible:', error);
+            return false;
         }
     }
 
@@ -398,25 +482,48 @@ export class baseNavigationPage {
 
     /**
      * Gets the current page URL
+     * @returns {Promise<string>} The current page URL
      */
     async getCurrentUrl(): Promise<string> {
-        return await this.page.url();
+        try {
+            console.log('Getting current URL', new Date());
+            return await this.page.url();
+        } catch (error) {
+            console.log('Could not get current URL:', error);
+            return '';
+        }
     }
 
     /**
      * Waits for the navigation to be fully loaded
+     * @returns {Promise<boolean>} True if navigation loaded successfully, false otherwise
      */
-    async waitForNavigationToLoad(): Promise<void> {
-        await this.page.waitForSelector(this.navigationBar);
-        await this.page.waitForSelector(this.companyHeader);
+    async waitForNavigationToLoad(): Promise<boolean> {
+        try {
+            console.log('Waiting for navigation to load', new Date());
+            await this.page.waitForSelector(this.navigationBar, { timeout: 10000 });
+            await this.page.waitForSelector(this.companyHeader, { timeout: 10000 });
+            return true;
+        } catch (error) {
+            console.log('Navigation did not load:', error);
+            return false;
+        }
     }
 
     /**
      * Validates that the page is ready for interaction
+     * @returns {Promise<boolean>} True if page is ready, false otherwise
      */
-    async validatePageIsReady(): Promise<void> {
-        await this.waitForNavigationToLoad();
-        await this.validateSidebarIsVisible();
-        await this.validateCompanyHeaderIsVisible();
+    async isPageReady(): Promise<boolean> {
+        try {
+            console.log('Validating page is ready', new Date());
+            const navigationLoaded = await this.waitForNavigationToLoad();
+            const sidebarVisible = await this.isSidebarVisible();
+            const headerVisible = await this.isCompanyHeaderVisible();
+            return navigationLoaded && sidebarVisible && headerVisible;
+        } catch (error) {
+            console.log('Page is not ready:', error);
+            return false;
+        }
     }
 }
