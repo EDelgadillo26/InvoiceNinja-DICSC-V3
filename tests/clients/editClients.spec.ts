@@ -116,11 +116,13 @@ test.describe('Login Tests', () => {
           await userTab.Clients().clickClientActionButton(clientData.company.name);
           await userTab.Clients().clickOnContextMenuEdit();
           await userTab.CreateClients().fillNameField(clientData2.company.name);
+          expect(await userTab.CreateClients().getNameFieldValue()).toBe(clientData2.company.name);
           await userTab.CreateClients().clickSaveButton();
-          await userTab.BaseNavigationPage().clickClients();
-          await userTab.page.reload();
+          expect (userTab.CreateClients().isEditConfirmationTextVisible()).toBeTruthy();
         });
         await test.step('Eliminar Cliente', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
           await userTab.Clients().clickClientActionButton(clientData2.company.name);
           await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
           await userTab.Clients().confirmPurgeClient();

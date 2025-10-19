@@ -128,6 +128,7 @@ export class CreateClientsPage {
         console.log('Clicking save button', new Date());
         await this.page.locator(this.saveButton).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.saveButton).click();
+        await this.page.waitForLoadState('networkidle');
     }
 
     /**
@@ -152,7 +153,7 @@ export class CreateClientsPage {
      * Gets the Create Confirmation text
      */
     async isCreateConfirmationTextVisible(): Promise<boolean> {
-    console.log('Getting create confirmation text', new Date());
+        console.log('Getting create confirmation text', new Date());
         try {
             await this.page.getByText('Successfully created client').waitFor({ state: 'visible', timeout: 2000 });
             return true;
@@ -161,6 +162,19 @@ export class CreateClientsPage {
         }
     }
     
+    /**
+     * Gets the Edit Confirmation text
+     */
+    async isEditConfirmationTextVisible(): Promise<boolean> {
+    console.log('Getting edit confirmation text', new Date());
+        try {
+            await this.page.getByText('Successfully updated client').waitFor({ state: 'visible', timeout: 2000 });
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
     // ========== BREADCRUMB METHODS ==========
 
     /**            

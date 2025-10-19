@@ -612,6 +612,7 @@ export class ClientsPage {
     async clickOnContextMenuEdit(): Promise<void> {
         await this.page.locator(this.editContextMenuOption).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.editContextMenuOption).click();
+        await this.page.waitForLoadState('load');
     }
     
     // ========== UTILITY METHODS ==========
