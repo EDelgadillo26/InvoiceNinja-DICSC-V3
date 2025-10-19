@@ -199,7 +199,8 @@ export class ClientsPage {
      * Types in the filter input
      */
     async typeInFilterInput(text: string): Promise<void> {
-        await this.page.locator(this.filterInput).fill(text);
+        await this.page.locator(this.filterInput).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.filterInput).pressSequentially(text);
     }
 
     /**

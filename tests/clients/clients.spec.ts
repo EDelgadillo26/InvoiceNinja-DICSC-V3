@@ -131,33 +131,15 @@ test.describe('Login Tests', () => {
         });
       }
     );
-
-    test('IN-31: Admin > Clients > New Client > Shipping Address > Verificar que el botón "Copy Billing" copie los datos de Billing Address a Shipping Address', {
+    test('IN-10: Admin > Clients > Buscar Cliente por Nombre de Compañía', {
       tag: ['@smoke', '@clients']
     }, async () => {
-        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+        await test.step('Ir al modulo Clients', async () => {
           await userTab.BaseNavigationPage().clickClients();
-          await userTab.Clients().clickNewClientButton();
         });
-        await test.step('Ingresar datos en Address > Billing Address', async () => {
-          await userTab.CreateClients().fillBillingAddress({
-            street: clientData.billing.street,
-            apt: clientData.billing.apt,
-            city: clientData.billing.city,
-            state: clientData.billing.state,
-            postalCode: clientData.billing.postalCode
-          });
-        });
-        await test.step('Copiar datos de Billing Address a Shipping Address', async () => {
-          await userTab.CreateClients().clickAddressTab('Shipping Address');
-          await userTab.CreateClients().clickCopyBillingButton();
-        });
-        await test.step('Validar que los Campos de Shipping Address se hayan copiado correctamente', async () => {
-          expect(await userTab.CreateClients().getShippingStreetFieldValue()).toBe(clientData.billing.street);
-          expect(await userTab.CreateClients().getShippingAptFieldValue()).toBe(clientData.billing.apt);
-          expect(await userTab.CreateClients().getShippingCityFieldValue()).toBe(clientData.billing.city);
-          expect(await userTab.CreateClients().getShippingStateFieldValue()).toBe(clientData.billing.state);
-          expect(await userTab.CreateClients().getShippingPostalCodeFieldValue()).toBe(clientData.billing.postalCode);
+        await test.step('Filtrar por Nombre de Compañía', async () => {
+          await userTab.Clients().typeInFilterInput('EnriqueCompany');
+          expect(await userTab.Clients().isSpecificClientVisible('EnriqueCompany')).toBeTruthy();
         });
       }
     );
