@@ -235,7 +235,6 @@ export class ClientsPage {
         await this.page.locator(this.lifecycleValue('Deleted')).check();
         await this.page.locator(this.applylifecycleButton).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.applylifecycleButton).click();
-        await this.page.waitForLoadState('networkidle');
     }
 
     /**
@@ -464,6 +463,7 @@ export class ClientsPage {
      * Clicks the action button for the specific client
      */
     async clickClientActionButton(name: string): Promise<void> {
+        await this.page.locator(this.actionsButtonSelector(name)).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.actionsButtonSelector(name)).click();
     }
 
@@ -525,7 +525,7 @@ export class ClientsPage {
      */
     async isSpecificClientVisible(clientName: string): Promise<boolean> {
         console.log(`Validating ${clientName} client visibility`, new Date());
-        await this.page.locator(this.clientNameGeneric(clientName)).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.waitForTimeout(2000);
         return await this.page.locator(this.clientNameGeneric(clientName)).isVisible();
     }
 

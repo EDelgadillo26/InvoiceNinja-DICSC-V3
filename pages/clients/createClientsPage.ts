@@ -68,25 +68,24 @@ export class CreateClientsPage {
     private readonly addressTitle = 'h3:has-text("Address")';
     
     // Address Tabs
-    private readonly billingAddressTab = 'button:has-text("Billing Address")';
-    private readonly shippingAddressTab = 'button:has-text("Shipping Address")';
-    
+    private readonly AddressTab = (tabName: string) => `//button[contains(text(),"${tabName}")]`;
+
     // Billing Address Fields
     private readonly billingStreetField = 'input#address1';
     private readonly billingAptField = 'input#address2';
     private readonly billingCityField = 'input#city';
     private readonly billingStateField = 'input#state';
     private readonly billingPostalCodeField = 'input#postal_code';
-    private readonly billingCountryDropdown = 'div:has(#react-select-7-input)';
+    private readonly billingCountryDropdown = 'input[role="combobox"][id="react-select-5-input"]';
     
     // Shipping Address Fields
-    private readonly copyBillingButton = 'button:has-text("Copy Billing")';
+    private readonly copyBillingButton = '//button[contains(text(),"Copy Billing")]';
     private readonly shippingStreetField = 'input#shipping_address1';
     private readonly shippingAptField = 'input#shipping_address2';
     private readonly shippingCityField = 'input#shipping_city';
     private readonly shippingStateField = 'input#shipping_state';
     private readonly shippingPostalCodeField = 'input#shipping_postal_code';
-    private readonly shippingCountryDropdown = 'div:has(#react-select-8-input)';
+    private readonly shippingCountryDropdown = 'dd:has(input#react-select-6-input) .css-ood9ll-singleValue';
 
     // ========== FORM CONTAINERS ==========
     private readonly leftColumn = 'div.w-full.xl\\:w-1\\/2:first-child';
@@ -611,30 +610,30 @@ export class CreateClientsPage {
     }
 
     /**
-     * Clicks the billing address tab
+     * Clicks the address tab
      */
-    async clickBillingAddressTab(): Promise<void> {
-        console.log('Clicking billing address tab', new Date());
-        await this.page.locator(this.billingAddressTab).waitFor({ state: 'visible', timeout: 10000 });
-        await this.page.locator(this.billingAddressTab).click();
+    async clickAddressTab(tabName : string): Promise<void> {
+        console.log(`Clicking ${tabName} address tab`, new Date());
+        await this.page.locator(this.AddressTab(tabName)).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.AddressTab(tabName)).click();
     }
 
     /**
-     * Clicks the shipping address tab
+     * Clicks the Copy button
      */
-    async clickShippingAddressTab(): Promise<void> {
-        console.log('Clicking shipping address tab', new Date());
-        await this.page.locator(this.shippingAddressTab).waitFor({ state: 'visible', timeout: 10000 });
-        await this.page.locator(this.shippingAddressTab).click();
+    async clickCopyBillingButton(): Promise<void> {
+        console.log('Clicking Copy button', new Date());
+        await this.page.locator(this.copyBillingButton).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.copyBillingButton).click();
     }
 
     /**
-     * Checks if billing address tab is active
+     * Checks if address tab is active
      */
-    async isBillingAddressTabActive(): Promise<boolean> {
+    async isAddressTabActive(tabName : string): Promise<boolean> {
         console.log('Validating billing address tab active state', new Date());
-        await this.page.locator(this.billingAddressTab).waitFor({ state: 'visible', timeout: 10000 });
-        const style = await this.page.locator(this.billingAddressTab).getAttribute('style');
+        await this.page.locator(this.AddressTab(tabName)).waitFor({ state: 'visible', timeout: 10000 });
+        const style = await this.page.locator(this.AddressTab(tabName)).getAttribute('style');
         return style?.includes('border-bottom: 1px solid rgb(42, 48, 61)') || false;
     }
 
@@ -733,12 +732,24 @@ export class CreateClientsPage {
     }
 
     /**
-     * Clicks the copy billing button
+     * Search and select country inside dropdown
      */
-    async clickCopyBillingButton(): Promise<void> {
-        console.log('Clicking copy billing button', new Date());
-        await this.page.locator(this.copyBillingButton).waitFor({ state: 'visible', timeout: 10000 });
-        await this.page.locator(this.copyBillingButton).click();
+    async searchAndSelectBillingCountry(country: string): Promise<void> {
+        console.log('Searching and selecting billing country:', country, new Date());
+        await this.page.locator(this.billingCountryDropdown).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.billingCountryDropdown).click();
+    }
+
+    /**
+     * Selects "Country" in the billing country dropdown
+     */
+    async selectBillingCountry(country: string): Promise<void> {
+        console.log(`Selecting ${country} in billing country dropdown`, new Date());
+        await this.page.locator(this.billingCountryDropdown).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.billingCountryDropdown).click();
+        await this.page.locator(this.billingCountryDropdown).pressSequentially(country);
+        await this.page.waitForTimeout(1000);
+        await this.page.locator(this.billingCountryDropdown).press('Enter');
     }
 
     /**
@@ -759,6 +770,15 @@ export class CreateClientsPage {
     }
 
     /**
+     * Gets the shipping apt/suite field value
+     */
+    async getShippingAptFieldValue(): Promise<string> {
+        console.log('Getting shipping apt/suite field value', new Date());
+        await this.page.locator(this.shippingAptField).waitFor({ state: 'visible', timeout: 10000 });
+        return await this.page.locator(this.shippingAptField).inputValue();
+    }
+
+    /**
      * Fills the shipping city field
      */
     async fillShippingCityField(city: string): Promise<void> {
@@ -776,12 +796,39 @@ export class CreateClientsPage {
     }
 
     /**
+     * Gets the shipping state field value
+     */
+    async getShippingStateFieldValue(): Promise<string> {
+        console.log('Getting shipping state field value', new Date());
+        await this.page.locator(this.shippingStateField).waitFor({ state: 'visible', timeout: 10000 });
+        return await this.page.locator(this.shippingStateField).inputValue();
+    }
+
+    /**
+     * Gets the shipping postal code field value
+     */
+    async getShippingPostalCodeFieldValue(): Promise<string> {
+        console.log('Getting shipping postal code field value', new Date());
+        await this.page.locator(this.shippingPostalCodeField).waitFor({ state: 'visible', timeout: 10000 });
+        return await this.page.locator(this.shippingPostalCodeField).inputValue();
+    }
+
+    /**
      * Clicks the shipping country dropdown
      */
     async clickShippingCountryDropdown(): Promise<void> {
         console.log('Clicking shipping country dropdown', new Date());
         await this.page.locator(this.shippingCountryDropdown).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.shippingCountryDropdown).click();
+    }
+
+    /**
+     * Gets the shipping country dropdown
+     */
+    async getShippingCountryDropdown(): Promise<string> {
+        console.log('Getting shipping country dropdown', new Date());
+        await this.page.locator(this.shippingCountryDropdown).waitFor({ state: 'visible', timeout: 10000 });
+        return await this.page.locator(this.shippingCountryDropdown).innerText();
     }
 
     // ========== UTILITY METHODS ==========
@@ -869,19 +916,16 @@ export class CreateClientsPage {
      */
     async fillBillingAddress(data: {
         street: string;
-        apt?: string;
+        apt: string;
         city: string;
         state: string;
         postalCode: string;
     }): Promise<void> {
         console.log('Filling billing address', new Date());
-        await this.clickBillingAddressTab();
+        await this.page.locator(this.billingStreetField).waitFor({ state: 'visible', timeout: 10000 });
+        await this.clickAddressTab('Billing Address');
         await this.fillBillingStreetField(data.street);
-        
-        if (data.apt) {
-            await this.fillBillingAptField(data.apt);
-        }
-        
+        await this.fillBillingAptField(data.apt);
         await this.fillBillingCityField(data.city);
         await this.fillBillingStateField(data.state);
         await this.fillBillingPostalCodeField(data.postalCode);
@@ -907,7 +951,7 @@ export class CreateClientsPage {
         };
         billing: {
             street: string;
-            apt?: string;
+            apt: string;
             city: string;
             state: string;
             postalCode: string;
@@ -939,7 +983,7 @@ export class CreateClientsPage {
         };
         billing: {
             street: string;
-            apt?: string;
+            apt: string;
             city: string;
             state: string;
             postalCode: string;

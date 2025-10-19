@@ -44,7 +44,7 @@ export class DataGenerator {
         const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
         const randomNumber = this.generateRandomNumber(10, 999);
         
-        return `${prefix}${suffix}${randomNumber}`;
+        return `${prefix}${suffix}`;
     }
 
     /**
@@ -109,6 +109,7 @@ export class DataGenerator {
      */
     static generateAddress(): {
         street: string;
+        apt: string;
         city: string;
         state: string;
         postalCode: string;
@@ -123,9 +124,11 @@ export class DataGenerator {
         const city = cities[Math.floor(Math.random() * cities.length)];
         const state = states[Math.floor(Math.random() * states.length)];
         const postalCode = this.generateRandomNumber(10000, 99999).toString();
-        
+        const apt = this.generateRandomNumber(100, 9999);
+
         return {
             street: `${streetNumber} ${street}`,
+            apt: `${apt}`,
             city: city,
             state: state,
             postalCode: postalCode,
@@ -168,7 +171,7 @@ export class DataGenerator {
      * @returns Complete client data object
      */
     static generateClientData(): {
-        company: {
+        company: { 
             name: string;
             number: string;
             idNumber: string;
@@ -184,6 +187,7 @@ export class DataGenerator {
         };
         billing: {
             street: string;
+            apt: string;
             city: string;
             state: string;
             postalCode: string;
@@ -209,6 +213,7 @@ export class DataGenerator {
             },
             billing: {
                 street: address.street,
+                apt: address.apt,
                 city: address.city,
                 state: address.state,
                 postalCode: address.postalCode,
