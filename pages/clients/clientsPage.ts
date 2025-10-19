@@ -51,6 +51,7 @@ export class ClientsPage {
     private readonly contextMenu = 'div[role="menu"]';
     private readonly contextMenuEdit = 'button:has-text("Edit")';
     private readonly contextMenuArchiveDeletePurgeOption = (option: 'Archive' | 'Delete' | 'Purge') => `//button[div[contains(text(),"${option}")]]`;
+    private readonly editContextMenuOption = '//a[contains(@href,"/edit") and .//div[text()="Edit"]]'
     private readonly confirmationContinueButton = '//button[contains(text(),"Continue")]';
    
     // ========== TABLE ROW SELECTORS ==========
@@ -598,7 +599,6 @@ export class ClientsPage {
         await this.page.locator(this.rowsPerPageDropdown).click();
     }
 
-
     /**
      * Clicks the contextMenuArchiveDeletePurge per page dropdown
      */
@@ -606,6 +606,14 @@ export class ClientsPage {
         await this.page.locator(this.contextMenuArchiveDeletePurgeOption(option)).click();
     }
 
+    /**
+     * Clicks the edit option in context menu dropdown
+     */
+    async clickOnContextMenuEdit(): Promise<void> {
+        await this.page.locator(this.editContextMenuOption).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.editContextMenuOption).click();
+    }
+    
     // ========== UTILITY METHODS ==========
 
     /**

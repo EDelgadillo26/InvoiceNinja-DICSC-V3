@@ -9,7 +9,6 @@ test.describe('Login Tests', () => {
     let browserContextConstructor: BrowserContextConstructor;
     let userBrowser: BrowserContext;
     let userTab: PageManager;
-    let clientData = DataGenerator.generateClientData();
     let staticDataExist : boolean = false;
 
   test.beforeAll(async ({ browser }) => {
@@ -58,6 +57,7 @@ test.describe('Login Tests', () => {
     test('IN-31: Admin > Clients > New Client > Shipping Address > Verificar que el botón "Copy Billing" copie los datos de Billing Address a Shipping Address', {
       tag: ['@smoke', '@clients']
     }, async () => {
+          let clientData = DataGenerator.generateClientData();
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
           await userTab.BaseNavigationPage().clickClients();
           await userTab.Clients().clickNewClientButton();
@@ -81,6 +81,50 @@ test.describe('Login Tests', () => {
           expect(await userTab.CreateClients().getShippingCityFieldValue()).toBe(clientData.billing.city);
           expect(await userTab.CreateClients().getShippingStateFieldValue()).toBe(clientData.billing.state);
           expect(await userTab.CreateClients().getShippingPostalCodeFieldValue()).toBe(clientData.billing.postalCode);
+        });
+      }
+    );
+
+    test('IN-19: Admin > Clients > Verificar que edite un nombre del cliente', {
+      tag: ['@smoke', '@clients']
+    }, async () => {
+          let clientData = DataGenerator.generateClientData();
+          let clientData2 = DataGenerator.generateClientData();
+
+        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+        });
+        await test.step('Crear cliente con los datos mínimos requeridos', async () => {
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().clickSaveButton();
+          expect (userTab.CreateClients().isCreateConfirmationTextVisible()).toBeTruthy();
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+          const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+            if (!existsClient) {
+              console.log(`Client ${clientData.company.name} was not found after creation.`, new Date());
+              expect(existsClient).toBeTruthy();
+
+            }else{
+              expect(existsClient).toBeTruthy();
+            }
+        });
+        await test.step('Editar Cliente', async () => {
+          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.Clients().clickOnContextMenuEdit();
+          await userTab.CreateClients().fillNameField(clientData2.company.name);
+          await userTab.CreateClients().clickSaveButton();
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+        });
+        await test.step('Eliminar Cliente', async () => {
+          await userTab.Clients().clickClientActionButton(clientData2.company.name);
+          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+          await userTab.Clients().confirmPurgeClient();
+          await userTab.Clients().isPurgeConfirmationTextVisible();
         });
       }
     );

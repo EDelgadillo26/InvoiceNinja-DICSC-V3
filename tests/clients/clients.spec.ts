@@ -9,7 +9,6 @@ test.describe('Login Tests', () => {
     let browserContextConstructor: BrowserContextConstructor;
     let userBrowser: BrowserContext;
     let userTab: PageManager;
-    let clientData = DataGenerator.generateClientData();
     let staticDataExist : boolean = false;
 
   test.beforeAll(async ({ browser }) => {
@@ -58,6 +57,7 @@ test.describe('Login Tests', () => {
     test('IN-16: Admin > Clients > Crear Cliente con los campos minimos requeridos', {
       tag: ['@smoke', '@clients']
     }, async () => {
+        let clientData = DataGenerator.generateClientData();
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
           await userTab.BaseNavigationPage().clickClients();
           await userTab.Clients().clickNewClientButton();
@@ -91,6 +91,7 @@ test.describe('Login Tests', () => {
     test('IN-23: Admin > Clients > Verificar que elimine un cliente archivado', {
       tag: ['@smoke', '@clients']
     }, async () => {
+        let clientData = DataGenerator.generateClientData();
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
           await userTab.BaseNavigationPage().clickClients();
           await userTab.Clients().clickNewClientButton();
@@ -131,6 +132,7 @@ test.describe('Login Tests', () => {
         });
       }
     );
+
     test('IN-10: Admin > Clients > Buscar Cliente por Nombre de Compañía', {
       tag: ['@smoke', '@clients']
     }, async () => {
@@ -139,6 +141,32 @@ test.describe('Login Tests', () => {
         });
         await test.step('Filtrar por Nombre de Compañía', async () => {
           await userTab.Clients().typeInFilterInput('EnriqueCompany');
+          expect(await userTab.Clients().isSpecificClientVisible('EnriqueCompany')).toBeTruthy();
+        });
+      }
+    );
+
+    test('IN-11: Admin > Clients > Verificar que busque un Cliente por Nombre de Cliente', {
+      tag: ['@smoke', '@clients']
+    }, async () => {
+        await test.step('Ir al modulo Clients', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+        });
+        await test.step('Filtrar por Nombre/Apellido de Cliente', async () => {
+          await userTab.Clients().typeInFilterInput('Delgadillo');
+          expect(await userTab.Clients().isSpecificClientVisible('EnriqueCompany')).toBeTruthy();
+        });
+      }
+    );
+
+    test('IN-12: Admin > Clients > Verificar que busque un Cliente por Contact Email', {
+      tag: ['@smoke', '@clients']
+    }, async () => {
+        await test.step('Ir al modulo Clients', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+        });
+        await test.step('Filtrar por Nombre de Compañía', async () => {
+          await userTab.Clients().typeInFilterInput('EDelgadillo2002@gmail.com');
           expect(await userTab.Clients().isSpecificClientVisible('EnriqueCompany')).toBeTruthy();
         });
       }
