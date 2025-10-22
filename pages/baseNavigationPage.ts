@@ -35,7 +35,7 @@ export class BaseNavigationPage {
     protected readonly clientsAddButton = 'a[href="#/clients/create"] svg[viewBox="0 0 20 20"]';
 
     // Products
-    protected readonly productsLink = 'a[href="#/products"]';
+    protected readonly productsLink = '//a[@href="#/products" and .//span[text()="Products"]]';
     protected readonly productsCreateLink = 'a[href="#/products/create"]';
     protected readonly productsIcon = 'svg[viewBox="0 0 18 18"]:has(polyline[points="14.983 5.53"])';
     protected readonly productsText = 'span:has-text("Products")';
@@ -192,7 +192,9 @@ export class BaseNavigationPage {
     }
 
     async clickProducts(): Promise<void> {
+        await this.page.locator(this.productsLink).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.productsLink).click();
+        await this.page.waitForLoadState('networkidle');
     }
 
     async clickCreateProduct(): Promise<void> {

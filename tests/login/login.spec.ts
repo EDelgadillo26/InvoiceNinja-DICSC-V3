@@ -16,7 +16,7 @@ test.describe('Login Tests', () => {
   });    
 
   test.beforeEach(async ({  }) => {
-    await userTab.Login().loginToInvoiceNinja();
+    
   });
 
   test.afterEach(async () => {
@@ -40,6 +40,7 @@ test.describe('Login Tests', () => {
       tag: ['@smoke', '@login']
     }, async () => {
         await test.step('Validar login con usuario admin', async () => {
+            await userTab.Login().loginToInvoiceNinja();
             await expect(userTab.page).toHaveURL(/.*dashboard/);
         });
       }
@@ -48,6 +49,7 @@ test.describe('Login Tests', () => {
       tag: ['@smoke', '@login']
     }, async () => {
         await test.step('Validar login con usuario admin', async () => {
+            await userTab.Login().loginToInvoiceNinja('edelgadillo@gmail.com','wrongpassword');
             await expect(userTab.page).not.toHaveURL(/.*dashboard/);
         });
       }

@@ -4,7 +4,7 @@ import { PageManager } from '../../pages/pageManager.page';
 import { DataGenerator } from '../../utils/dataGenerator';
 import users from '../../data/users.json';
 
-test.describe('Clientes Principal Page Tests', () => {
+test.describe('Clients Edit Tests', () => {
 
     let browserContextConstructor: BrowserContextConstructor;
     let userBrowser: BrowserContext;
@@ -54,44 +54,43 @@ test.describe('Clientes Principal Page Tests', () => {
     }
   });
 
-    test('IN-16: Admin > Clients > Crear Cliente con los campos minimos requeridos', {
+    test('IN-31: Admin > Clients > New Client > Shipping Address > Verificar que el botón "Copy Billing" copie los datos de Billing Address a Shipping Address', {
       tag: ['@smoke', '@clients']
     }, async () => {
-        let clientData = DataGenerator.generateClientData();
+          let clientData = DataGenerator.generateClientData();
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
           await userTab.BaseNavigationPage().clickClients();
           await userTab.Clients().clickNewClientButton();
         });
-        await test.step('Crear cliente con los datos mínimos requeridos', async () => {
-          await userTab.CreateClients().fillNameField(clientData.company.name);
-          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
-          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
-          await userTab.CreateClients().clickSaveButton();
-          expect (userTab.CreateClients().isCreateConfirmationTextVisible()).toBeTruthy();
-          await userTab.BaseNavigationPage().clickClients();
-          await userTab.page.reload();
-          const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
-            if (!existsClient) {
-              console.log(`Client ${clientData.company.name} was not found after creation.`, new Date());
-              expect(existsClient).toBeTruthy();
-
-            }else{
-              expect(existsClient).toBeTruthy();
-            }
+        await test.step('Ingresar datos en Address > Billing Address', async () => {
+          await userTab.CreateClients().fillBillingAddress({
+            street: clientData.billing.street,
+            apt: clientData.billing.apt,
+            city: clientData.billing.city,
+            state: clientData.billing.state,
+            postalCode: clientData.billing.postalCode
+          });
         });
-        await test.step('TearDown - Eliminar Cliente', async () => {
-          await userTab.Clients().clickClientActionButton(clientData.company.name);
-          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
-          await userTab.Clients().confirmPurgeClient();
-          await userTab.Clients().isPurgeConfirmationTextVisible();
+        await test.step('Copiar datos de Billing Address a Shipping Address', async () => {
+          await userTab.CreateClients().clickAddressTab('Shipping Address');
+          await userTab.CreateClients().clickCopyBillingButton();
+        });
+        await test.step('Validar que los Campos de Shipping Address se hayan copiado correctamente', async () => {
+          expect(await userTab.CreateClients().getShippingStreetFieldValue()).toBe(clientData.billing.street);
+          expect(await userTab.CreateClients().getShippingAptFieldValue()).toBe(clientData.billing.apt);
+          expect(await userTab.CreateClients().getShippingCityFieldValue()).toBe(clientData.billing.city);
+          expect(await userTab.CreateClients().getShippingStateFieldValue()).toBe(clientData.billing.state);
+          expect(await userTab.CreateClients().getShippingPostalCodeFieldValue()).toBe(clientData.billing.postalCode);
         });
       }
     );
 
-    test('IN-23: Admin > Clients > Verificar que elimine un cliente archivado', {
+    test('IN-19: Admin > Clients > Verificar que edite un nombre del cliente', {
       tag: ['@smoke', '@clients']
     }, async () => {
-        let clientData = DataGenerator.generateClientData();
+          let clientData = DataGenerator.generateClientData();
+          let clientData2 = DataGenerator.generateClientData();
+
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
           await userTab.BaseNavigationPage().clickClients();
           await userTab.Clients().clickNewClientButton();
@@ -113,61 +112,21 @@ test.describe('Clientes Principal Page Tests', () => {
               expect(existsClient).toBeTruthy();
             }
         });
-        await test.step('Archivar Cliente', async () => {
+        await test.step('Editar Cliente', async () => {
           await userTab.Clients().clickClientActionButton(clientData.company.name);
-          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Archive');
-          await userTab.Clients().isArchiveConfirmationTextVisible();
-          await userTab.page.reload();
+          await userTab.Clients().clickOnContextMenuEdit();
+          await userTab.CreateClients().fillNameField(clientData2.company.name);
+          expect(await userTab.CreateClients().getNameFieldValue()).toBe(clientData2.company.name);
+          await userTab.CreateClients().clickSaveButton();
+          expect (userTab.CreateClients().isEditConfirmationTextVisible()).toBeTruthy();
         });
-        await test.step('Habilitar lifecycle para ver todos los clientes', async () => {
-          await userTab.Clients().clickLifecycleDropdownAndSelectAllOptions();
-          await userTab.page.reload();
-        });
-        
         await test.step('Eliminar Cliente', async () => {
-          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+          await userTab.Clients().clickClientActionButton(clientData2.company.name);
           await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
           await userTab.Clients().confirmPurgeClient();
           await userTab.Clients().isPurgeConfirmationTextVisible();
-        });
-      }
-    );
-
-    test('IN-10: Admin > Clients > Buscar Cliente por Nombre de Compañía', {
-      tag: ['@smoke', '@clients']
-    }, async () => {
-        await test.step('Ir al modulo Clients', async () => {
-          await userTab.BaseNavigationPage().clickClients();
-        });
-        await test.step('Filtrar por Nombre de Compañía', async () => {
-          await userTab.Clients().typeInFilterInput('EnriqueCompany');
-          expect(await userTab.Clients().isSpecificClientVisible('EnriqueCompany')).toBeTruthy();
-        });
-      }
-    );
-
-    test('IN-11: Admin > Clients > Verificar que busque un Cliente por Nombre de Cliente', {
-      tag: ['@smoke', '@clients']
-    }, async () => {
-        await test.step('Ir al modulo Clients', async () => {
-          await userTab.BaseNavigationPage().clickClients();
-        });
-        await test.step('Filtrar por Nombre/Apellido de Cliente', async () => {
-          await userTab.Clients().typeInFilterInput('Delgadillo');
-          expect(await userTab.Clients().isSpecificClientVisible('EnriqueCompany')).toBeTruthy();
-        });
-      }
-    );
-
-    test('IN-12: Admin > Clients > Verificar que busque un Cliente por Contact Email', {
-      tag: ['@smoke', '@clients']
-    }, async () => {
-        await test.step('Ir al modulo Clients', async () => {
-          await userTab.BaseNavigationPage().clickClients();
-        });
-        await test.step('Filtrar por Nombre de Compañía', async () => {
-          await userTab.Clients().typeInFilterInput('EDelgadillo2002@gmail.com');
-          expect(await userTab.Clients().isSpecificClientVisible('EnriqueCompany')).toBeTruthy();
         });
       }
     );
