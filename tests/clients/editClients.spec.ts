@@ -4,7 +4,7 @@ import { PageManager } from '../../pages/pageManager.page';
 import { DataGenerator } from '../../utils/dataGenerator';
 import users from '../../data/users.json';
 
-test.describe('Login Tests', () => {
+test.describe('Clients Edit Tests', () => {
 
     let browserContextConstructor: BrowserContextConstructor;
     let userBrowser: BrowserContext;

@@ -198,4 +198,70 @@ export class DataGenerator {
         const now = new Date();
         return now.toISOString().replace(/[:.]/g, '-').slice(0, -5);
     }
+
+    //Products
+
+    /**
+     * Generates a Product Name
+     * @returns Random Product Name
+     */
+    static generateProductName(): string {
+        return faker.commerce.productName();
+    }
+
+    /**
+     * Generates a random Product Description
+     * @returns Random Product Description
+     */
+    static generateProductDescription(): string {
+        return faker.commerce.productDescription();
+    }
+
+    /**
+     * Generates a random Product Price
+     * @returns Random Product Price
+     */
+    static generateProductPrice(): string {
+        return this.generateRandomNumber(1000000, 9999999).toString();
+    }
+
+    /**
+     * Generates a random Default Quantity
+     * @returns Random Default Quantity
+     */
+    static generateProductDefaultQuantity(): string {
+        return this.generateRandomNumber(1, 100).toString();
+    }
+
+    /**
+     * Generates a random Product Max Quantity
+     * @returns Random Product Max Quantity
+     */
+    static generateProductMaxQuantity(): string {
+        return this.generateRandomNumber(100, 1000).toString();
+    }
+    
+    /**
+     * Generates complete client data
+     * @returns Complete client data object
+     */
+    static generateProductData(): {
+        id: string;
+        name: string;
+        description: string;
+        price: string;
+        defaultQuantity: string;
+        maxQuantity: string;
+        category: string;
+    } {
+        return {
+            id: this.generateUniqueId(),
+            name: this.generateProductName(),
+            description: this.generateProductDescription(),
+            price: this.generateProductPrice(),
+            defaultQuantity: this.generateProductDefaultQuantity(),
+            maxQuantity: this.generateProductMaxQuantity(),
+            category: this.generateRandomString(8, true)
+        };
+    }
 }

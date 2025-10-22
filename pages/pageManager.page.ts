@@ -6,6 +6,8 @@ import { SettingsClientsPage } from "./clients/settingsClientsPage";
 import { CreateClientsPage } from "./clients/createClientsPage";
 import { LocationsClientsPage } from "./clients/locationsClientsPage";
 import { DocumentsClientsPage } from "./clients/documentsClientsPage";
+import { ProductsPage } from "./products/productsPage";
+import { CreateProductsPage } from "./products/CreateProductsPage";
 
 export class PageManager {
     readonly page: Page;
@@ -16,6 +18,8 @@ export class PageManager {
     private readonly createClientsPage: CreateClientsPage;
     private readonly locationsClientsPage: LocationsClientsPage;
     private readonly documentsClientsPage: DocumentsClientsPage;
+    private readonly productsPage: ProductsPage;
+    private readonly createProductsPage: CreateProductsPage;
 
   /**   
    * Constructor for Playwright PageManager class
@@ -30,6 +34,8 @@ export class PageManager {
     this.createClientsPage = new CreateClientsPage(page);
     this.locationsClientsPage = new LocationsClientsPage(page);
     this.documentsClientsPage = new DocumentsClientsPage(page);
+    this.productsPage = new ProductsPage(page);
+    this.createProductsPage = new CreateProductsPage(page);
   }
 
 
@@ -81,6 +87,7 @@ export class PageManager {
   LocationsClients(): LocationsClientsPage {
     return this.locationsClientsPage;
   }
+
   /**
    * Get the DocumentsClientsPage object
    * @returns DocumentsClientsPage instance
@@ -88,4 +95,20 @@ export class PageManager {
   DocumentsClients(): DocumentsClientsPage {
     return this.documentsClientsPage;
   }  
+
+  /**
+   * Get the ProductsPage object
+   * @returns ProductsPage instance
+   */
+  Products(): ProductsPage {
+    return this.productsPage;
+  }  
+
+  /**
+   * Get the CreateProductsPage object
+   * @returns CreateProductsPage instance
+   */
+  CreateProducts(): CreateProductsPage {
+    return this.createProductsPage;
+  }
 }
