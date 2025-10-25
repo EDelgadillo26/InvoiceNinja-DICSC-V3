@@ -16,9 +16,9 @@ export class ProductsPage {
 
     // ========== FILTER AND CONTROL SELECTORS ==========
     private readonly filterInput = 'input#filter[placeholder="Filter"]';
-    private readonly lifecycleDropdown = 'div:has(span:has-text("Lifecycle:"))';
-    private readonly lifecycleValue = 'span:has-text("Active")';
-    private readonly lifecycleArrow = 'div:has(span:has-text("Active")) svg[viewBox="0 0 20 20"]';
+    private readonly lifecycleDropdown = '//div[.//span[contains(text(),"Lifecycle")]]//div[@class="sm:w-auto w-full css-b62m3t-container"]';
+    private readonly lifecycleValue = (columnName: string) => `//div[@role="option" and .//span[text()="${columnName}"]]//input[@type="checkbox"]`;
+    private readonly applylifecycleButton = 'div.flex.w-full.px-3.space-x-2 > button:nth-child(2)';
 
     // ========== ACTION BUTTONS SELECTORS ==========
     private readonly columnsButton = 'button:has(span:has-text("Columns"))';
@@ -46,6 +46,7 @@ export class ProductsPage {
     private readonly productName = (name: string) => `//td//a[contains(@href, "/products/") and contains(@href, "/edit") and text()="${name}"]`;
     private readonly actionsButtonSelector = (productName: string) => `//tr[td[2]//a[text()="${productName}"]]//button[@data-cy="chevronDownButton"]`;
     private readonly actionsButtonDeleteOrArchiveOption = (productName: string) => `//button[div[contains(text(),"${productName}")]]`;
+    private readonly actionsEditOption = `//a[contains(@href,"/edit") and .//div[text()="Edit"]]`;
     // ========== PAGINATION SELECTORS ==========
     private readonly totalResults = 'span:has-text("Total results:")';
     private readonly paginationInfo = 'span:has-text("1 / 1")';
@@ -109,13 +110,6 @@ export class ProductsPage {
     }
 
     /**
-     * Gets the current lifecycle value
-     */
-    async getLifecycleValue(): Promise<string> {
-        return await this.page.locator(this.lifecycleValue).textContent() || '';
-    }
-
-    /**
      * Checks if the lifecycle dropdown is visible
      * @returns {Promise<boolean>} True if lifecycle dropdown is visible, false otherwise
      */
@@ -124,6 +118,32 @@ export class ProductsPage {
         await this.page.locator(this.lifecycleDropdown).waitFor({ state: 'visible', timeout: 10000 });
         return await this.page.locator(this.lifecycleDropdown).isVisible();
     }
+
+    /**
+     * Clicks the lifecycle dropdown and select all options
+     */
+    async clickLifecycleDropdownAndSelectAllOptions(): Promise<void> {
+        await this.page.locator(this.lifecycleDropdown).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.lifecycleDropdown).click();
+        await this.page.locator(this.lifecycleValue('Active')).check();
+        await this.page.locator(this.lifecycleValue('Archived')).check();
+        await this.page.locator(this.lifecycleValue('Deleted')).check();
+        await this.page.locator(this.applylifecycleButton).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.applylifecycleButton).click();
+    }    
+
+    /**
+     * Clicks the lifecycle dropdown and select specific option
+     */
+    async clickLifecycleDropdownAndSelectSpecificOptions(options: string[]): Promise<void> {
+        await this.page.locator(this.lifecycleDropdown).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.lifecycleDropdown).click();
+        for (const option of options) {
+            await this.page.locator(this.lifecycleValue(option)).check();
+        }
+        await this.page.locator(this.applylifecycleButton).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.applylifecycleButton).click();
+    } 
 
     // ========== ACTION BUTTONS METHODS ==========
 
@@ -230,7 +250,7 @@ export class ProductsPage {
      */
     async isProductVisible(product: string): Promise<boolean> {
         console.log(`Validating visibility of product: ${product}`, new Date());
-        await this.page.locator(this.productName(product)).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.productName(product)).waitFor({ state: 'visible', timeout: 15000 });
         return await this.page.locator(this.productName(product)).isVisible();
     }
 
@@ -248,6 +268,14 @@ export class ProductsPage {
     async clickProductDeleteOrArchiveOption(option: string): Promise<void> {
         await this.page.locator(this.actionsButtonDeleteOrArchiveOption(option)).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.actionsButtonDeleteOrArchiveOption(option)).click();
+    }
+
+    /**
+     * Clicks the edit option for the specific product
+     */
+    async clickProductEditOption(): Promise<void> {
+        await this.page.locator(this.actionsEditOption).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.actionsEditOption).click();
     }
 
     // ========== TABLE HEADER METHODS ==========
