@@ -527,6 +527,19 @@ export class ClientsPage {
       }
     }
 
+   /**
+     * Gets the Delete Confirmation text
+     */
+    async isDeleteConfirmationTextVisible(): Promise<boolean> {
+      console.log('Getting delete confirmation text', new Date());
+      try {
+          await this.page.getByText('Successfully deleted Client').waitFor({ state: 'visible', timeout: 2000 });
+          return true;
+      } catch {
+          return false;
+      }
+    }
+
     /**
      * Checks if client action buttons are visible
      * @returns {Promise<boolean>} True if client action buttons are visible, false otherwise

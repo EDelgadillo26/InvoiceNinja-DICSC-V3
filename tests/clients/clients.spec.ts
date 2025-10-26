@@ -89,7 +89,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-23: Admin > Clients > Verificar que elimine un cliente archivado', {
-      tag: ['@smoke', '@clients']
+      tag: ['@sanity', '@clients']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
@@ -146,7 +146,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-11: Admin > Clients > Verificar que busque un Cliente por Nombre de Cliente', {
-      tag: ['@smoke', '@clients']
+      tag: ['@sanity', '@clients']
     }, async () => {
         await test.step('Ir al modulo Clients', async () => {
           await userTab.BaseNavigationPage().clickClients();
@@ -159,7 +159,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-12: Admin > Clients > Verificar que busque un Cliente por Contact Email', {
-      tag: ['@smoke', '@clients']
+      tag: ['@sanity', '@clients']
     }, async () => {
         await test.step('Ir al modulo Clients', async () => {
           await userTab.BaseNavigationPage().clickClients();
@@ -241,7 +241,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-22: Admin > Clients > Verificar que restaure un cliente archivado', {
-      tag: ['@smoke', '@clients']
+      tag: ['@sanity', '@clients']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
@@ -325,6 +325,54 @@ test.describe('Clientes Principal Page Tests', () => {
           await userTab.page.reload();
         });
         await test.step('Tierdown - Purgar Cliente', async () => {
+          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+          await userTab.Clients().confirmPurgeClient();
+          await userTab.Clients().isPurgeConfirmationTextVisible();
+        });
+      }
+    );
+    test('IN-147: Admin > Clients > Verificar que restaure un cliente eliminado', {
+      tag: ['@sanity', '@clients']
+    }, async () => {
+        let clientData = DataGenerator.generateClientData();
+        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+        });
+        await test.step('Crear cliente con los datos mínimos requeridos', async () => {
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().clickSaveButton();
+          expect (userTab.CreateClients().isCreateConfirmationTextVisible()).toBeTruthy();
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+          const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+            if (!existsClient) {
+              console.log(`Client ${clientData.company.name} was not found after creation.`, new Date());
+              expect(existsClient).toBeTruthy();
+
+            }else{
+              expect(existsClient).toBeTruthy();
+            }
+        });
+        await test.step('Archivar Cliente', async () => {
+          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Delete');
+          await userTab.Clients().isDeleteConfirmationTextVisible();
+          await userTab.page.reload();
+        });
+        await test.step('Habilitar lifecycle para ver todos los clientes', async () => {
+          await userTab.Clients().clickLifecycleDropdownAndSelectAllOptions();
+          await userTab.page.reload();
+        });
+        await test.step('Restaurar el cliente archivado', async () => {
+          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Restore');
+          await userTab.Clients().isRestoreConfirmationTextVisible();
+        });
+        await test.step('Eliminar Cliente', async () => {
           await userTab.Clients().clickClientActionButton(clientData.company.name);
           await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
           await userTab.Clients().confirmPurgeClient();
