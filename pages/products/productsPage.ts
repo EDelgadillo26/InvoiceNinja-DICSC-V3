@@ -47,6 +47,8 @@ export class ProductsPage {
     private readonly actionsButtonSelector = (productName: string) => `//tr[td[2]//a[text()="${productName}"]]//button[@data-cy="chevronDownButton"]`;
     private readonly actionsButtonDeleteOrArchiveOption = (productName: string) => `//button[div[contains(text(),"${productName}")]]`;
     private readonly actionsEditOption = `//a[contains(@href,"/edit") and .//div[text()="Edit"]]`;
+    private readonly tableColumnsName = 'thead th';
+
     // ========== PAGINATION SELECTORS ==========
     private readonly totalResults = 'span:has-text("Total results:")';
     private readonly paginationInfo = 'span:has-text("1 / 1")';
@@ -92,7 +94,10 @@ export class ProductsPage {
      * Types in the filter input
      */
     async typeInFilterInput(text: string): Promise<void> {
+        await this.page.locator(this.filterInput).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.filterInput).clear();
         await this.page.locator(this.filterInput).pressSequentially(text);
+        await this.page.waitForTimeout(1000);
     }
 
     /**
@@ -258,16 +263,17 @@ export class ProductsPage {
      * Clicks the action button for the specific product
      */
     async clickProductActionButton(name: string): Promise<void> {
-        await this.page.locator(this.actionsButtonSelector(name)).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.actionsButtonSelector(name)).waitFor({ state: 'visible', timeout: 15000 });
         await this.page.locator(this.actionsButtonSelector(name)).click();
     }    
 
     /**
-     * Clicks the delete or archive option for the specific product
+     * Clicks the delete or archive or Restore option for the specific product
      */
     async clickProductDeleteOrArchiveOption(option: string): Promise<void> {
         await this.page.locator(this.actionsButtonDeleteOrArchiveOption(option)).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.actionsButtonDeleteOrArchiveOption(option)).click();
+        await this.page.waitForTimeout(2000);
     }
 
     /**
@@ -276,6 +282,17 @@ export class ProductsPage {
     async clickProductEditOption(): Promise<void> {
         await this.page.locator(this.actionsEditOption).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.actionsEditOption).click();
+    }
+
+    /**
+     * Gets all column names in the table
+     * @returns {Promise<string[]>} Array of all column names in the table
+     */
+    async getAllColumnsName(): Promise<string[]> {
+      await this.page.locator(this.tableColumnsName).first().waitFor({ state: 'visible', timeout: 5000 });
+      const columnHeaders = await this.page.locator(this.tableColumnsName).allInnerTexts();
+      // const cleanedHeaders = columnHeaders.map(h => h.trim()).filter(Boolean);
+      return columnHeaders;
     }
 
     // ========== TABLE HEADER METHODS ==========
