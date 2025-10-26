@@ -171,4 +171,29 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       }
     );
+  
+    test('IN-2: Admin > Clients > Verificar que se muestren las columnas por defecto en la Tabla de Clientes', {
+      tag: ['@smoke', '@clients']
+    }, async () => {
+        await test.step('Ir al modulo Clients', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+        });
+        await test.step('Validar las columnas por defecto', async () => {
+          const expectedHeaders = [
+            '',
+            'Name',
+            'Contact Email',
+            'ID Number',
+            'Balance',
+            'Paid to Date',
+            'Date Created',
+            'Last Login',
+            'Website',
+            ''
+          ];
+          const visibleColumns = await userTab.Clients().getAllColumnsName();
+          expect(visibleColumns).toEqual(expect.arrayContaining(expectedHeaders));
+        });
+      }
+    );
 });
