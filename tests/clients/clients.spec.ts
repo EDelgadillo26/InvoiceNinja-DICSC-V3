@@ -382,7 +382,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-146: Admin > Clients > Actions > Verificar que purge un cliente', {
-      tag: ['@sanity', '@clients']
+      tag: ['@smoke', '@clients']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
