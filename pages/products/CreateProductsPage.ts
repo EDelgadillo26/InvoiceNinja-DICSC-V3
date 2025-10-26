@@ -331,6 +331,32 @@ export class CreateProductsPage {
     }
 
     /**
+     * Gets the archive Confirmation text
+     */
+    async isArchiveConfirmationTextVisible(): Promise<boolean> {
+        console.log('Getting archive confirmation text', new Date());
+        try {
+            await this.page.getByText('Successfully archived product').waitFor({ state: 'visible', timeout: 2000 });
+            return true;
+        } catch {
+            return false;
+        }
+    }    
+
+    /**
+     * Gets the Edit Confirmation text
+     */
+    async isEditConfirmationTextVisible(): Promise<boolean> {
+        console.log('Getting edit confirmation text', new Date());
+        try {
+            await this.page.getByText('Successfully edited product').waitFor({ state: 'visible', timeout: 2000 });
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    /**
      * Gets the Delete Confirmation text
      */
     async isDeleteConfirmationTextVisible(): Promise<boolean> {

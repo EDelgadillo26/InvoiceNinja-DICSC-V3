@@ -41,6 +41,7 @@ export class ClientsPage {
     private readonly table = 'table.min-w-full.table-fixed';
     private readonly tableHeader = 'thead';
     private readonly tableBody = 'tbody';
+    private readonly tableColumnsName = 'thead th';
 
     // ========== TABLE HEADER COLUMN SELECTORS ==========
     private readonly headerCheckbox = 'thead input[type="checkbox"]';
@@ -50,7 +51,7 @@ export class ClientsPage {
     // ========== Context Menu  (Actions Button) ==========
     private readonly contextMenu = 'div[role="menu"]';
     private readonly contextMenuEdit = 'button:has-text("Edit")';
-    private readonly contextMenuArchiveDeletePurgeOption = (option: 'Archive' | 'Delete' | 'Purge') => `//button[div[contains(text(),"${option}")]]`;
+    private readonly contextMenuArchiveDeletePurgeOption = (option: 'Archive' | 'Delete' | 'Purge' | 'Restore') => `//button[div[contains(text(),"${option}")]]`;
     private readonly editContextMenuOption = '//a[contains(@href,"/edit") and .//div[text()="Edit"]]'
     private readonly confirmationContinueButton = '//button[contains(text(),"Continue")]';
    
@@ -389,6 +390,17 @@ export class ClientsPage {
         return true;
     }
 
+    /**
+     * Gets all column names in the table
+     * @returns {Promise<string[]>} Array of all column names in the table
+     */
+    async getAllColumnsName(): Promise<string[]> {
+      await this.page.locator(this.tableColumnsName).first().waitFor({ state: 'visible', timeout: 5000 });
+      const columnHeaders = await this.page.locator(this.tableColumnsName).allInnerTexts();
+      // const cleanedHeaders = columnHeaders.map(h => h.trim()).filter(Boolean);
+      return columnHeaders;
+    }
+
     // ========== CLIENT ROW METHODS ==========
 
     /**
@@ -489,6 +501,19 @@ export class ClientsPage {
       }
     }
 
+    /**
+     * Gets the Restore Confirmation text
+     */
+    async isRestoreConfirmationTextVisible(): Promise<boolean> {
+      console.log('Getting restore confirmation text', new Date());
+      try {
+          await this.page.getByText('Successfully restored Client').waitFor({ state: 'visible', timeout: 2000 });
+          return true;
+      } catch {
+          return false;
+      }
+    }
+
    /**
      * Gets the Archive Confirmation text
      */
@@ -496,6 +521,19 @@ export class ClientsPage {
       console.log('Getting archive confirmation text', new Date());
       try {
           await this.page.getByText('Successfully archived Client').waitFor({ state: 'visible', timeout: 2000 });
+          return true;
+      } catch {
+          return false;
+      }
+    }
+
+   /**
+     * Gets the Delete Confirmation text
+     */
+    async isDeleteConfirmationTextVisible(): Promise<boolean> {
+      console.log('Getting delete confirmation text', new Date());
+      try {
+          await this.page.getByText('Successfully deleted Client').waitFor({ state: 'visible', timeout: 2000 });
           return true;
       } catch {
           return false;
@@ -602,7 +640,7 @@ export class ClientsPage {
     /**
      * Clicks the contextMenuArchiveDeletePurge per page dropdown
      */
-    async clickOnContextMenuArchiveDeletePurge(option: 'Archive' | 'Delete' | 'Purge'): Promise<void> {
+    async clickOnContextMenuArchiveDeletePurge(option: 'Archive' | 'Delete' | 'Purge' | 'Restore'): Promise<void> {
         await this.page.locator(this.contextMenuArchiveDeletePurgeOption(option)).click();
     }
 
