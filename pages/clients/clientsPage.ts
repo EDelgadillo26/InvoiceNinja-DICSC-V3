@@ -51,7 +51,7 @@ export class ClientsPage {
     // ========== Context Menu  (Actions Button) ==========
     private readonly contextMenu = 'div[role="menu"]';
     private readonly contextMenuEdit = 'button:has-text("Edit")';
-    private readonly contextMenuArchiveDeletePurgeOption = (option: 'Archive' | 'Delete' | 'Purge') => `//button[div[contains(text(),"${option}")]]`;
+    private readonly contextMenuArchiveDeletePurgeOption = (option: 'Archive' | 'Delete' | 'Purge' | 'Restore') => `//button[div[contains(text(),"${option}")]]`;
     private readonly editContextMenuOption = '//a[contains(@href,"/edit") and .//div[text()="Edit"]]'
     private readonly confirmationContinueButton = '//button[contains(text(),"Continue")]';
    
@@ -501,6 +501,19 @@ export class ClientsPage {
       }
     }
 
+    /**
+     * Gets the Restore Confirmation text
+     */
+    async isRestoreConfirmationTextVisible(): Promise<boolean> {
+      console.log('Getting restore confirmation text', new Date());
+      try {
+          await this.page.getByText('Successfully restored Client').waitFor({ state: 'visible', timeout: 2000 });
+          return true;
+      } catch {
+          return false;
+      }
+    }
+
    /**
      * Gets the Archive Confirmation text
      */
@@ -614,7 +627,7 @@ export class ClientsPage {
     /**
      * Clicks the contextMenuArchiveDeletePurge per page dropdown
      */
-    async clickOnContextMenuArchiveDeletePurge(option: 'Archive' | 'Delete' | 'Purge'): Promise<void> {
+    async clickOnContextMenuArchiveDeletePurge(option: 'Archive' | 'Delete' | 'Purge' | 'Restore'): Promise<void> {
         await this.page.locator(this.contextMenuArchiveDeletePurgeOption(option)).click();
     }
 
