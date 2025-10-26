@@ -324,7 +324,7 @@ test.describe('Clientes Principal Page Tests', () => {
           await userTab.Clients().clickLifecycleDropdownAndSelectAllOptions();
           await userTab.page.reload();
         });
-        await test.step('Tierdown - Purgar Cliente', async () => {
+        await test.step('Teardown - Purgar Cliente', async () => {
           await userTab.Clients().clickClientActionButton(clientData.company.name);
           await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
           await userTab.Clients().confirmPurgeClient();
