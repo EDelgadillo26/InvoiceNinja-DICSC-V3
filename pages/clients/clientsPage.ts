@@ -34,6 +34,13 @@ export class ClientsPage {
     private readonly importButton = 'a[href="#/clients/import"]';
     private readonly importIcon = 'svg[viewBox="0 0 18 18"]:has(path[d*="M12.28,8.97"])';
     private readonly newClientButton = '//a[contains(@href, "#/clients/create") and contains(text(), "New Client")]';
+    private readonly generalActionsButton = '//*[@id="root"]/div/div[2]/div[3]/main/div[2]/div/div[1]/div[1]/div[1]/button';
+    private readonly bulkUpdateOption = '//button[div[text()="Bulk Update"]]'
+    private readonly bulkUpdateColumnsDropdown = '//*[@id="headlessui-dialog-:r1a:"]/div/div[2]/div[2]/div/div[1]/div/div/div[1]';
+    private readonly bulkUpdateColumnsOption = (option: string) => `//*[@id="react-select-18-option-${option}"]`;
+    private readonly bulkUpdateValueDropdown = '//*[@id="headlessui-dialog-:r1a:"]/div/div[2]/div[2]/div/div[2]/div/select';
+    private readonly bulkUpdateValueInput = (value: string) =>  `select option:has-text("${value}")`;
+    private readonly bulkUpdateOptionUpdateButton = '//button[div[text()="Update"] or text()="Update"]'
 
     // ========== DATA TABLE SELECTORS ==========
     private readonly dataTable = '[data-cy="dataTable"]';
@@ -42,6 +49,7 @@ export class ClientsPage {
     private readonly tableHeader = 'thead';
     private readonly tableBody = 'tbody';
     private readonly tableColumnsName = 'thead th';
+    private readonly selectClientCheckbox = (client: string) => `//tr[td[2]//a[text()="${client}"]]//input[@type="checkbox"]`;
 
     // ========== TABLE HEADER COLUMN SELECTORS ==========
     private readonly headerCheckbox = 'thead input[type="checkbox"]';
@@ -316,6 +324,41 @@ export class ClientsPage {
         return await this.page.locator(this.newClientButton).textContent() || '';
     }
 
+    /**
+     * Clicks the general action button
+     */
+    async clickGeneralClientActionButton(): Promise<void> {
+        await this.page.locator(this.generalActionsButton).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.generalActionsButton).click();
+    }
+
+    /**
+     * Clicks the bulk update button
+     */
+    async clickBulkUpdateButton(): Promise<void> {
+        await this.page.locator(this.bulkUpdateOption).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.bulkUpdateOption).click();
+    }
+
+    /**
+     * Select Column to update and Value for bulk update
+     * @param value - The value to set
+     * @param column - The column to update
+     */
+    async selectBulkUpdateColumnAndValue(): Promise<void> {
+        await this.page.locator('.css-1y9i3r8').click();
+        await this.page.getByRole('option', { name: 'Industry' }).click();
+        await this.page.locator('select').selectOption('14');
+    }
+
+    /**
+     * Clicks the Update for Bulk Update button
+     */
+    async clickUpdateBulkUpdateButton(): Promise<void> {
+        await this.page.locator(this.bulkUpdateOptionUpdateButton).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.locator(this.bulkUpdateOptionUpdateButton).click();
+    }
+
     // ========== DATA TABLE METHODS ==========
 
     /**
@@ -343,6 +386,14 @@ export class ClientsPage {
      */
     async getTableRowCount(): Promise<number> {
         return await this.page.locator(this.tableRowsAll).count();
+    }
+
+    /**
+     * Clicks the row checkbox for a specific client by name
+     */
+    async clickRowCheckboxByClientName(clientName: string): Promise<void> {
+        await this.page.locator(this.selectClientCheckbox(clientName)).waitFor({ state: 'visible', timeout: 5000 });
+        await this.page.locator(this.selectClientCheckbox(clientName)).click();
     }
 
     // ========== TABLE HEADER METHODS ==========
@@ -485,6 +536,7 @@ export class ClientsPage {
      * Clicks the action button for the specific client
      */
     async confirmPurgeClient(): Promise<void> {
+        await this.page.locator(this.confirmationContinueButton).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.confirmationContinueButton).click();
     }
 
