@@ -288,4 +288,48 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       }
     );
+
+    test('IN-145: Admin > Clients > Actions > Verificar que elimine un cliente activo', {
+      tag: ['@smoke', '@clients']
+    }, async () => {
+        let clientData = DataGenerator.generateClientData();
+        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+        });
+        await test.step('Crear cliente con los datos mínimos requeridos', async () => {
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().clickSaveButton();
+          expect (userTab.CreateClients().isCreateConfirmationTextVisible()).toBeTruthy();
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+          const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+            if (!existsClient) {
+              console.log(`Client ${clientData.company.name} was not found after creation.`, new Date());
+              expect(existsClient).toBeTruthy();
+
+            }else{
+              expect(existsClient).toBeTruthy();
+            }
+        });
+        await test.step('Archivar Cliente', async () => {
+          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Delete');
+          await userTab.Clients().isArchiveConfirmationTextVisible();
+          await userTab.page.reload();
+        });
+        await test.step('Habilitar lifecycle para ver todos los clientes', async () => {
+          await userTab.Clients().clickLifecycleDropdownAndSelectAllOptions();
+          await userTab.page.reload();
+        });
+        await test.step('Tierdown - Purgar Cliente', async () => {
+          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+          await userTab.Clients().confirmPurgeClient();
+          await userTab.Clients().isPurgeConfirmationTextVisible();
+        });
+      }
+    );
 });
