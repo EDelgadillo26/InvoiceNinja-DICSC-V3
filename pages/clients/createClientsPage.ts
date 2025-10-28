@@ -92,6 +92,10 @@ export class CreateClientsPage {
     private readonly rightColumn = 'div.w-full.xl\\:w-1\\/2:last-child';
     private readonly formContainer = 'div.flex.flex-col.xl\\:flex-row';
 
+    // ========== LOST INFORMATION MESSAGE ==========
+    private readonly lostInformationMessage = 'span:has-text("Are You Sure To Lost Information?")';
+
+
     // ========== PAGE HEADER METHODS ==========
 
     /**
@@ -160,6 +164,14 @@ export class CreateClientsPage {
         } catch {
             return false;
         }
+    }
+
+    /**
+     * Gets the Lost Information Confirmation text
+     */
+    async isLostInformationConfirmationTextVisible(): Promise<boolean> {
+        console.log('Getting lost information confirmation text', new Date());
+        return await this.page.locator(this.lostInformationMessage).isVisible();
     }
     
     /**

@@ -507,4 +507,21 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       }
     );
+
+    test.fixme('IN-18: Admin > Clients > Verificar mensaje de confirmacion al cancelar la creación de cliente', {
+      tag: ['@sanity', '@clients']
+    }, async () => {
+        let clientData = DataGenerator.generateClientData();
+        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+        });
+        await test.step('Crear Cliente sin nombre de la compania', async () => {
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.BaseNavigationPage().clickProducts();
+          expect(await userTab.CreateClients().isLostInformationConfirmationTextVisible()).toBeTruthy();       
+        });
+      }
+    );
 });
