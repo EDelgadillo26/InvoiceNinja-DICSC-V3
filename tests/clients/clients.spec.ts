@@ -464,4 +464,47 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       }
     );
+
+    test.fixme('IN-26: Admin > Clients > New Client > Validar que NO permita crear un cliente con el campo Name vacío', {
+      tag: ['@sanity', '@clients']
+    }, async () => {
+        let clientData = DataGenerator.generateClientData();
+        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+        });
+        await test.step('Crear Cliente sin nombre de la compania', async () => {
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().clickSaveButton();
+          expect (userTab.CreateClients().isCreateConfirmationTextVisible()).toBeTruthy();
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+          const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.contact.firstName);
+          if (existsClient) {
+            try {
+              expect(existsClient).toBeFalsy();
+            } catch (error) {
+              await test.info().attach("Failure Screenshot - Client should not exist", { 
+                body: await userTab.page.screenshot(), 
+                contentType: 'image/png' 
+              });
+              await test.step('Habilitar lifecycle para ver todos los clientes', async () => {
+                await userTab.Clients().clickLifecycleDropdownAndSelectAllOptions();
+                await userTab.page.reload();
+              });
+              await test.step('Teardown - Purgar Cliente', async () => {
+                await userTab.Clients().clickClientActionButton(clientData.contact.firstName);
+                await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+                await userTab.Clients().confirmPurgeClient();
+                await userTab.Clients().isPurgeConfirmationTextVisible();
+              });
+              throw error;
+            }
+          } else {
+            expect(existsClient).toBeFalsy();
+          }         
+        });
+      }
+    );
 });

@@ -138,7 +138,7 @@ test.describe('Products Principal Page Tests', () => {
     );
 
     test('IN-198: Admin > Products > Verificar que elimine un producto archivado', {
-      tag: ['@smoke', '@products']
+      tag: ['@sanity', '@products']
     }, async () => {
         let productData = DataGenerator.generateProductData();
         await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {

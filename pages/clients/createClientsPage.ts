@@ -128,7 +128,7 @@ export class CreateClientsPage {
         console.log('Clicking save button', new Date());
         await this.page.locator(this.saveButton).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.saveButton).click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForTimeout(2000);
     }
 
     /**
