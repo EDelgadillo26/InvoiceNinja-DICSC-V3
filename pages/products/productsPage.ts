@@ -182,7 +182,6 @@ export class ProductsPage {
      */
     async isImportButtonVisible(): Promise<boolean> {
         console.log('Validating import button visibility', new Date());
-        await this.page.locator(this.importButton).waitFor({ state: 'visible', timeout: 10000 });
         return await this.page.locator(this.importButton).isVisible();
     }
 

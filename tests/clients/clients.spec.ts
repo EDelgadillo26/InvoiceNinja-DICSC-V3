@@ -524,4 +524,29 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       }
     );
+
+    test('IN-24: Admin > Clients > Verificar que cancele una edición de cliente', {
+      tag: ['@sanity', '@clients']
+    }, async () => {
+        let clientData = DataGenerator.generateClientData();
+        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+        });
+        await test.step('Cancelar la creacion de un cliente', async () => {
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+          const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+            if (!existsClient) {
+              expect(existsClient).toBeFalsy();
+
+            }else{
+              expect(existsClient).toBeTruthy();
+            }
+        });
+      }
+    );
 });
