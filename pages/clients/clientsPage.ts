@@ -56,6 +56,24 @@ export class ClientsPage {
     private readonly headerName = (columnName: string) => `th:has(span:has-text("${columnName}"))`; 
     private readonly headerActions = 'th:last-child';
 
+    // ========== SORTING SELECTORS ==========
+    private readonly nameHeaderContainer = 'th:has(span:has-text("Name"))';
+    private readonly sortArrowAscending = 'svg polyline[points="16.5 12.5 10 6 3.5 12.5"][stroke="#2a303d"]';
+    private readonly sortArrowDescending = 'svg polyline[points="3.5 7.5 10 14 16.5 7.5"][stroke="#2a303d"]';
+    
+    // Generic column selectors
+    private readonly columnHeaderContainer = (columnName: string) => `th:has(span:has-text("${columnName}"))`;
+    private readonly columnDataSelector = (columnIndex: number) => `tbody td:nth-child(${columnIndex})`;
+    
+    // Specific column data selectors
+    private readonly contactEmailData = 'tbody td:nth-child(3)';
+    private readonly idNumberData = 'tbody td:nth-child(4)';
+    private readonly balanceData = 'tbody td:nth-child(5)';
+    private readonly paidToDateData = 'tbody td:nth-child(6)';
+    private readonly dateCreatedData = 'tbody td:nth-child(7)';
+    private readonly lastLoginData = 'tbody td:nth-child(8)';
+    private readonly websiteData = 'tbody td:nth-child(9)';
+
     // ========== Context Menu  (Actions Button) ==========
     private readonly contextMenu = 'div[role="menu"]';
     private readonly contextMenuEdit = 'button:has-text("Edit")';
@@ -786,5 +804,277 @@ export class ClientsPage {
         for (const expectedClient of expectedClients) {
             expect(actualClients).toContain(expectedClient);
         }
+    }
+
+    // ========== SORTING METHODS ==========
+
+    /**
+     * Gets the current sort direction for the Name column
+     * @returns {Promise<'asc' | 'desc' | 'none'>} Current sort direction
+     */
+    async getNameColumnSortDirection(): Promise<'asc' | 'desc' | 'none'> {
+        const nameHeader = this.page.locator(this.nameHeaderContainer);
+        
+        // Look for ascending arrow (darker color indicates active)
+        const ascArrow = nameHeader.locator(this.sortArrowAscending);
+        const descArrow = nameHeader.locator(this.sortArrowDescending);
+        
+        if (await ascArrow.isVisible()) {
+            return 'asc';
+        } else if (await descArrow.isVisible()) {
+            return 'desc';
+        } else {
+            return 'none';
+        }
+    }
+
+    /**
+     * Validates if client names are sorted in ascending order
+     * @returns {Promise<boolean>} True if names are sorted ascending, false otherwise
+     */
+    async areClientNamesSortedAscending(): Promise<boolean> {
+        const clientNames = await this.getAllClientNames();
+        
+        if (clientNames.length <= 1) return true;
+        
+        for (let i = 0; i < clientNames.length - 1; i++) {
+            if (clientNames[i].toLowerCase() > clientNames[i + 1].toLowerCase()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Validates if client names are sorted in descending order
+     * @returns {Promise<boolean>} True if names are sorted descending, false otherwise
+     */
+    async areClientNamesSortedDescending(): Promise<boolean> {
+        const clientNames = await this.getAllClientNames();
+        
+        if (clientNames.length <= 1) return true;
+        
+        for (let i = 0; i < clientNames.length - 1; i++) {
+            if (clientNames[i].toLowerCase() < clientNames[i + 1].toLowerCase()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Validates if the Name column sorting matches the expected order
+     * @param expectedOrder The expected sort direction ('asc' or 'desc')
+     * @returns {Promise<boolean>} True if sorting matches expected order
+     */
+    async validateNameColumnSorting(expectedOrder: 'asc' | 'desc'): Promise<boolean> {
+        const actualSortDirection = await this.getNameColumnSortDirection();
+        
+        if (actualSortDirection !== expectedOrder) {
+            console.log(`Expected sort direction: ${expectedOrder}, but found: ${actualSortDirection}`);
+            return false;
+        }
+
+        if (expectedOrder === 'asc') {
+            return await this.areClientNamesSortedAscending();
+        } else {
+            return await this.areClientNamesSortedDescending();
+        }
+    }
+
+    // ========== GENERIC SORTING METHODS ==========
+
+    /**
+     * Gets the current sort direction for any column
+     * @param columnName The name of the column to check
+     * @returns {Promise<'asc' | 'desc' | 'none'>} Current sort direction
+     */
+    async getColumnSortDirection(columnName: string): Promise<'asc' | 'desc' | 'none'> {
+        const columnHeader = this.page.locator(this.columnHeaderContainer(columnName));
+        
+        // Look for ascending arrow (darker color indicates active)
+        const ascArrow = columnHeader.locator(this.sortArrowAscending);
+        const descArrow = columnHeader.locator(this.sortArrowDescending);
+        
+        if (await ascArrow.isVisible()) {
+            return 'asc';
+        } else if (await descArrow.isVisible()) {
+            return 'desc';
+        } else {
+            return 'none';
+        }
+    }
+
+    /**
+     * Gets all data from a specific column
+     * @param columnName The name of the column
+     * @returns {Promise<string[]>} Array of column data
+     */
+    async getColumnData(columnName: string): Promise<string[]> {
+        let selector: string;
+        
+        // Map column names to their specific selectors
+        switch (columnName.toLowerCase()) {
+            case 'name':
+                selector = this.clientNames;
+                break;
+            case 'contact email':
+                selector = this.contactEmailData;
+                break;
+            case 'id number':
+                selector = this.idNumberData;
+                break;
+            case 'balance':
+                selector = this.balanceData;
+                break;
+            case 'paid to date':
+                selector = this.paidToDateData;
+                break;
+            case 'date created':
+                selector = this.dateCreatedData;
+                break;
+            case 'last login':
+                selector = this.lastLoginData;
+                break;
+            case 'website':
+                selector = this.websiteData;
+                break;
+            default:
+                throw new Error(`Unknown column: ${columnName}`);
+        }
+
+        const dataElements = await this.page.locator(selector).all();
+        const data: string[] = [];
+        
+        for (const element of dataElements) {
+            const text = await element.textContent();
+            if (text) data.push(text.trim());
+        }
+        
+        return data;
+    }
+
+    /**
+     * Validates if column data is sorted in ascending order based on data type
+     * @param columnData Array of column data
+     * @param dataType Type of data: 'text', 'number', 'date', 'currency'
+     * @returns {Promise<boolean>} True if data is sorted ascending
+     */
+    async isDataSortedAscending(columnData: string[], dataType: 'text' | 'number' | 'date' | 'currency'): Promise<boolean> {
+        if (columnData.length <= 1) return true;
+        
+        for (let i = 0; i < columnData.length - 1; i++) {
+            const current = columnData[i];
+            const next = columnData[i + 1];
+            
+            let comparison: boolean;
+            
+            switch (dataType) {
+                case 'text':
+                    comparison = current.toLowerCase() <= next.toLowerCase();
+                    break;
+                case 'number':
+                    const currentNum = parseFloat(current.replace(/[^0-9.-]/g, '')) || 0;
+                    const nextNum = parseFloat(next.replace(/[^0-9.-]/g, '')) || 0;
+                    comparison = currentNum <= nextNum;
+                    break;
+                case 'currency':
+                    const currentCurrency = parseFloat(current.replace(/[$,\s]/g, '')) || 0;
+                    const nextCurrency = parseFloat(next.replace(/[$,\s]/g, '')) || 0;
+                    comparison = currentCurrency <= nextCurrency;
+                    break;
+                case 'date':
+                    const currentDate = new Date(current);
+                    const nextDate = new Date(next);
+                    comparison = currentDate <= nextDate;
+                    break;
+                default:
+                    comparison = current.toLowerCase() <= next.toLowerCase();
+            }
+            
+            if (!comparison) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    /**
+     * Validates if column data is sorted in descending order based on data type
+     * @param columnData Array of column data
+     * @param dataType Type of data: 'text', 'number', 'date', 'currency'
+     * @returns {Promise<boolean>} True if data is sorted descending
+     */
+    async isDataSortedDescending(columnData: string[], dataType: 'text' | 'number' | 'date' | 'currency'): Promise<boolean> {
+        if (columnData.length <= 1) return true;
+        
+        for (let i = 0; i < columnData.length - 1; i++) {
+            const current = columnData[i];
+            const next = columnData[i + 1];
+            
+            let comparison: boolean;
+            
+            switch (dataType) {
+                case 'text':
+                    comparison = current.toLowerCase() >= next.toLowerCase();
+                    break;
+                case 'number':
+                    const currentNum = parseFloat(current.replace(/[^0-9.-]/g, '')) || 0;
+                    const nextNum = parseFloat(next.replace(/[^0-9.-]/g, '')) || 0;
+                    comparison = currentNum >= nextNum;
+                    break;
+                case 'currency':
+                    const currentCurrency = parseFloat(current.replace(/[$,\s]/g, '')) || 0;
+                    const nextCurrency = parseFloat(next.replace(/[$,\s]/g, '')) || 0;
+                    comparison = currentCurrency >= nextCurrency;
+                    break;
+                case 'date':
+                    const currentDate = new Date(current);
+                    const nextDate = new Date(next);
+                    comparison = currentDate >= nextDate;
+                    break;
+                default:
+                    comparison = current.toLowerCase() >= next.toLowerCase();
+            }
+            
+            if (!comparison) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    /**
+     * Validates if any column sorting matches the expected order
+     * @param columnName The name of the column to validate
+     * @param expectedOrder The expected sort direction ('asc' or 'desc')
+     * @param dataType Type of data in the column
+     * @returns {Promise<boolean>} True if sorting matches expected order
+     */
+    async validateColumnSorting(columnName: string, expectedOrder: 'asc' | 'desc', dataType: 'text' | 'number' | 'date' | 'currency'): Promise<boolean> {
+        const actualSortDirection = await this.getColumnSortDirection(columnName);
+        
+        if (actualSortDirection !== expectedOrder) {
+            console.log(`Column ${columnName}: Expected sort direction: ${expectedOrder}, but found: ${actualSortDirection}`);
+            return false;
+        }
+
+        const columnData = await this.getColumnData(columnName);
+        
+        if (expectedOrder === 'asc') {
+            return await this.isDataSortedAscending(columnData, dataType);
+        } else {
+            return await this.isDataSortedDescending(columnData, dataType);
+        }
+    }
+
+    /**
+     * Clicks on any column header to change sorting
+     * @param columnName The name of the column header to click
+     */
+    async clickColumnHeader(columnName: string): Promise<void> {
+        await this.page.locator(this.columnHeaderContainer(columnName)).click();
     }
 }

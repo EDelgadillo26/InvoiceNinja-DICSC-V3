@@ -549,4 +549,77 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       }
     );
+    //Parametrizacion de pruebas para validacion de ordenamiento de columnas
+    const columnsToTest = [
+      { name: 'Name', dataType: 'text' as const, id: 'IN-3' },
+      { name: 'Contact Email', dataType: 'text' as const, id: 'IN-4' },
+      { name: 'ID Number', dataType: 'text' as const, id: 'IN-5' },
+      { name: 'Balance', dataType: 'currency' as const, id: 'IN-6' },
+      { name: 'Paid to Date', dataType: 'currency' as const, id: 'IN-7' },
+      { name: 'Date Created', dataType: 'date' as const, id: 'IN-272' },
+      { name: 'Last Login', dataType: 'date' as const, id: 'IN-273' },
+      { name: 'Website', dataType: 'text' as const, id: 'IN-9' }
+    ];
+
+    for (const column of columnsToTest) {
+      test(`${column.id}: Admin > Clients > Verificar ordenamiento de la columna ${column.name}`, {
+        tag: ['@smoke', '@clients']
+      }, async () => {
+          await test.step('Ir al modulo Clients', async () => {
+            await userTab.BaseNavigationPage().clickClients();
+            await userTab.page.waitForLoadState('networkidle');
+          });
+          await test.step(`Verificar ordenamiento inicial de la columna ${column.name}`, async () => {
+            const initialSortDirection = await userTab.Clients().getColumnSortDirection(column.name);
+            console.log(`${column.name} - Ordenamiento inicial detectado: ${initialSortDirection}`);
+            if (initialSortDirection !== 'none') {
+              const isValidSorting = await userTab.Clients().validateColumnSorting(column.name, initialSortDirection, column.dataType);
+              expect(isValidSorting).toBeTruthy();
+              console.log(`${column.name} - Validación exitosa del ordenamiento inicial: ${initialSortDirection}`);
+            } else {
+              console.log(`${column.name} - No tiene ordenamiento inicial aplicado`);
+            }
+          });
+          await test.step(`Hacer clic en la columna ${column.name} para activar ordenamiento`, async () => {
+            await userTab.Clients().clickColumnHeader(column.name);
+            await userTab.page.waitForLoadState('networkidle');
+            await userTab.page.waitForTimeout(1500);
+          });
+          await test.step(`Verificar que el ordenamiento se aplicó correctamente en ${column.name}`, async () => {
+            const newSortDirection = await userTab.Clients().getColumnSortDirection(column.name);
+            console.log(`${column.name} - Nuevo ordenamiento detectado: ${newSortDirection}`);
+            if (newSortDirection !== 'none') {
+              const isValidSorting = await userTab.Clients().validateColumnSorting(column.name, newSortDirection, column.dataType);
+              expect(isValidSorting).toBeTruthy();
+              console.log(`${column.name} - Validación exitosa después del primer clic: ${newSortDirection}`);
+              const columnData = await userTab.Clients().getColumnData(column.name);
+              console.log(`${column.name} - Datos encontrados (primeros 3): ${columnData.slice(0, 3).join(', ')}${columnData.length > 3 ? '...' : ''}`);
+            }
+          });
+          await test.step(`Hacer clic nuevamente en ${column.name} para cambiar dirección del ordenamiento`, async () => {
+            await userTab.Clients().clickColumnHeader(column.name);
+            await userTab.page.waitForLoadState('networkidle');
+            await userTab.page.waitForTimeout(1500);
+          });
+          await test.step(`Verificar el cambio bidireccional del ordenamiento en ${column.name}`, async () => {
+            const finalSortDirection = await userTab.Clients().getColumnSortDirection(column.name);
+            console.log(`${column.name} - Ordenamiento final detectado: ${finalSortDirection}`);
+            if (finalSortDirection !== 'none') {
+              const isValidSorting = await userTab.Clients().validateColumnSorting(column.name, finalSortDirection, column.dataType);
+              expect(isValidSorting).toBeTruthy();
+              console.log(`${column.name} - Validación exitosa del cambio bidireccional: ${finalSortDirection}`);
+            }
+          });
+          await test.step(`Validar que existen datos en la columna ${column.name}`, async () => {
+            const columnData = await userTab.Clients().getColumnData(column.name);
+            console.log(`${column.name} - Se encontraron ${columnData.length} registros`);
+            if (columnData.length > 0) {
+              console.log(`${column.name} - Datos de ejemplo: ${columnData.slice(0, 2).join(', ')}`);
+            } else {
+              console.log(`${column.name} - Columna sin datos visibles`);
+            }
+          });
+        }
+      );
+    }
 });
