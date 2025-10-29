@@ -39,17 +39,17 @@ export class CreateClientsPage {
     
     // Company Details Form Fields
     private readonly nameField = '//dt[span[text()="Name"]]/following-sibling::dd//input[@type="text"]';
-    private readonly numberField = 'input[type="text"]:near(span:has-text("Number"))';
-    private readonly groupDropdown = 'div:has(#react-select-9-input)';
-    private readonly assignedUserDropdown = 'div:has(#react-select-10-input)';
-    private readonly idNumberField = 'input[type="text"]:near(span:has-text("ID Number"))';
-    private readonly vatNumberField = 'input[type="text"]:near(span:has-text("VAT Number"))';
-    private readonly websiteField = 'input[type="text"]:near(span:has-text("Website"))';
-    private readonly phoneField = 'input[type="text"]:near(span:has-text("Phone"))';
-    private readonly routingIdField = 'input[type="text"]:near(span:has-text("Routing ID"))';
-    private readonly validVatToggle = 'button[id*="headlessui-switch"]:near(span:has-text("Valid VAT Number"))';
-    private readonly taxExemptToggle = 'button[id*="headlessui-switch"]:near(span:has-text("Tax Exempt"))';
-    private readonly classificationDropdown = 'div:has(#react-select-6-input)';
+    private readonly numberField = '//dt[span[text()="Number"]]/following-sibling::dd//input[@type="text"]';
+    private readonly groupDropdown = '//dt[span[text()="Group"]]/following-sibling::dd//div[contains(@id,"react-select-9-input")]';
+    private readonly assignedUserDropdown = '//dt[span[text()="Assigned User"]]/following-sibling::dd//div[contains(@id,"react-select-10-input")]';
+    private readonly idNumberField = '//dt[span[text()="ID Number"]]/following-sibling::dd//input[@type="text"]';
+    private readonly vatNumberField = '//dt[span[text()="VAT Number"]]/following-sibling::dd//input[@type="text"]';
+    private readonly websiteField = '//dt[span[text()="Website"]]/following-sibling::dd//input[@type="text"]';
+    private readonly phoneField = '//dt[span[text()="Phone"]]/following-sibling::dd//input[@type="text"]';
+    private readonly routingIdField = '//dt[span[text()="Routing ID"]]/following-sibling::dd//input[@type="text"]';
+    private readonly validVatToggle = '//dt[span[text()="Valid VAT Number"]]/following-sibling::dd//button[@id*="headlessui-switch"]';
+    private readonly taxExemptToggle = '//dt[span[text()="Tax Exempt"]]/following-sibling::dd//button[@id*="headlessui-switch"]';
+    private readonly classificationDropdown = '//dt[span[text()="Classification"]]/following-sibling::dd//div[contains(@id,"react-select-6-input")]';
 
     // ========== CONTACTS FORM SELECTORS ==========
     private readonly contactsSection = 'div:has(h3:has-text("Contacts"))';
@@ -326,6 +326,7 @@ export class CreateClientsPage {
      */
     async fillNumberField(number: string): Promise<void> {
         console.log('Filling number field', new Date());
+        await this.page.locator(this.numberField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.numberField).fill(number);
     }
 

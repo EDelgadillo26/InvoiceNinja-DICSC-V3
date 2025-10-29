@@ -198,5 +198,156 @@ test.describe('Clientes Principal Page Tests', () => {
         }
       }
     );
+
+    test('IN-48: Admin > Clients > Verificar que permita crear cliente con 1 carácter en el campo Number', {
+      tag: ['@boundary', '@clients']
+    }, async () => {
+        let clientData = DataGenerator.generateClientData();
+        const singleCharName = '1';
+        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+        });
+        await test.step('Crear cliente con 1 carácter en el campo Name', async () => {
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().fillNumberField(singleCharName);
+          await userTab.CreateClients().clickSaveButton();
+        });
+        await test.step('Verificar que el cliente se creó exitosamente', async () => {
+          expect(await userTab.CreateClients().isCreateConfirmationTextVisible()).toBeTruthy();
+          console.log(`Cliente creado exitosamente con 1 carácter: "${singleCharName}"`);
+        });
+        await test.step('Validar que el cliente aparece en la lista', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+          const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+          expect(existsClient).toBeTruthy();
+        });
+        await test.step('TearDown - Eliminar Cliente', async () => {
+          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+          await userTab.Clients().confirmPurgeClient();
+          await userTab.Clients().isPurgeConfirmationTextVisible();
+        });
+      });
+
+    test('IN-49: Admin > Clients > Verificar que permita crear cliente con 255 caracteres en el campo Number', {
+      tag: ['@boundary', '@clients']
+    }, async () => {
+        let clientData = DataGenerator.generateClientData();
+        const maxCharName = '1'.repeat(255);
+        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+        });
+        await test.step('Crear cliente con 255 caracteres en el campo Name', async () => {
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().fillNumberField(maxCharName);
+          await userTab.CreateClients().clickSaveButton();
+        });
+        await test.step('Validar que el cliente aparece en la lista', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+          const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+          expect(existsClient).toBeTruthy();
+        });
+        await test.step('TearDown - Eliminar Cliente', async () => {
+          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+          await userTab.Clients().confirmPurgeClient();
+          await userTab.Clients().isPurgeConfirmationTextVisible();
+        });
+      });
+
+    test('IN-50: Admin > Clients > Verificar que NO permita crear cliente con 256 caracteres en el campo Number', {
+      tag: ['@boundary', '@clients', '@negative']
+    }, async () => {
+        const clientData = DataGenerator.generateClientData();
+        const exceedCharName = '5'.repeat(256);
+        let clientWasCreated = false;
+        try {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().fillNumberField(exceedCharName);
+          await userTab.CreateClients().clickSaveButton();
+          const wasCreated = await userTab.CreateClients().isCreateConfirmationTextVisible();
+          if (wasCreated) {
+            clientWasCreated = true;
+            console.log('FALLO: El sistema permitió crear cliente con 256 caracteres');
+          } else {
+            console.log('CORRECTO: El sistema NO permitió crear cliente con 256 caracteres');
+          }
+          expect(wasCreated).toBeFalsy();
+        } finally {
+          if (clientWasCreated) {
+            try {
+              await userTab.BaseNavigationPage().clickClients();
+              await userTab.page.reload();
+              const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+              if (existsClient) {
+                await userTab.Clients().clickClientActionButton(clientData.company.name);
+                await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+                await userTab.Clients().confirmPurgeClient();
+                await userTab.Clients().isPurgeConfirmationTextVisible();
+                console.log('Cliente eliminado exitosamente');
+              }
+            } catch (cleanupError) {
+              console.log(`Error en limpieza: ${cleanupError}`);
+            }
+          }
+        }
+      }
+    );
+
+    test('IN-51: Admin > Clients > Verificar que NO permita crear cliente con caracteres especiales en el campo Number', {
+      tag: ['@boundary', '@clients', '@special-chars', '@negative']
+    }, async () => {
+         const clientData = DataGenerator.generateClientData();
+        const exceedCharName = '!@#1';
+        let clientWasCreated = false;
+        try {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().fillNumberField(exceedCharName);
+          await userTab.CreateClients().clickSaveButton();
+          const wasCreated = await userTab.CreateClients().isCreateConfirmationTextVisible();
+          if (wasCreated) {
+            clientWasCreated = true;
+            console.log('FALLO: El sistema permitió crear cliente con caracteres especiales');
+          } else {
+            console.log('CORRECTO: El sistema NO permitió crear cliente con caracteres especiales');
+          }
+          expect(wasCreated).toBeFalsy();
+        } finally {
+          if (clientWasCreated) {
+            try {
+              await userTab.BaseNavigationPage().clickClients();
+              await userTab.page.reload();
+              const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+              if (existsClient) {
+                await userTab.Clients().clickClientActionButton(clientData.company.name);
+                await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+                await userTab.Clients().confirmPurgeClient();
+                await userTab.Clients().isPurgeConfirmationTextVisible();
+                console.log('Cliente eliminado exitosamente');
+              }
+            } catch (cleanupError) {
+              console.log(`Error en limpieza: ${cleanupError}`);
+            }
+          }
+        }
+      }
+    );
     
+
 });
