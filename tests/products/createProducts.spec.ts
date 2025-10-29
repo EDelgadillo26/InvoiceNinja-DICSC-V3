@@ -1,0 +1,111 @@
+import test, { BrowserContext, expect } from '@playwright/test';
+import { BrowserContextConstructor } from '../../utils/browserContextConstructor';
+import { PageManager } from '../../pages/pageManager.page';
+import { DataGenerator } from '../../utils/dataGenerator';
+import users from '../../data/users.json';
+
+test.describe('Products Principal Page Tests', () => {
+
+    let browserContextConstructor: BrowserContextConstructor;
+    let userBrowser: BrowserContext;
+    let userTab: PageManager;
+    let staticDataExist : boolean = false;
+
+  test.beforeAll(async ({ browser }) => {
+    browserContextConstructor = new BrowserContextConstructor(browser);
+    userBrowser = await browserContextConstructor.createUserBrowserWindow();
+    userTab = await browserContextConstructor.createNewTabInBrowserWindow(userBrowser);
+  });
+
+  test.beforeEach(async ({  }) => {
+    await userTab.Login().loginToInvoiceNinja();
+
+    // if (!staticDataExist) {
+    //   await userTab.BaseNavigationPage().clickClients();
+    //   const existsClientStatic = await userTab.Clients().isSpecificClientVisible('EnriqueCompany');
+    //   if (!existsClientStatic) {
+    //     await userTab.Clients().clickNewClientButton();
+    //     await userTab.CreateClients().fillNameField('EnriqueCompany');
+    //     await userTab.CreateClients().fillFirstNameField('Enrique');
+    //     await userTab.CreateClients().fillLastNameField('Delgadillo');
+    //     await userTab.CreateClients().clickSaveButton();
+    //     expect (userTab.CreateClients().isCreateConfirmationTextVisible()).toBeTruthy();
+    //     await userTab.BaseNavigationPage().clickClients();
+    //     await userTab.page.reload();
+    //     staticDataExist = true;
+    //   }
+    // }
+  });
+
+  test.afterEach(async () => {
+    if (test.info().status === 'failed') {
+        if (userBrowser) {
+            for (const page of userBrowser.pages()) {
+              await test.info().attach("Failure Screenshot", { body: await page.screenshot(), contentType: 'image/png' });
+            }
+        }
+    }
+    await userTab.Login().logOutUser();
+  });
+
+  test.afterAll(async ({  }) => {
+    if (userBrowser) {
+      await userBrowser.close();
+    }
+  });
+
+    test('IN-193: Admin > Pasdroducts > Crear Producto con los campos mínimos requeridos', {
+      tag: ['@smoke', '@products']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+        });
+        await test.step('Llenar los campos del nuevo producto', async () => {
+          await userTab.CreateProducts().fillItemField(productData.name);
+          await userTab.CreateProducts().fillDescriptionField(productData.description);
+          await userTab.CreateProducts().fillGenericNumberField('Price',productData.price);
+          await userTab.CreateProducts().fillGenericNumberField('Default Quantity',productData.defaultQuantity);
+          await userTab.CreateProducts().fillGenericNumberField('Max Quantity',productData.maxQuantity);
+          await userTab.CreateProducts().selectTaxCategoryOption('Services');
+          await userTab.CreateProducts().clickSaveButton();
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.page.reload();
+          const existsProduct = await userTab.Products().isProductVisible(productData.name);
+            if (!existsProduct) {
+              console.log(`Product ${productData.name} was not found after creation.`, new Date());
+              expect(existsProduct).toBeTruthy();
+
+            }else{
+              expect(existsProduct).toBeTruthy();
+            }
+        });
+        await test.step('TearDown - Eliminar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+        });
+      }
+    );
+    test.fixme('IN-265: Admin > Products > Verificar que muestre mensaje de alerta antes de salir del formulario de creación de producto cuando este contiene información', {
+      tag: ['@sanity', '@products']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+        });
+        await test.step('Crear Producto sin nombre', async () => {
+          await userTab.CreateProducts().fillDescriptionField(productData.description);
+          await userTab.CreateProducts().fillGenericNumberField('Price', productData.price);
+          await userTab.CreateProducts().fillGenericNumberField('Default Quantity', productData.defaultQuantity);
+          await userTab.CreateProducts().fillGenericNumberField('Max Quantity', productData.maxQuantity);
+          await userTab.CreateProducts().selectTaxCategoryOption('Services');
+          await userTab.BaseNavigationPage().clickClients();
+          expect(await userTab.CreateProducts().isLostInformationConfirmationTextVisible()).toBeTruthy();
+        });
+      }
+    );
+});

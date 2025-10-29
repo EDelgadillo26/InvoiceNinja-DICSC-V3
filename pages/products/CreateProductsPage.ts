@@ -36,6 +36,8 @@ export class CreateProductsPage {
     private readonly imageUrlLabel = 'dt span:has-text("Image URL")';
     private readonly requiredFieldIndicator = 'span.text-red-600:has-text("*")';
 
+    // ========== LOST INFORMATION MESSAGE ==========
+    private readonly lostInformationMessage = 'span:has-text("Are You Sure To Lost Information?")';
 
     // ========== PAGE HEADER METHODS ==========
 
@@ -367,6 +369,14 @@ export class CreateProductsPage {
         } catch {
             return false;
         }
+    }
+
+    /**
+     * Gets the Lost Information Confirmation text
+     */
+    async isLostInformationConfirmationTextVisible(): Promise<boolean> {
+        console.log('Getting lost information confirmation text', new Date());
+        return await this.page.locator(this.lostInformationMessage).isVisible();
     }
 
 }
