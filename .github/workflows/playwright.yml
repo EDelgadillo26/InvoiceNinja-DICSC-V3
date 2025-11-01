@@ -1,4 +1,4 @@
-name: InvoiceNinja E2E Tests
+name: InvoiceNinja Tests
 on:
   push:
     branches: [ develop ]
@@ -17,15 +17,16 @@ on:
 
 jobs:
   test:
-    name: Run Playwright E2E Tests
+    name: Run Playwright Tests
     timeout-minutes: 30
     runs-on: ubuntu-latest
     
     env:
-      # Optimizaciones para CI
+      # Optimizaciones para CI/CD - Sin navegadores físicos
       CI: true
-      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: false
-      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/ms-playwright
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: true
+      PLAYWRIGHT_HTML_REPORT: playwright-report
+      PLAYWRIGHT_JUNIT_OUTPUT_NAME: results.xml
       # Variables de entorno desde GitHub Secrets
       INVOICE_NINJA_EMAIL: ${{ secrets.INVOICE_NINJA_EMAIL }}
       INVOICE_NINJA_PASSWORD: ${{ secrets.INVOICE_NINJA_PASSWORD }}
@@ -49,37 +50,73 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
-    - name: Install Playwright (no browsers - headless only)
+    - name: Validate environment variables
       run: |
-        npx playwright install-deps chromium
-        npx playwright install chromium --with-deps
+        echo "🔍 Validating required environment variables..."
+        if [ -z "$INVOICE_NINJA_EMAIL" ]; then
+          echo "❌ INVOICE_NINJA_EMAIL is not set"
+          exit 1
+        fi
+        if [ -z "$INVOICE_NINJA_PASSWORD" ]; then
+          echo "❌ INVOICE_NINJA_PASSWORD is not set"
+          exit 1
+        fi
+        if [ -z "$INVOICE_NINJA_BASE_URL" ]; then
+          echo "❌ INVOICE_NINJA_BASE_URL is not set"
+          exit 1
+        fi
+        echo "✅ All environment variables are set"
       
-    - name: Run single test (IN-16 - Basic client creation)
-      if: ${{ github.event.inputs.test_scope != 'all' }}
+    - name: Install system dependencies (no browsers)
       run: |
-        echo "Running single test case for validation..."
-        npx playwright test --grep "IN-16.*Crear Cliente con los campos minimos requeridos" --project=chromium --reporter=list
+        echo "🔧 Installing system dependencies only (no browser download)..."
+        npx playwright install-deps
+        echo "✅ System dependencies installed - running headless only"
+      
+    - name: Determine test scope
+      id: test-scope
+      run: |
+        if [ "${{ github.event.inputs.test_scope }}" = "all" ]; then
+          echo "scope=all" >> $GITHUB_OUTPUT
+        else
+          echo "scope=single" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Run single test (IN-16 - Basic client creation)
+      if: steps.test-scope.outputs.scope == 'single'
+      run: |
+        echo "🎯 Running single test case in headless mode..."
+        npx playwright test --grep "IN-16.*Crear Cliente con los campos minimos requeridos" --project=chromium --reporter=list --forbid-only
       
     - name: Run all tests
-      if: ${{ github.event.inputs.test_scope == 'all' }}
+      if: steps.test-scope.outputs.scope == 'all'
       run: |
-        echo "Running all test cases..."
-        npx playwright test --project=chromium --reporter=list
+        echo "🚀 Running all test cases in headless mode..."
+        npx playwright test --project=chromium --reporter=list --forbid-only
       
-    - name: Upload test results
+    - name: Upload HTML test report
       uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
+      if: always()
       with:
-        name: playwright-report-${{ matrix.project }}
-        path: |
-          playwright-report/
-          test-results/
+        name: playwright-report-${{ github.run_number }}
+        path: playwright-report/
         retention-days: 7
         
-    - name: Upload test summary
+    - name: Upload test results and screenshots
       uses: actions/upload-artifact@v4
       if: failure()
       with:
-        name: test-failure-screenshots
+        name: test-failures-${{ github.run_number }}
         path: test-results/
         retention-days: 3
+        
+    - name: Test Summary
+      if: always()
+      run: |
+        echo "## 📊 Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Test Scope**: ${{ steps.test-scope.outputs.scope }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Run Number**: ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+        if [ -f "test-results/results.json" ]; then
+          echo "- **Results**: Available in artifacts" >> $GITHUB_STEP_SUMMARY
+        fi
