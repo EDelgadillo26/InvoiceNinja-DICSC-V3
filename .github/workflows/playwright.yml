@@ -23,6 +23,9 @@ jobs:
     name: Run Playwright Tests
     timeout-minutes: 30
     runs-on: ubuntu-latest
+    environment: 
+      name: production
+      url: https://edelgadillo26.github.io/InvoiceNinja-DICSC-V3/reports/${{ github.run_number }}/
     permissions:
       contents: write  # Para crear/escribir archivos y ramas
       pages: write     # Para GitHub Pages
@@ -112,31 +115,31 @@ jobs:
       if: steps.test-scope.outputs.scope == 'single'
       run: |
         echo "🎯 Running single test case in headless mode..."
-        npx playwright test --grep "IN-16.*Crear Cliente con los campos minimos requeridos" --project=chromium --reporter=list --forbid-only
+        npx playwright test --grep "IN-16.*Crear Cliente con los campos minimos requeridos" --project=chromium --reporter=html,allure-playwright --forbid-only
       
     - name: Run smoke tests (@smoke tag)
       if: steps.test-scope.outputs.scope == 'smoke'
       run: |
         echo "💨 Running smoke tests (@smoke tag)..."
-        npx playwright test --grep "@smoke" --project=chromium --reporter=list --forbid-only
+        npx playwright test --grep "@smoke" --project=chromium --reporter=html,allure-playwright --forbid-only
       
     - name: Run sanity tests (@sanity tag)
       if: steps.test-scope.outputs.scope == 'sanity'
       run: |
         echo "🔍 Running sanity tests (@sanity tag)..."
-        npx playwright test --grep "@sanity" --project=chromium --reporter=list --forbid-only
+        npx playwright test --grep "@sanity" --project=chromium --reporter=html,allure-playwright --forbid-only
       
     - name: Run regression tests (@regression tag)
       if: steps.test-scope.outputs.scope == 'regression'
       run: |
         echo "🔄 Running regression tests (@regression tag)..."
-        npx playwright test --grep "@regression" --project=chromium --reporter=list --forbid-only
+        npx playwright test --grep "@regression" --project=chromium --reporter=html,allure-playwright --forbid-only
       
     - name: Run all tests
       if: steps.test-scope.outputs.scope == 'all'
       run: |
         echo "🚀 Running all test cases in headless mode..."
-        npx playwright test --project=chromium --reporter=list --forbid-only
+        npx playwright test --project=chromium --reporter=html,allure-playwright --forbid-only
         
     - name: Generate Allure Report
       if: always()
@@ -195,7 +198,8 @@ jobs:
           echo "- **Results**: Available in artifacts" >> $GITHUB_STEP_SUMMARY
         fi
         if [ -f "allure-report/index.html" ]; then
-          echo "- **Allure Report**: Download 'allure-report-${{ github.run_number }}' artifact" >> $GITHUB_STEP_SUMMARY
+          echo "- **Allure Report**: [View Online Report](https://edelgadillo26.github.io/InvoiceNinja-DICSC-V3/reports/${{ github.run_number }}/)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Artifacts**: Download 'allure-report-${{ github.run_number }}' artifact" >> $GITHUB_STEP_SUMMARY
         fi
         
     - name: Deploy Allure Report to GitHub Pages
