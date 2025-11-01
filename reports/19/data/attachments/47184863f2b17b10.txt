@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-01T15:26:20.150Z
+Validating EnriqueCompany client visibility 2025-11-01T15:26:22.586Z
+Filling name field 2025-11-01T15:26:24.713Z
+Filling first name field 2025-11-01T15:26:24.943Z
+Filling last name field 2025-11-01T15:26:24.972Z
+Clicking save button 2025-11-01T15:26:24.997Z
+Getting create confirmation text 2025-11-01T15:26:27.092Z
+Validating Wisoky, DuBuque and Stamm client visibility 2025-11-01T15:26:27.629Z
+Getting purge confirmation text 2025-11-01T15:26:30.149Z
+Logging out user 2025-11-01T15:26:30.944Z
