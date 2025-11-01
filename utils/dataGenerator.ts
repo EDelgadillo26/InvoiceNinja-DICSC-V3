@@ -1,0 +1,267 @@
+import { faker } from '@faker-js/faker';
+
+/**
+ * Data Generator Utility
+ * Generates random test data for automation tests
+ */
+export class DataGenerator {
+    
+    /**
+     * Generates a random string of specified length
+     * @param length The length of the string to generate
+     * @param includeNumbers Whether to include numbers (default: true)
+     * @returns Random string
+     */
+    static generateRandomString(length: number = 8, includeNumbers: boolean = true): string {
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        const numbers = '0123456789';
+        const characters = includeNumbers ? letters + numbers : letters;
+        
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+
+    /**
+     * Generates a random number within a range
+     * @param min Minimum value (inclusive)
+     * @param max Maximum value (inclusive)
+     * @returns Random number
+     */
+    static generateRandomNumber(min: number = 1, max: number = 9999): number {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    /**
+     * Generates a random company name using Faker
+     * @returns Random company name
+     */
+    static generateCompanyName(): string {
+        return faker.company.name();
+    }
+
+    /**
+     * Generates a random first name using Faker
+     * @returns Random first name
+     */
+    static generateFirstName(): string {
+        return faker.person.firstName();
+    }
+
+    /**
+     * Generates a random last name using Faker
+     * @returns Random last name
+     */
+    static generateLastName(): string {
+        return faker.person.lastName();
+    }
+
+    /**
+     * Generates a random email address using Faker
+     * @param domain Optional domain (default: testdomain.com)
+     * @returns Random email address
+     */
+    static generateEmail(domain: string = 'testdomain.com'): string {
+        return faker.internet.email({ provider: domain });
+    }
+
+    /**
+     * Generates a random phone number using Faker
+     * @param format Phone format (default: 'xxx-xxx-xxxx')
+     * @returns Random phone number
+     */
+    static generatePhoneNumber(format: string = 'xxx-xxx-xxxx'): string {
+        return faker.phone.number();
+    }
+
+    /**
+     * Generates a random address using Faker
+     * @returns Random address object
+     */
+    static generateAddress(): {
+        street: string;
+        apt: string;
+        city: string;
+        state: string;
+        postalCode: string;
+        country: string;
+    } {
+        return {
+            street: faker.location.streetAddress(),
+            apt: faker.location.secondaryAddress(),
+            city: faker.location.city(),
+            state: faker.location.state({ abbreviated: true }),
+            postalCode: faker.location.zipCode(),
+            country: 'US'
+        };
+    }
+
+    /**
+     * Generates a random website URL using Faker
+     * @returns Random website URL
+     */
+    static generateWebsite(): string {
+        return faker.internet.url();
+    }
+
+    /**
+     * Generates a random VAT number
+     * @returns Random VAT number
+     */
+    static generateVatNumber(): string {
+        const prefix = 'VAT';
+        const number = this.generateRandomNumber(100000000, 999999999);
+        return `${prefix}${number}`;
+    }
+
+    /**
+     * Generates a random ID number
+     * @returns Random ID number
+     */
+    static generateIdNumber(): string {
+        return this.generateRandomNumber(1000000, 9999999).toString();
+    }
+
+    /**
+     * Generates complete client data
+     * @returns Complete client data object
+     */
+    static generateClientData(): {
+        company: { 
+            name: string;
+            number: string;
+            idNumber: string;
+            website: string;
+            phone: string;
+            vatNumber: string;
+        };
+        contact: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            phone: string;
+        };
+        billing: {
+            street: string;
+            apt: string;
+            city: string;
+            state: string;
+            postalCode: string;
+            country: string;
+        };
+    } {
+        const address = this.generateAddress();
+        
+        return {
+            company: {
+                name: this.generateCompanyName(),
+                number: `CLI${this.generateRandomNumber(1000, 9999)}`,
+                idNumber: this.generateIdNumber(),
+                website: this.generateWebsite(),
+                phone: this.generatePhoneNumber(),
+                vatNumber: this.generateVatNumber()
+            },
+            contact: {
+                firstName: this.generateFirstName(),
+                lastName: this.generateLastName(),
+                email: this.generateEmail(),
+                phone: this.generatePhoneNumber()
+            },
+            billing: {
+                street: address.street,
+                apt: address.apt,
+                city: address.city,
+                state: address.state,
+                postalCode: address.postalCode,
+                country: address.country
+            }
+        };
+    }
+
+    /**
+     * Generates a timestamp-based unique identifier
+     * @returns Unique identifier string
+     */
+    static generateUniqueId(): string {
+        const timestamp = Date.now();
+        const randomString = this.generateRandomString(4, false);
+        return `${randomString}${timestamp}`;
+    }
+
+    /**
+     * Gets current timestamp for test naming
+     * @returns Formatted timestamp
+     */
+    static getTimestamp(): string {
+        const now = new Date();
+        return now.toISOString().replace(/[:.]/g, '-').slice(0, -5);
+    }
+
+    //Products
+
+    /**
+     * Generates a Product Name
+     * @returns Random Product Name
+     */
+    static generateProductName(): string {
+        return faker.commerce.productName();
+    }
+
+    /**
+     * Generates a random Product Description
+     * @returns Random Product Description
+     */
+    static generateProductDescription(): string {
+        return faker.commerce.productDescription();
+    }
+
+    /**
+     * Generates a random Product Price
+     * @returns Random Product Price
+     */
+    static generateProductPrice(): string {
+        return this.generateRandomNumber(1000000, 9999999).toString();
+    }
+
+    /**
+     * Generates a random Default Quantity
+     * @returns Random Default Quantity
+     */
+    static generateProductDefaultQuantity(): string {
+        return this.generateRandomNumber(1, 100).toString();
+    }
+
+    /**
+     * Generates a random Product Max Quantity
+     * @returns Random Product Max Quantity
+     */
+    static generateProductMaxQuantity(): string {
+        return this.generateRandomNumber(100, 1000).toString();
+    }
+    
+    /**
+     * Generates complete client data
+     * @returns Complete client data object
+     */
+    static generateProductData(): {
+        id: string;
+        name: string;
+        description: string;
+        price: string;
+        defaultQuantity: string;
+        maxQuantity: string;
+        category: string;
+    } {
+        return {
+            id: this.generateUniqueId(),
+            name: this.generateProductName(),
+            description: this.generateProductDescription(),
+            price: this.generateProductPrice(),
+            defaultQuantity: this.generateProductDefaultQuantity(),
+            maxQuantity: this.generateProductMaxQuantity(),
+            category: this.generateRandomString(8, true)
+        };
+    }
+}
