@@ -14,6 +14,9 @@
     "test:debug": "npx playwright test --debug",
     "test:ci": "npx playwright test --project=chromium --reporter=github",
     "report": "npx playwright show-report",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "test:allure": "npm run test && npm run allure:generate && npm run allure:open",
     "postinstall": "npx playwright install --with-deps"
   },
   "repository": {
@@ -28,7 +31,8 @@
     "@faker-js/faker": "^10.1.0",
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.5.2",
-    "@types/speakeasy": "^2.0.10"
+    "@types/speakeasy": "^2.0.10",
+    "allure-playwright": "^3.4.2"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
