@@ -362,6 +362,7 @@ export class CreateClientsPage {
      */
     async fillIdNumberField(idNumber: string): Promise<void> {
         console.log('Filling ID number field', new Date());
+        await this.page.locator(this.idNumberField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.idNumberField).fill(idNumber);
     }
 
