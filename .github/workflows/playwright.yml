@@ -21,6 +21,12 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     
+    env:
+      # Optimizaciones para CI
+      CI: true
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: false
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/ms-playwright
+    
     strategy:
       fail-fast: false
       matrix:
@@ -39,16 +45,22 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
-    - name: Install Playwright Browsers
-      run: npx playwright install chromium --with-deps
+    - name: Install Playwright (no browsers - headless only)
+      run: |
+        npx playwright install-deps chromium
+        npx playwright install chromium --with-deps
       
     - name: Run single test (IN-16 - Basic client creation)
       if: ${{ github.event.inputs.test_scope != 'all' }}
-      run: npx playwright test --grep "IN-16.*Crear Cliente con los campos minimos requeridos" --project=chromium
+      run: |
+        echo "Running single test case for validation..."
+        npx playwright test --grep "IN-16.*Crear Cliente con los campos minimos requeridos" --project=chromium --reporter=list
       
     - name: Run all tests
       if: ${{ github.event.inputs.test_scope == 'all' }}
-      run: npx playwright test --project=chromium
+      run: |
+        echo "Running all test cases..."
+        npx playwright test --project=chromium --reporter=list
       
     - name: Upload test results
       uses: actions/upload-artifact@v4
