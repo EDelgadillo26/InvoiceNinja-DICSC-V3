@@ -29,10 +29,14 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
-    /* Run in headless mode based on HEADLESS environment variable */
-    headless: false, 
+    /* Run in headless mode based on environment */
+    headless: process.env.CI ? true : false, 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    /* Screenshot on failure */
+    screenshot: 'only-on-failure',
+    /* Video recording */
+    video: process.env.CI ? 'retain-on-failure' : 'off',
   },
 
   /* Configure projects for major browsers */

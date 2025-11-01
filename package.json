@@ -5,10 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "test:single": "npx playwright test --grep \"IN-16.*Crear Cliente con los campos minimos requeridos\"",
+    "test:boundary": "npx playwright test --grep @boundary",
+    "test:number-field": "npx playwright test --grep \"IN-48|IN-49|IN-50|IN-51\"",
     "test_Smoke": "npx playwright test --grep @smoke",
     "test_Login": "npx playwright test --grep @login",
     "test:headed": "npx playwright test --headed",
     "test:debug": "npx playwright test --debug",
+    "test:ci": "npx playwright test --project=chromium --reporter=github",
     "report": "npx playwright show-report",
     "postinstall": "npx playwright install --with-deps"
   },
