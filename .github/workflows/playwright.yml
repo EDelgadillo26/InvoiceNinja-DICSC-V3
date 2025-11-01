@@ -23,9 +23,6 @@ jobs:
     name: Run Playwright Tests
     timeout-minutes: 30
     runs-on: ubuntu-latest
-    environment: 
-      name: production
-      url: https://edelgadillo26.github.io/InvoiceNinja-DICSC-V3/reports/${{ github.run_number }}/
     permissions:
       contents: write  # Para crear/escribir archivos y ramas
       pages: write     # Para GitHub Pages
