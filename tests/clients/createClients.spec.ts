@@ -89,7 +89,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-25: Admin > Clients > Verificar que permita crear cliente con 1 carácter en el campo Name', {
-      tag: ['@boundary', '@clients']
+      tag: ['@boundary', '@clients', '@regression']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         const singleCharName = 'A';
@@ -123,7 +123,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-27: Admin > Clients > Verificar que permita crear cliente con 255 caracteres en el campo Name', {
-      tag: ['@boundary', '@clients']
+      tag: ['@boundary', '@clients', '@regression']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         const maxCharName = 'A'.repeat(255);
@@ -200,7 +200,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-48: Admin > Clients > Verificar que permita crear cliente con 1 carácter en el campo Number', {
-      tag: ['@boundary', '@clients']
+      tag: ['@boundary', '@clients', '@regression']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         const singleCharName = '1';
