@@ -13,6 +13,9 @@ on:
         type: choice
         options:
         - single
+        - smoke
+        - sanity
+        - regression
         - all
 
 jobs:
@@ -76,17 +79,47 @@ jobs:
     - name: Determine test scope
       id: test-scope
       run: |
-        if [ "${{ github.event.inputs.test_scope }}" = "all" ]; then
-          echo "scope=all" >> $GITHUB_OUTPUT
-        else
-          echo "scope=single" >> $GITHUB_OUTPUT
-        fi
+        case "${{ github.event.inputs.test_scope }}" in
+          "smoke")
+            echo "scope=smoke" >> $GITHUB_OUTPUT
+            ;;
+          "sanity")
+            echo "scope=sanity" >> $GITHUB_OUTPUT
+            ;;
+          "regression")
+            echo "scope=regression" >> $GITHUB_OUTPUT
+            ;;
+          "all")
+            echo "scope=all" >> $GITHUB_OUTPUT
+            ;;
+          *)
+            echo "scope=single" >> $GITHUB_OUTPUT
+            ;;
+        esac
     
     - name: Run single test (IN-16 - Basic client creation)
       if: steps.test-scope.outputs.scope == 'single'
       run: |
         echo "🎯 Running single test case in headless mode..."
         npx playwright test --grep "IN-16.*Crear Cliente con los campos minimos requeridos" --project=chromium --reporter=list --forbid-only
+      
+    - name: Run smoke tests (@smoke tag)
+      if: steps.test-scope.outputs.scope == 'smoke'
+      run: |
+        echo "💨 Running smoke tests (@smoke tag)..."
+        npx playwright test --grep "@smoke" --project=chromium --reporter=list --forbid-only
+      
+    - name: Run sanity tests (@sanity tag)
+      if: steps.test-scope.outputs.scope == 'sanity'
+      run: |
+        echo "🔍 Running sanity tests (@sanity tag)..."
+        npx playwright test --grep "@sanity" --project=chromium --reporter=list --forbid-only
+      
+    - name: Run regression tests (@regression tag)
+      if: steps.test-scope.outputs.scope == 'regression'
+      run: |
+        echo "🔄 Running regression tests (@regression tag)..."
+        npx playwright test --grep "@regression" --project=chromium --reporter=list --forbid-only
       
     - name: Run all tests
       if: steps.test-scope.outputs.scope == 'all'
