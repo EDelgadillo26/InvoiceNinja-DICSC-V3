@@ -138,7 +138,7 @@ test.describe('Products Principal Page Tests', () => {
     );
 
     test('IN-198: Admin > Products > Verificar que elimine un producto archivado', {
-      tag: ['@smoke', '@products']
+      tag: ['@sanity', '@products']
     }, async () => {
         let productData = DataGenerator.generateProductData();
         await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {
@@ -172,6 +172,204 @@ test.describe('Products Principal Page Tests', () => {
           await userTab.Products().clickProductDeleteOrArchiveOption('Archive');
           expect (userTab.CreateProducts().isArchiveConfirmationTextVisible()).toBeTruthy();
         });
+        await test.step('TearDown - Eliminar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+        });
+      }
+    );
+
+    test('IN-187: Admin > Products > Verificar que se muestre la Tabla de Productos con las columnas por defecto', {
+      tag: ['@smoke', '@products']
+    }, async () => {
+        await test.step('Ir al modulo Products', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+        });
+        await test.step('Validar las columnas por defecto', async () => {
+          const expectedHeaders = [
+            '',
+            'Product',
+            'Notes',
+            'Price',
+            'Default Quantity',
+            ''
+          ];
+          const visibleColumns = await userTab.Products().getAllColumnsName();
+          expect(visibleColumns).toEqual(expect.arrayContaining(expectedHeaders));
+        });
+      }
+    );
+
+    test('IN-206: Admin > Products > Actions > Verificar que elimine un producto activo', {
+      tag: ['@smoke', '@products']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+        });
+        await test.step('Llenar los campos del nuevo producto', async () => {
+          await userTab.CreateProducts().fillItemField(productData.name);
+          await userTab.CreateProducts().fillDescriptionField(productData.description);
+          await userTab.CreateProducts().fillGenericNumberField('Price',productData.price);
+          await userTab.CreateProducts().fillGenericNumberField('Default Quantity',productData.defaultQuantity);
+          await userTab.CreateProducts().fillGenericNumberField('Max Quantity',productData.maxQuantity);
+          await userTab.CreateProducts().selectTaxCategoryOption('Services');
+          await userTab.CreateProducts().clickSaveButton();
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.page.reload();
+          await userTab.Products().clickLifecycleDropdownAndSelectAllOptions();
+          await userTab.Products().typeInFilterInput(productData.name);
+          const existsProduct = await userTab.Products().isProductVisible(productData.name);
+            if (!existsProduct) {
+              console.log(`Product ${productData.name} was not found after creation.`, new Date());
+              expect(existsProduct).toBeTruthy();
+
+            }else{
+              expect(existsProduct).toBeTruthy();
+            }
+        });
+        await test.step('TearDown - Eliminar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+        });
+      }
+    );
+
+    test('IN-207: Admin > Products > Verificar que restaure un producto eliminado', {
+      tag: ['@sanity', '@products']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+        });
+        await test.step('Llenar los campos del nuevo producto', async () => {
+          await userTab.CreateProducts().fillItemField(productData.name);
+          await userTab.CreateProducts().fillDescriptionField(productData.description);
+          await userTab.CreateProducts().fillGenericNumberField('Price',productData.price);
+          await userTab.CreateProducts().fillGenericNumberField('Default Quantity',productData.defaultQuantity);
+          await userTab.CreateProducts().fillGenericNumberField('Max Quantity',productData.maxQuantity);
+          await userTab.CreateProducts().selectTaxCategoryOption('Services');
+          await userTab.CreateProducts().clickSaveButton();
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.page.reload();
+          await userTab.Products().clickLifecycleDropdownAndSelectAllOptions();
+          await userTab.Products().typeInFilterInput(productData.name);
+          const existsProduct = await userTab.Products().isProductVisible(productData.name);
+            if (!existsProduct) {
+              console.log(`Product ${productData.name} was not found after creation.`, new Date());
+              expect(existsProduct).toBeTruthy();
+
+            }else{
+              expect(existsProduct).toBeTruthy();
+            }
+        });
+        await test.step('Eliminar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+          expect (userTab.CreateProducts().isArchiveConfirmationTextVisible()).toBeTruthy();
+        });
+        await test.step('Restaurar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Restore');
+          expect (userTab.CreateProducts().isArchiveConfirmationTextVisible()).toBeTruthy();
+        });        
+        await test.step('TearDown - Eliminar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+        });
+      }
+    );
+
+    test('IN-196: Admin > Products > Actions > Verificar que archive un producto', {
+      tag: ['@sanity', '@products']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+        });
+        await test.step('Llenar los campos del nuevo producto', async () => {
+          await userTab.CreateProducts().fillItemField(productData.name);
+          await userTab.CreateProducts().fillDescriptionField(productData.description);
+          await userTab.CreateProducts().fillGenericNumberField('Price',productData.price);
+          await userTab.CreateProducts().fillGenericNumberField('Default Quantity',productData.defaultQuantity);
+          await userTab.CreateProducts().fillGenericNumberField('Max Quantity',productData.maxQuantity);
+          await userTab.CreateProducts().selectTaxCategoryOption('Services');
+          await userTab.CreateProducts().clickSaveButton();
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.page.reload();
+          await userTab.Products().clickLifecycleDropdownAndSelectAllOptions();
+          await userTab.Products().typeInFilterInput(productData.name);
+          const existsProduct = await userTab.Products().isProductVisible(productData.name);
+            if (!existsProduct) {
+              console.log(`Product ${productData.name} was not found after creation.`, new Date());
+              expect(existsProduct).toBeTruthy();
+
+            }else{
+              expect(existsProduct).toBeTruthy();
+            }
+        });
+        await test.step('Archivar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Archive');
+          expect (userTab.CreateProducts().isArchiveConfirmationTextVisible()).toBeTruthy();
+        });     
+        await test.step('TearDown - Eliminar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+        });
+      }
+    );
+
+    test('IN-197: Admin > Products > Verificar que restaure un producto archivado', {
+      tag: ['@sanity', '@products']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+        });
+        await test.step('Llenar los campos del nuevo producto', async () => {
+          await userTab.CreateProducts().fillItemField(productData.name);
+          await userTab.CreateProducts().fillDescriptionField(productData.description);
+          await userTab.CreateProducts().fillGenericNumberField('Price',productData.price);
+          await userTab.CreateProducts().fillGenericNumberField('Default Quantity',productData.defaultQuantity);
+          await userTab.CreateProducts().fillGenericNumberField('Max Quantity',productData.maxQuantity);
+          await userTab.CreateProducts().selectTaxCategoryOption('Services');
+          await userTab.CreateProducts().clickSaveButton();
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.page.reload();
+          await userTab.Products().clickLifecycleDropdownAndSelectAllOptions();
+          await userTab.Products().typeInFilterInput(productData.name);
+          const existsProduct = await userTab.Products().isProductVisible(productData.name);
+            if (!existsProduct) {
+              console.log(`Product ${productData.name} was not found after creation.`, new Date());
+              expect(existsProduct).toBeTruthy();
+
+            }else{
+              expect(existsProduct).toBeTruthy();
+            }
+        });
+        await test.step('Archivar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Archive');
+          expect (userTab.CreateProducts().isArchiveConfirmationTextVisible()).toBeTruthy();
+        });
+        await test.step('Restaurar Producto', async () => {
+          await userTab.Products().clickProductActionButton(productData.name);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Restore');
+          expect (userTab.CreateProducts().isArchiveConfirmationTextVisible()).toBeTruthy();
+        });        
         await test.step('TearDown - Eliminar Producto', async () => {
           await userTab.Products().clickProductActionButton(productData.name);
           await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
