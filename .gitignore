@@ -15,5 +15,9 @@ node_modules/
 /playwright/.cache/
 auth-state.json
 
+# Allure Reports
+/allure-results/
+/allure-report/
+
 # Extras
 .DS_Store
