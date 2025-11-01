@@ -377,4 +377,5 @@ test.describe('Products Principal Page Tests', () => {
         });
       }
     );
+    
 });
