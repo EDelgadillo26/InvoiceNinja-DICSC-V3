@@ -26,6 +26,10 @@ jobs:
       CI: true
       PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: false
       PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/ms-playwright
+      # Variables de entorno desde GitHub Secrets
+      INVOICE_NINJA_EMAIL: ${{ secrets.INVOICE_NINJA_EMAIL }}
+      INVOICE_NINJA_PASSWORD: ${{ secrets.INVOICE_NINJA_PASSWORD }}
+      INVOICE_NINJA_BASE_URL: ${{ secrets.INVOICE_NINJA_BASE_URL }}
     
     strategy:
       fail-fast: false
