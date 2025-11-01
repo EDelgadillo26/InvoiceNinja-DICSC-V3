@@ -391,7 +391,7 @@ test.describe('Clientes Principal Page Tests', () => {
         }
       }
     );
-//Probar
+
     test('IN-54: Admin > Clients > New Client > Validar que permita un campo ID Number con 1 carácter numerico', {
       tag: ['@clients', '@regression']
     }, async () => {
