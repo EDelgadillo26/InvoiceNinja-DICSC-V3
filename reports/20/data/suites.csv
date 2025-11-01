@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","12529","IN-16: Admin > Clients > Crear Cliente con los campos minimos requeridos","chromium","Sat Nov 01 15:32:48 UTC 2025","passed","Sat Nov 01 15:33:01 UTC 2025","Clientes Principal Page Tests","clients/createClients.spec.ts","",""

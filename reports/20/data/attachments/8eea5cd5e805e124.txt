@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-01T15:32:49.511Z
+Validating EnriqueCompany client visibility 2025-11-01T15:32:52.128Z
+Filling name field 2025-11-01T15:32:54.250Z
+Filling first name field 2025-11-01T15:32:54.602Z
+Filling last name field 2025-11-01T15:32:54.627Z
+Clicking save button 2025-11-01T15:32:54.668Z
+Getting create confirmation text 2025-11-01T15:32:56.742Z
+Validating Kuhic LLC client visibility 2025-11-01T15:32:57.310Z
+Getting purge confirmation text 2025-11-01T15:32:59.808Z
+Logging out user 2025-11-01T15:33:00.606Z
