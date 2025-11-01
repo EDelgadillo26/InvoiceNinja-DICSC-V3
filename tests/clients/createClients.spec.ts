@@ -89,7 +89,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-25: Admin > Clients > Verificar que permita crear cliente con 1 carácter en el campo Name', {
-      tag: ['@boundary', '@clients', '@regression']
+      tag: ['@clients', '@regression']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         const singleCharName = 'A';
@@ -123,7 +123,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-27: Admin > Clients > Verificar que permita crear cliente con 255 caracteres en el campo Name', {
-      tag: ['@boundary', '@clients', '@regression']
+      tag: ['@clients', '@regression']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         const maxCharName = 'A'.repeat(255);
@@ -157,7 +157,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-28: Admin > Clients > Verificar que NO permita crear cliente con 256 caracteres en el campo Name', {
-      tag: ['@boundary', '@clients', '@negative']
+      tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
         const exceedCharName = 'B'.repeat(256);
@@ -200,7 +200,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-48: Admin > Clients > Verificar que permita crear cliente con 1 carácter en el campo Number', {
-      tag: ['@boundary', '@clients', '@regression']
+      tag: ['@clients', '@regression']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         const singleCharName = '1';
@@ -234,7 +234,7 @@ test.describe('Clientes Principal Page Tests', () => {
       });
 
     test('IN-49: Admin > Clients > Verificar que permita crear cliente con 255 caracteres en el campo Number', {
-      tag: ['@boundary', '@clients']
+      tag: ['@regression', '@clients']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
         const maxCharName = '1'.repeat(255);
@@ -264,7 +264,7 @@ test.describe('Clientes Principal Page Tests', () => {
       });
 
     test('IN-50: Admin > Clients > Verificar que NO permita crear cliente con 256 caracteres en el campo Number', {
-      tag: ['@boundary', '@clients', '@negative']
+      tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
         const exceedCharName = '5'.repeat(256);
@@ -307,7 +307,7 @@ test.describe('Clientes Principal Page Tests', () => {
     );
 
     test('IN-51: Admin > Clients > Verificar que NO permita crear cliente con caracteres especiales en el campo Number', {
-      tag: ['@boundary', '@clients', '@special-chars', '@negative']
+      tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
         const exceedCharName = '!@#1';
@@ -348,6 +348,47 @@ test.describe('Clientes Principal Page Tests', () => {
         }
       }
     );
-    
 
+    test('IN-274: Admin > Clients > Verificar que NO permita crear cliente con caracteres alfabeticos en el campo Number', {
+      tag: ['@regression', '@clients', '@negative']
+    }, async () => {
+         const clientData = DataGenerator.generateClientData();
+        const exceedCharName = 'textoprueba';
+        let clientWasCreated = false;
+        try {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().fillNumberField(exceedCharName);
+          await userTab.CreateClients().clickSaveButton();
+          const wasCreated = await userTab.CreateClients().isCreateConfirmationTextVisible();
+          if (wasCreated) {
+            clientWasCreated = true;
+            console.log('FALLO: El sistema permitió crear cliente con caracteres especiales');
+          } else {
+            console.log('CORRECTO: El sistema NO permitió crear cliente con caracteres especiales');
+          }
+          expect(wasCreated).toBeFalsy();
+        } finally {
+          if (clientWasCreated) {
+            try {
+              await userTab.BaseNavigationPage().clickClients();
+              await userTab.page.reload();
+              const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+              if (existsClient) {
+                await userTab.Clients().clickClientActionButton(clientData.company.name);
+                await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+                await userTab.Clients().confirmPurgeClient();
+                await userTab.Clients().isPurgeConfirmationTextVisible();
+                console.log('Cliente eliminado exitosamente');
+              }
+            } catch (cleanupError) {
+              console.log(`Error en limpieza: ${cleanupError}`);
+            }
+          }
+        }
+      }
+    );
 });
