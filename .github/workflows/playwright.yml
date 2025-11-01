@@ -23,8 +23,8 @@ jobs:
     name: Run Playwright Tests
     timeout-minutes: 30
     runs-on: ubuntu-latest
-    environment:
-      name: Test Reports
+    environment: 
+      name: production
       url: https://edelgadillo26.github.io/InvoiceNinja-DICSC-V3/reports/${{ github.run_number }}/
     permissions:
       contents: write  # Para crear/escribir archivos y ramas
@@ -198,7 +198,8 @@ jobs:
           echo "- **Results**: Available in artifacts" >> $GITHUB_STEP_SUMMARY
         fi
         if [ -f "allure-report/index.html" ]; then
-          echo "- **Allure Report**: Download 'allure-report-${{ github.run_number }}' artifact" >> $GITHUB_STEP_SUMMARY
+          echo "- **Allure Report**: [View Online Report](https://edelgadillo26.github.io/InvoiceNinja-DICSC-V3/reports/${{ github.run_number }}/)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Artifacts**: Download 'allure-report-${{ github.run_number }}' artifact" >> $GITHUB_STEP_SUMMARY
         fi
         
     - name: Deploy Allure Report to GitHub Pages
