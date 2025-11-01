@@ -2,8 +2,8 @@ name: InvoiceNinja Tests
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
   workflow_dispatch: # Permite ejecutar manualmente
     inputs:
       test_scope:
@@ -23,6 +23,11 @@ jobs:
     name: Run Playwright Tests
     timeout-minutes: 30
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Para crear/escribir archivos y ramas
+      pages: write     # Para GitHub Pages
+      id-token: write  # Para autenticación
+      actions: read    # Para leer artifacts
     
     env:
       # Optimizaciones para CI/CD - Sin navegadores físicos
