@@ -45,7 +45,7 @@ export class CreateClientsPage {
     private readonly idNumberField = '//dt[span[text()="ID Number"]]/following-sibling::dd//input[@type="text"]';
     private readonly vatNumberField = '//dt[span[text()="VAT Number"]]/following-sibling::dd//input[@type="text"]';
     private readonly websiteField = '//dt[span[text()="Website"]]/following-sibling::dd//input[@type="text"]';
-    private readonly phoneField = '//dt[span[text()="Phone"]]/following-sibling::dd//input[@type="text"]';
+    private readonly phoneField = '//*[@id="root"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[8]/dd/section/div/input';
     private readonly routingIdField = '//dt[span[text()="Routing ID"]]/following-sibling::dd//input[@type="text"]';
     private readonly validVatToggle = '//dt[span[text()="Valid VAT Number"]]/following-sibling::dd//button[@id*="headlessui-switch"]';
     private readonly taxExemptToggle = '//dt[span[text()="Tax Exempt"]]/following-sibling::dd//button[@id*="headlessui-switch"]';
@@ -416,6 +416,7 @@ export class CreateClientsPage {
      */
     async fillPhoneField(phone: string): Promise<void> {
         console.log('Filling phone field', new Date());
+        await this.page.locator(this.phoneField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.phoneField).fill(phone);
     }
 
