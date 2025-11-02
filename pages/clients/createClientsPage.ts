@@ -380,6 +380,7 @@ export class CreateClientsPage {
      */
     async fillVatNumberField(vatNumber: string): Promise<void> {
         console.log('Filling VAT number field', new Date());
+        await this.page.locator(this.vatNumberField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.vatNumberField).fill(vatNumber);
     }
 
