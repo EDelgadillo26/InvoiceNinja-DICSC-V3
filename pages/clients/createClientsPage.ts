@@ -398,6 +398,7 @@ export class CreateClientsPage {
      */
     async fillWebsiteField(website: string): Promise<void> {
         console.log('Filling website field', new Date());
+        await this.page.locator(this.websiteField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.websiteField).fill(website);
     }
 
