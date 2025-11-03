@@ -43,8 +43,8 @@ export class ProductsPage {
     // ========== TABLE  SELECTORS ==========
     private readonly tableRowsAll = 'tbody tr';
     private readonly noRecordsMessage = 'span:has-text("No records found")';
-    private readonly productName = (name: string) => `//td//a[contains(@href, "/products/") and contains(@href, "/edit") and text()="${name}"]`;
-    private readonly actionsButtonSelector = (productName: string) => `//tr[td[2]//a[text()="${productName}"]]//button[@data-cy="chevronDownButton"]`;
+    private readonly productName = (name: string) => `//td//a[contains(@href, "/products/") and contains(@href, "/edit") and contains(text(), "${name}")]`;
+    private readonly actionsButtonSelector = (productName: string) => `//tr[td[2]//a[contains(text(), "${productName}")]]//button[@data-cy="chevronDownButton"]`;
     private readonly actionsButtonDeleteOrArchiveOption = (productName: string) => `//button[div[contains(text(),"${productName}")]]`;
     private readonly actionsEditOption = `//a[contains(@href,"/edit") and .//div[text()="Edit"]]`;
     private readonly tableColumnsName = 'thead th';
@@ -138,16 +138,23 @@ export class ProductsPage {
     }    
 
     /**
-     * Clicks the lifecycle dropdown and select specific option
+     * Clicks the lifecycle dropdown and select specific option, deselecting all others
      */
     async clickLifecycleDropdownAndSelectSpecificOptions(options: string[]): Promise<void> {
         await this.page.locator(this.lifecycleDropdown).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.lifecycleDropdown).click();
+        // Deseleccionar todas las opciones primero
+        const allOptions = ['Active', 'Archived', 'Deleted'];
+        for (const option of allOptions) {
+            await this.page.locator(this.lifecycleValue(option)).uncheck();
+        }
+        // Seleccionar solo las opciones especificadas
         for (const option of options) {
             await this.page.locator(this.lifecycleValue(option)).check();
         }
         await this.page.locator(this.applylifecycleButton).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.applylifecycleButton).click();
+        await this.page.waitForTimeout(2000);
     } 
 
     // ========== ACTION BUTTONS METHODS ==========
@@ -191,6 +198,7 @@ export class ProductsPage {
     async clickNewProductButton(): Promise<void> {
         await this.page.locator(this.newProductButton).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.newProductButton).click();
+        await this.page.waitForTimeout(2000);
     }
 
     /**

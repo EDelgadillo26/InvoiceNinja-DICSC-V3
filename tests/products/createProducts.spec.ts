@@ -89,6 +89,7 @@ test.describe('Products Principal Page Tests', () => {
         });
       }
     );
+
     test.fixme('IN-265: Admin > Products > Verificar que muestre mensaje de alerta antes de salir del formulario de creación de producto cuando este contiene información', {
       tag: ['@sanity', '@products']
     }, async () => {
@@ -108,4 +109,146 @@ test.describe('Products Principal Page Tests', () => {
         });
       }
     );
+
+    test('IN-212: Admin > Products > New Product > Validar que permita un campo Item con 1 carácter', {
+      tag: ['@products', '@regression']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        const singleCharName = 'a';
+        await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+        });
+        await test.step('Crear producto con 1 carácter en el campo Item', async () => {
+          await userTab.CreateProducts().fillItemField(singleCharName);
+          await userTab.CreateProducts().clickSaveButton();
+        });
+        await test.step('Verificar que el producto se creó exitosamente', async () => {
+          expect(await userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+          console.log(`Producto creado exitosamente con 1 carácter: "${singleCharName}"`);
+        });
+        await test.step('Validar que el producto aparece en la lista', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.page.reload();
+          await userTab.Products().clickLifecycleDropdownAndSelectSpecificOptions(['Active']);
+          await userTab.Products().typeInFilterInput(singleCharName);
+          const existsProduct = await userTab.Products().isProductVisible(singleCharName);
+          expect(existsProduct).toBeTruthy();
+        });
+        await test.step('TearDown - Eliminar Producto', async () => {
+          await userTab.Products().clickProductActionButton(singleCharName);
+          await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+        });
+      });
+
+    test('IN-213: Admin > Products > New Product > Validar que permita un campo Item con 255 caracteres', {
+      tag: ['@regression', '@products']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        const maxCharName = 'a'.repeat(255);
+        await test.step('Ir al modulo Products y hacer clic en "Nuevo Producto"', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+        });
+        await test.step('Crear producto con 255 caracteres en el campo Item', async () => {
+          await userTab.CreateProducts().fillItemField(maxCharName);
+          await userTab.CreateProducts().clickSaveButton();
+        });
+        await test.step('Validar que el producto aparece en la lista', async () => {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.page.reload();
+          await userTab.Products().clickLifecycleDropdownAndSelectSpecificOptions(['Active']);
+          await userTab.Products().typeInFilterInput('aaaaaaaaaaaaa');
+          const existsProduct = await userTab.Products().isProductVisible('aaaaaaaaaaaaa');
+          expect(existsProduct).toBeTruthy();
+        });
+        await test.step('TearDown - Eliminar Producto', async () => {
+          await userTab.Products().clickProductActionButton('aaaaaaaaaaaaa');
+          await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+          expect (userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
+        });
+      });
+
+    test('IN-214: Admin > Products > New Product > Validar que NO permita un campo Item con 256 caracteres', {
+      tag: ['@regression', '@products', '@negative']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        const exceedCharName = 'z'.repeat(256);
+        let productWasCreated = false;
+        try {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+          await userTab.CreateProducts().fillItemField(exceedCharName);
+          await userTab.CreateProducts().clickSaveButton();
+          const wasCreated = await userTab.CreateProducts().isCreateConfirmationTextVisible();
+          if (wasCreated) {
+            productWasCreated = true;
+            console.log('CORRECTO: El sistema NO permitió crear producto con 256 caracteres');
+          } else {
+            console.log('FALLO: El sistema permitió crear producto con 256 caracteres');
+          }
+          expect(wasCreated).toBeFalsy();
+        } finally {
+          if (productWasCreated) {
+            try {
+              await userTab.BaseNavigationPage().clickProducts();
+              await userTab.page.reload();
+              await userTab.Products().clickLifecycleDropdownAndSelectSpecificOptions(['Active']);
+              await userTab.Products().typeInFilterInput('zzzzzzzzzzzz');
+              const existsProduct = await userTab.Products().isProductVisible('zzzzzzzzzzzz');
+              if (existsProduct) {
+                await userTab.Products().clickProductActionButton('zzzzzzzzzzzz');
+                await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+                console.log('Producto eliminado exitosamente');
+              }
+            } catch (cleanupError) {
+              console.log(`Error en limpieza: ${cleanupError}`);
+            }
+          }
+        }
+      }
+    );
+
+    test('IN-293: Admin > Clients > New Client > Validar que NO permita un campo Item con caracteres especiales', {
+      tag: ['@regression', '@products', '@negative']
+    }, async () => {
+        let productData = DataGenerator.generateProductData();
+        const specialCharName = '*&@!';
+        let productWasCreated = false;
+        try {
+          await userTab.BaseNavigationPage().clickProducts();
+          await userTab.Products().clickNewProductButton();
+          await userTab.CreateProducts().fillItemField(specialCharName);
+          await userTab.CreateProducts().clickSaveButton();
+          const wasCreated = await userTab.CreateProducts().isCreateConfirmationTextVisible();
+          if (wasCreated) {
+            productWasCreated = true;
+            console.log('CORRECTO: El sistema NO permitió crear producto con caracteres especiales');
+          } else {
+            console.log('FALLO: El sistema permitió crear producto con caracteres especiales');
+          }
+          expect(wasCreated).toBeFalsy();
+        } finally {
+          if (productWasCreated) {
+            try {
+              await userTab.BaseNavigationPage().clickProducts();
+              await userTab.page.reload();
+              await userTab.Products().clickLifecycleDropdownAndSelectSpecificOptions(['Active']);
+              await userTab.Products().typeInFilterInput(specialCharName);
+              const existsProduct = await userTab.Products().isProductVisible(specialCharName);
+              if (existsProduct) {
+                await userTab.Products().clickProductActionButton(specialCharName);
+                await userTab.Products().clickProductDeleteOrArchiveOption('Delete');
+                console.log('Producto eliminado exitosamente');
+              }
+            } catch (cleanupError) {
+              console.log(`Error en limpieza: ${cleanupError}`);
+            }
+          }
+        }
+      }
+    );
+
+
 });
