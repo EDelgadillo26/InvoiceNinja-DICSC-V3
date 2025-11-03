@@ -434,6 +434,7 @@ export class CreateClientsPage {
      */
     async fillRoutingIdField(routingId: string): Promise<void> {
         console.log('Filling routing ID field', new Date());
+        await this.page.locator(this.routingIdField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.routingIdField).fill(routingId);
     }
 
