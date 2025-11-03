@@ -591,6 +591,7 @@ export class CreateClientsPage {
      */
     async fillContactPhoneField(phone: string): Promise<void> {
         console.log('Filling contact phone field', new Date());
+        await this.page.locator(this.contactPhoneField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.contactPhoneField).fill(phone);
     }
 
