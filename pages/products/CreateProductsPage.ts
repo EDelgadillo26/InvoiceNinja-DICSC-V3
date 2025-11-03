@@ -19,7 +19,7 @@ export class CreateProductsPage {
     private readonly descriptionField = '//dt[span[contains(text(),"Description")]]/following-sibling::dd//textarea';
         //Price, DefaultQuantity, MaxQuantity
     private readonly priceDefaultQuantityField =  (field: string) => `//dt[span[contains(text(),"${field}")]]/following-sibling::dd//input[@type="text" and @inputmode="numeric"]`;
-    private readonly imageUrlField = '//dt[span[contains(text(),"Image URL")]]/following-sibling::dd//input[@type="text" and @required]';
+    private readonly imageUrlField = '//dt[span[contains(text(),"Image URL")]]/following-sibling::dd//input[@type="text"]';
 
     // ========== DROPDOWN SELECTORS ==========
     private readonly taxCategoryDropdown = '//dt[span[contains(text(),"Tax Category")]]/following-sibling::dd//input[@role="combobox"]';
