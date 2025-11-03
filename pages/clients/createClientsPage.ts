@@ -676,6 +676,7 @@ export class CreateClientsPage {
      */
     async fillBillingStreetField(street: string): Promise<void> {
         console.log('Filling billing street field', new Date());
+        await this.page.locator(this.billingStreetField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.billingStreetField).fill(street);
     }
 
