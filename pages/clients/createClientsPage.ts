@@ -694,6 +694,7 @@ export class CreateClientsPage {
      */
     async fillBillingAptField(apt: string): Promise<void> {
         console.log('Filling billing apt field', new Date());
+        await this.page.locator(this.billingAptField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.billingAptField).fill(apt);
     }
 
