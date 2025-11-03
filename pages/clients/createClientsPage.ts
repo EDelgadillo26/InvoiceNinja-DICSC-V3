@@ -748,6 +748,7 @@ export class CreateClientsPage {
      */
     async fillBillingPostalCodeField(postalCode: string): Promise<void> {
         console.log('Filling billing postal code field', new Date());
+        await this.page.locator(this.billingPostalCodeField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.billingPostalCodeField).fill(postalCode);
     }
 
