@@ -1313,4 +1313,167 @@ test.describe('Clientes Principal Page Tests', () => {
         }
       }
     );
+
+    test('IN-76: Admin > Clients > New Client > Validar que permita el campo Email con formato válido', {
+      tag: ['@clients', '@regression']
+    }, async () => {
+        let clientData = DataGenerator.generateClientData();
+        const singleCharName = 'pedroGad@gmail.com';
+        await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+        });
+        await test.step('Crear cliente con 1 carácter en el campo Routing ID', async () => {
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().fillEmailField(singleCharName);
+          await userTab.CreateClients().clickSaveButton();
+        });
+        await test.step('Verificar que el cliente se creó exitosamente', async () => {
+          expect(await userTab.CreateClients().isCreateConfirmationTextVisible()).toBeTruthy();
+          console.log(`Cliente creado exitosamente con 1 carácter: "${singleCharName}"`);
+        });
+        await test.step('Validar que el cliente aparece en la lista', async () => {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.page.reload();
+          const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+          expect(existsClient).toBeTruthy();
+        });
+        await test.step('TearDown - Eliminar Cliente', async () => {
+          await userTab.Clients().clickClientActionButton(clientData.company.name);
+          await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+          await userTab.Clients().confirmPurgeClient();
+          await userTab.Clients().isPurgeConfirmationTextVisible();
+        });
+      });
+
+    test('IN-77: Admin > Clients > New Client > Validar que NO permita el campo Email con un correo sin "@"', {
+      tag: ['@regression', '@clients', '@negative']
+    }, async () => {
+        const clientData = DataGenerator.generateClientData();
+        const invalidEmail = 'pedroGadgmail.com';
+        let clientWasCreated = false;
+        try {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().fillEmailField(invalidEmail);
+          await userTab.CreateClients().clickSaveButton();
+          const wasCreated = await userTab.CreateClients().isCreateConfirmationTextVisible();
+          if (wasCreated) {
+            clientWasCreated = true;
+            console.log('FALLO: El sistema permitió crear cliente con un correo sin "@"');
+          } else {
+            console.log('CORRECTO: El sistema NO permitió crear cliente con un correo sin "@"');
+          }
+          expect(wasCreated).toBeFalsy();
+        } finally {
+          if (clientWasCreated) {
+            try {
+              await userTab.BaseNavigationPage().clickClients();
+              await userTab.page.reload();
+              const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+              if (existsClient) {
+                await userTab.Clients().clickClientActionButton(clientData.company.name);
+                await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+                await userTab.Clients().confirmPurgeClient();
+                await userTab.Clients().isPurgeConfirmationTextVisible();
+                console.log('Cliente eliminado exitosamente');
+              }
+            } catch (cleanupError) {
+              console.log(`Error en limpieza: ${cleanupError}`);
+            }
+          }
+        }
+      }
+    );
+
+    test('IN-78: Admin > Clients > New Client > Validar que NO permita el campo Email con más de 255 caracteres', {
+      tag: ['@regression', '@clients', '@negative']
+    }, async () => {
+         const clientData = DataGenerator.generateClientData();
+        const exceedCharEmail = 'a'.repeat(256) + '@gmail.com';
+        let clientWasCreated = false;
+        try {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().fillEmailField(exceedCharEmail);
+          await userTab.CreateClients().clickSaveButton();
+          const wasCreated = await userTab.CreateClients().isCreateConfirmationTextVisible();
+          if (wasCreated) {
+            clientWasCreated = true;
+            console.log('FALLO: El sistema permitió crear cliente con mas de 255 caracteres');
+          } else {
+            console.log('CORRECTO: El sistema NO permitió crear cliente con mas de 255 caracteres');
+          }
+          expect(wasCreated).toBeFalsy();
+        } finally {
+          if (clientWasCreated) {
+            try {
+              await userTab.BaseNavigationPage().clickClients();
+              await userTab.page.reload();
+              const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+              if (existsClient) {
+                await userTab.Clients().clickClientActionButton(clientData.company.name);
+                await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+                await userTab.Clients().confirmPurgeClient();
+                await userTab.Clients().isPurgeConfirmationTextVisible();
+                console.log('Cliente eliminado exitosamente');
+              }
+            } catch (cleanupError) {
+              console.log(`Error en limpieza: ${cleanupError}`);
+            }
+          }
+        }
+      }
+    );
+
+    test('IN-79: Admin > Clients > New Client > Validar que NO permita el campo Email con un correo con espacios', {
+      tag: ['@regression', '@clients', '@negative']
+    }, async () => {
+         const clientData = DataGenerator.generateClientData();
+        const invalidEmail = 'test email@gmail.com';
+        let clientWasCreated = false;
+        try {
+          await userTab.BaseNavigationPage().clickClients();
+          await userTab.Clients().clickNewClientButton();
+          await userTab.CreateClients().fillNameField(clientData.company.name);
+          await userTab.CreateClients().fillFirstNameField(clientData.contact.firstName);
+          await userTab.CreateClients().fillLastNameField(clientData.contact.lastName);
+          await userTab.CreateClients().fillEmailField(invalidEmail);
+          await userTab.CreateClients().clickSaveButton();
+          const wasCreated = await userTab.CreateClients().isCreateConfirmationTextVisible();
+          if (wasCreated) {
+            clientWasCreated = true;
+            console.log('FALLO: El sistema permitió crear cliente con un correo con espacios');
+          } else {
+            console.log('CORRECTO: El sistema NO permitió crear cliente con un correo con espacios');
+          }
+          expect(wasCreated).toBeFalsy();
+        } finally {
+          if (clientWasCreated) {
+            try {
+              await userTab.BaseNavigationPage().clickClients();
+              await userTab.page.reload();
+              const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
+              if (existsClient) {
+                await userTab.Clients().clickClientActionButton(clientData.company.name);
+                await userTab.Clients().clickOnContextMenuArchiveDeletePurge('Purge');
+                await userTab.Clients().confirmPurgeClient();
+                await userTab.Clients().isPurgeConfirmationTextVisible();
+                console.log('Cliente eliminado exitosamente');
+              }
+            } catch (cleanupError) {
+              console.log(`Error en limpieza: ${cleanupError}`);
+            }
+          }
+        }
+      }
+    );
 });

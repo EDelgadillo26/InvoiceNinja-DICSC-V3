@@ -573,6 +573,7 @@ export class CreateClientsPage {
      */
     async fillEmailField(email: string): Promise<void> {
         console.log('Filling email field', new Date());
+        await this.page.locator(this.emailField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.emailField).fill(email);
     }
 
