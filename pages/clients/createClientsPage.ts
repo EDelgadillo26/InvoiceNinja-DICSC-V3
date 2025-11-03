@@ -730,6 +730,7 @@ export class CreateClientsPage {
      */
     async fillBillingStateField(state: string): Promise<void> {
         console.log('Filling billing state field', new Date());
+        await this.page.locator(this.billingStateField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.billingStateField).fill(state);
     }
 
