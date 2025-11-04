@@ -54,7 +54,7 @@ test.describe('Products Principal Page Tests', () => {
     }
   });
 
-    test('IN-193: Admin > Pasdroducts > Crear Producto con los campos mínimos requeridos', {
+    test('IN-193: Admin > Products > Crear Producto con los campos mínimos requeridos', {
       tag: ['@smoke', '@products']
     }, async () => {
         let productData = DataGenerator.generateProductData();
