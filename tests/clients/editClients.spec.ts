@@ -90,7 +90,6 @@ test.describe('Clients Edit Tests', () => {
     }, async () => {
           let clientData = DataGenerator.generateClientData();
           let clientData2 = DataGenerator.generateClientData();
-
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
           await userTab.BaseNavigationPage().clickClients();
           await userTab.Clients().clickNewClientButton();
@@ -107,7 +106,6 @@ test.describe('Clients Edit Tests', () => {
             if (!existsClient) {
               console.log(`Client ${clientData.company.name} was not found after creation.`, new Date());
               expect(existsClient).toBeTruthy();
-
             }else{
               expect(existsClient).toBeTruthy();
             }
