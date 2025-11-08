@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T23:57:55.578Z
+Filling item field 2025-11-08T23:58:04.006Z
+Filling description field 2025-11-08T23:58:04.024Z
+Filling generic number field 2025-11-08T23:58:04.063Z
+Filling generic number field 2025-11-08T23:58:04.102Z
+Filling generic number field 2025-11-08T23:58:04.127Z
+Selecting tax category option 2025-11-08T23:58:04.151Z
+Clicking save button 2025-11-08T23:58:05.244Z
+Getting create confirmation text 2025-11-08T23:58:05.295Z
+Validating visibility of product: Awesome Aluminum Bacon 2025-11-08T23:58:07.660Z
+Getting create confirmation text 2025-11-08T23:58:11.126Z
+Logging out user 2025-11-08T23:58:11.129Z

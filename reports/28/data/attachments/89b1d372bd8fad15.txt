@@ -1,0 +1,15 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T23:58:24.304Z
+Filling item field 2025-11-08T23:58:28.499Z
+Filling description field 2025-11-08T23:58:28.509Z
+Filling generic number field 2025-11-08T23:58:28.530Z
+Filling generic number field 2025-11-08T23:58:28.550Z
+Filling generic number field 2025-11-08T23:58:28.569Z
+Selecting tax category option 2025-11-08T23:58:28.600Z
+Clicking save button 2025-11-08T23:58:29.706Z
+Getting create confirmation text 2025-11-08T23:58:29.757Z
+Validating visibility of product: Handcrafted Aluminum Soap 2025-11-08T23:58:30.266Z
+Filling item field 2025-11-08T23:58:31.194Z
+Clicking save button 2025-11-08T23:58:31.499Z
+Getting edit confirmation text 2025-11-08T23:58:31.578Z
+Getting create confirmation text 2025-11-08T23:58:35.704Z
+Logging out user 2025-11-08T23:58:35.707Z

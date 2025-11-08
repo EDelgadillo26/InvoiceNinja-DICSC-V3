@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T23:56:58.165Z
+Validating EnriqueCompany client visibility 2025-11-08T23:57:01.182Z
+Filling name field 2025-11-08T23:57:03.300Z
+Filling first name field 2025-11-08T23:57:03.626Z
+Filling last name field 2025-11-08T23:57:03.655Z
+Clicking save button 2025-11-08T23:57:03.684Z
+Getting create confirmation text 2025-11-08T23:57:05.759Z
+Validating Huel, Treutel and Luettgen client visibility 2025-11-08T23:57:06.321Z
+Getting purge confirmation text 2025-11-08T23:57:08.834Z
+Logging out user 2025-11-08T23:57:09.639Z

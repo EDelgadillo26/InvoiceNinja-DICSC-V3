@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T23:58:13.043Z
+Filling item field 2025-11-08T23:58:18.169Z
+Filling description field 2025-11-08T23:58:18.179Z
+Filling generic number field 2025-11-08T23:58:18.199Z
+Filling generic number field 2025-11-08T23:58:18.220Z
+Filling generic number field 2025-11-08T23:58:18.240Z
+Selecting tax category option 2025-11-08T23:58:18.263Z
+Clicking save button 2025-11-08T23:58:19.359Z
+Getting create confirmation text 2025-11-08T23:58:19.409Z
+Validating visibility of product: Modern Rubber Computer 2025-11-08T23:58:19.921Z
+Getting create confirmation text 2025-11-08T23:58:22.879Z
+Logging out user 2025-11-08T23:58:22.881Z

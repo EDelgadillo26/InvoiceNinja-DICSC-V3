@@ -1,0 +1,9 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T23:55:57.859Z
+Validating EnriqueCompany client visibility 2025-11-08T23:55:59.838Z
+Contact Email - Ordenamiento inicial detectado: none
+Contact Email - No tiene ordenamiento inicial aplicado
+Contact Email - Nuevo ordenamiento detectado: none
+Contact Email - Ordenamiento final detectado: none
+Contact Email - Se encontraron 1 registros
+Contact Email - Datos de ejemplo: edelgadillo2002@gmail.com
+Logging out user 2025-11-08T23:56:04.967Z

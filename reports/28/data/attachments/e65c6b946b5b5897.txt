@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T23:58:40.762Z
+Filling item field 2025-11-08T23:58:44.814Z
+Filling description field 2025-11-08T23:58:44.825Z
+Filling generic number field 2025-11-08T23:58:44.847Z
+Filling generic number field 2025-11-08T23:58:44.868Z
+Filling generic number field 2025-11-08T23:58:44.887Z
+Selecting tax category option 2025-11-08T23:58:44.905Z
+Clicking save button 2025-11-08T23:58:46.004Z
+Getting create confirmation text 2025-11-08T23:58:46.057Z
+Validating visibility of product: Refined Cotton Pants 2025-11-08T23:58:48.625Z
+Getting create confirmation text 2025-11-08T23:58:50.738Z
+Logging out user 2025-11-08T23:58:50.740Z
