@@ -123,15 +123,15 @@ test.describe('Products Principal Page Tests', () => {
           await userTab.CreateProducts().fillItemField(singleCharName);
           await userTab.CreateProducts().clickSaveButton();
         });
-        await test.step('Verificar que el producto se creó exitosamente', async () => {
+        await test.step('Verificar el mensaje de que se creó exitosamente', async () => {
           expect(await userTab.CreateProducts().isCreateConfirmationTextVisible()).toBeTruthy();
           console.log(`Producto creado exitosamente con 1 carácter: "${singleCharName}"`);
         });
         await test.step('Validar que el producto aparece en la lista', async () => {
           await userTab.BaseNavigationPage().clickProducts();
           await userTab.page.reload();
-          await userTab.Products().clickLifecycleDropdownAndSelectSpecificOptions(['Active']);
-          await userTab.Products().typeInFilterInput(singleCharName);
+              await userTab.Products().clickLifecycleDropdownAndSelectSpecificOptions(['Active']);
+              await userTab.Products().typeInFilterInput(singleCharName);
           const existsProduct = await userTab.Products().isProductVisible(singleCharName);
           expect(existsProduct).toBeTruthy();
         });
