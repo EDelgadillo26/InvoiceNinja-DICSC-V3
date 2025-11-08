@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T16:05:19.853Z
+Validating EnriqueCompany client visibility 2025-11-08T16:05:22.346Z
+Filling name field 2025-11-08T16:05:24.467Z
+Filling first name field 2025-11-08T16:05:24.719Z
+Filling last name field 2025-11-08T16:05:24.753Z
+Clicking save button 2025-11-08T16:05:24.789Z
+Getting create confirmation text 2025-11-08T16:05:26.882Z
+Validating Bartell - Spencer client visibility 2025-11-08T16:05:27.439Z
+Client Bartell - Spencer was not found after creation. 2025-11-08T16:05:29.443Z
+Logging out user 2025-11-08T16:05:29.583Z
