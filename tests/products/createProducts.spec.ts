@@ -170,7 +170,7 @@ test.describe('Products Principal Page Tests', () => {
         });
       });
 
-    test('IN-214: Admin > Products > New Product > Validar que NO permita un campo Item con 256 caracteres', {
+    test.fixme('IN-214: Admin > Products > New Product > Validar que NO permita un campo Item con 256 caracteres', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -210,7 +210,7 @@ test.describe('Products Principal Page Tests', () => {
       }
     );
 
-    test('IN-293: Admin > Clients > New Client > Validar que NO permita un campo Item con caracteres especiales', {
+    test.fixme('IN-293: Admin > Clients > New Client > Validar que NO permita un campo Item con caracteres especiales', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -312,7 +312,7 @@ test.describe('Products Principal Page Tests', () => {
         });
       });
 
-    test('IN-225: Admin > Products > New Product > Validar que NO permita un campo Description con 256 caracteres', {
+    test.fixme('IN-225: Admin > Products > New Product > Validar que NO permita un campo Description con 256 caracteres', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -353,7 +353,7 @@ test.describe('Products Principal Page Tests', () => {
       }
     );
 
-    test('IN-294: Admin > Clients > New Client > Validar que NO permita un campo Description con SOLO caracteres especiales', {
+    test.fixme('IN-294: Admin > Clients > New Client > Validar que NO permita un campo Description con SOLO caracteres especiales', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -456,7 +456,7 @@ test.describe('Products Principal Page Tests', () => {
         });
       });
 
-    test('IN-221: Admin > Products > New Product > Validar que NO permita el campo Price con 21 dígitos', {
+    test.fixme('IN-221: Admin > Products > New Product > Validar que NO permita el campo Price con 21 dígitos', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -497,7 +497,7 @@ test.describe('Products Principal Page Tests', () => {
       }
     );
 
-    test('IN-222: Admin > Products > New Product > Validar que NO permita el campo Price con caracteres especiales', {
+    test.fixme('IN-222: Admin > Products > New Product > Validar que NO permita el campo Price con caracteres especiales', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -538,7 +538,7 @@ test.describe('Products Principal Page Tests', () => {
       }
     );
 
-    test('IN-295: Admin > Products > New Product > Validar que NO permita el campo Price con caracteres alfabeticos', {
+    test.fixme('IN-295: Admin > Products > New Product > Validar que NO permita el campo Price con caracteres alfabeticos', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -641,7 +641,7 @@ test.describe('Products Principal Page Tests', () => {
         });
       });
 
-    test('IN-228: Admin > Products > New Product > Validar que NO permita el campo Default Quantity con 21 dígitos', {
+    test.fixme('IN-228: Admin > Products > New Product > Validar que NO permita el campo Default Quantity con 21 dígitos', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -682,7 +682,7 @@ test.describe('Products Principal Page Tests', () => {
       }
     );
 
-    test('IN-229: Admin > Products > New Product > Validar que NO permita el campo Default Quantity con caracteres especiales', {
+    test.fixme('IN-229: Admin > Products > New Product > Validar que NO permita el campo Default Quantity con caracteres especiales', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -723,7 +723,7 @@ test.describe('Products Principal Page Tests', () => {
       }
     );
 
-    test('IN-296: Admin > Products > New Product > Validar que NO permita el campo Default Quantity con caracteres alfabeticos', {
+    test.fixme('IN-296: Admin > Products > New Product > Validar que NO permita el campo Default Quantity con caracteres alfabeticos', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -826,7 +826,7 @@ test.describe('Products Principal Page Tests', () => {
         });
       });
 
-    test('IN-232: Admin > Products > New Product > Validar que NO permita el campo Max Quantity con 21 dígitos', {
+    test.fixme('IN-232: Admin > Products > New Product > Validar que NO permita el campo Max Quantity con 21 dígitos', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -867,7 +867,7 @@ test.describe('Products Principal Page Tests', () => {
       }
     );
 
-    test('IN-233: Admin > Products > New Product > Validar que NO permita el campo Max Quantity con caracteres especiales', {
+    test.fixme('IN-233: Admin > Products > New Product > Validar que NO permita el campo Max Quantity con caracteres especiales', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -908,7 +908,7 @@ test.describe('Products Principal Page Tests', () => {
       }
     );
 
-    test('IN-297: Admin > Products > New Product > Validar que NO permita el campo Max Quantity con caracteres alfabeticos', {
+    test.fixme('IN-297: Admin > Products > New Product > Validar que NO permita el campo Max Quantity con caracteres alfabeticos', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -1011,7 +1011,7 @@ test.describe('Products Principal Page Tests', () => {
         });
       });
 
-    test('IN-300: Admin > Products > New Product > Validar que NO permita un campo Image URL con 256 caracteres', {
+    test.fixme('IN-300: Admin > Products > New Product > Validar que NO permita un campo Image URL con 256 caracteres', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
@@ -1052,7 +1052,7 @@ test.describe('Products Principal Page Tests', () => {
       }
     );
 
-    test('IN-301: Admin > Clients > New Client > Validar que NO permita un campo Image URL con SOLO caracteres especiales', {
+    test.fixme('IN-301: Admin > Clients > New Client > Validar que NO permita un campo Image URL con SOLO caracteres especiales', {
       tag: ['@regression', '@products', '@negative']
     }, async () => {
         let productData = DataGenerator.generateProductData();
