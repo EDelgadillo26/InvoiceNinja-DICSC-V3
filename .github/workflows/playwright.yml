@@ -90,7 +90,13 @@ jobs:
     - name: Determine test scope
       id: test-scope
       run: |
-        case "${{ github.event.inputs.test_scope }}" in
+        # Si no hay input (push automático), usar smoke por defecto
+        TEST_SCOPE="${{ github.event.inputs.test_scope }}"
+        if [ -z "$TEST_SCOPE" ]; then
+          TEST_SCOPE="smoke"
+        fi
+        
+        case "$TEST_SCOPE" in
           "smoke")
             echo "scope=smoke" >> $GITHUB_OUTPUT
             ;;
@@ -103,8 +109,11 @@ jobs:
           "all")
             echo "scope=all" >> $GITHUB_OUTPUT
             ;;
-          *)
+          "single")
             echo "scope=single" >> $GITHUB_OUTPUT
+            ;;
+          *)
+            echo "scope=smoke" >> $GITHUB_OUTPUT
             ;;
         esac
     
