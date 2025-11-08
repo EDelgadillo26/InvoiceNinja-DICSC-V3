@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T16:32:09.338Z
+Filling item field 2025-11-08T16:32:12.863Z
+Filling description field 2025-11-08T16:32:12.873Z
+Filling generic number field 2025-11-08T16:32:12.893Z
+Filling generic number field 2025-11-08T16:32:12.910Z
+Filling generic number field 2025-11-08T16:32:12.928Z
+Selecting tax category option 2025-11-08T16:32:12.945Z
+Clicking save button 2025-11-08T16:32:14.018Z
+Getting create confirmation text 2025-11-08T16:32:14.085Z
+Validating visibility of product: Practical Aluminum Table 2025-11-08T16:32:16.468Z
+Getting create confirmation text 2025-11-08T16:32:18.566Z
+Logging out user 2025-11-08T16:32:18.569Z

@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T16:28:53.040Z
+Validating EnriqueCompany client visibility 2025-11-08T16:28:54.753Z
+Filling name field 2025-11-08T16:28:56.864Z
+Filling first name field 2025-11-08T16:28:57.085Z
+Filling last name field 2025-11-08T16:28:57.106Z
+Clicking save button 2025-11-08T16:28:57.132Z
+Getting create confirmation text 2025-11-08T16:28:59.211Z
+Validating Kohler - Prohaska client visibility 2025-11-08T16:28:59.742Z
+Getting archive confirmation text 2025-11-08T16:29:01.842Z
+Getting purge confirmation text 2025-11-08T16:29:06.869Z
+Logging out user 2025-11-08T16:29:07.670Z

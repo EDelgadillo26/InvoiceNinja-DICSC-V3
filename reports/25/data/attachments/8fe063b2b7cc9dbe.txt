@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T16:29:21.919Z
+Validating EnriqueCompany client visibility 2025-11-08T16:29:23.582Z
+Filling name field 2025-11-08T16:29:25.698Z
+Filling first name field 2025-11-08T16:29:25.909Z
+Filling last name field 2025-11-08T16:29:25.938Z
+Clicking save button 2025-11-08T16:29:25.966Z
+Getting create confirmation text 2025-11-08T16:29:28.049Z
+Validating Stokes - Koss client visibility 2025-11-08T16:29:28.534Z
+Getting purge confirmation text 2025-11-08T16:29:34.252Z
+Logging out user 2025-11-08T16:29:35.046Z

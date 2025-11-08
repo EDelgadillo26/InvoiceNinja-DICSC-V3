@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T16:29:44.745Z
+Validating EnriqueCompany client visibility 2025-11-08T16:29:46.387Z
+Contact Email - Ordenamiento inicial detectado: none
+Contact Email - No tiene ordenamiento inicial aplicado
+Contact Email - Nuevo ordenamiento detectado: desc
+Contact Email - Validación exitosa después del primer clic: desc
+Contact Email - Datos encontrados (primeros 3): 
+Contact Email - Ordenamiento final detectado: asc
+Contact Email - Validación exitosa del cambio bidireccional: asc
+Contact Email - Se encontraron 0 registros
+Contact Email - Columna sin datos visibles
+Logging out user 2025-11-08T16:29:51.540Z

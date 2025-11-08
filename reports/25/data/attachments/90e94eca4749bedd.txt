@@ -1,0 +1,14 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T16:31:01.369Z
+Validating EnriqueCompany client visibility 2025-11-08T16:31:03.119Z
+Filling name field 2025-11-08T16:31:05.261Z
+Filling first name field 2025-11-08T16:31:05.467Z
+Filling last name field 2025-11-08T16:31:05.489Z
+Clicking save button 2025-11-08T16:31:05.516Z
+Getting create confirmation text 2025-11-08T16:31:07.596Z
+Validating Barrows Inc client visibility 2025-11-08T16:31:08.071Z
+Filling name field 2025-11-08T16:31:10.198Z
+Getting name field value 2025-11-08T16:31:10.432Z
+Clicking save button 2025-11-08T16:31:10.438Z
+Getting edit confirmation text 2025-11-08T16:31:12.527Z
+Getting purge confirmation text 2025-11-08T16:31:14.282Z
+Logging out user 2025-11-08T16:31:15.087Z

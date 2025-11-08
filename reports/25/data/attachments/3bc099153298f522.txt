@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T16:31:43.958Z
+Filling item field 2025-11-08T16:31:48.460Z
+Filling description field 2025-11-08T16:31:48.470Z
+Filling generic number field 2025-11-08T16:31:48.488Z
+Filling generic number field 2025-11-08T16:31:48.508Z
+Filling generic number field 2025-11-08T16:31:48.526Z
+Selecting tax category option 2025-11-08T16:31:48.543Z
+Clicking save button 2025-11-08T16:31:49.638Z
+Getting create confirmation text 2025-11-08T16:31:49.689Z
+Validating visibility of product: Recycled Marble Cheese 2025-11-08T16:31:50.237Z
+Getting create confirmation text 2025-11-08T16:31:53.221Z
+Logging out user 2025-11-08T16:31:53.223Z

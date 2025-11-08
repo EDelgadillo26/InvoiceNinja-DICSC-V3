@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T16:30:42.275Z
+Validating EnriqueCompany client visibility 2025-11-08T16:30:44.806Z
+Filling name field 2025-11-08T16:30:46.910Z
+Filling first name field 2025-11-08T16:30:47.125Z
+Filling last name field 2025-11-08T16:30:47.150Z
+Clicking save button 2025-11-08T16:30:47.177Z
+Getting create confirmation text 2025-11-08T16:30:49.266Z
+Validating Prosacco - Hand client visibility 2025-11-08T16:30:49.804Z
+Getting purge confirmation text 2025-11-08T16:30:52.332Z
+Logging out user 2025-11-08T16:30:53.125Z

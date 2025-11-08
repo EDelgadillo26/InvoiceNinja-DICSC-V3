@@ -1,0 +1,15 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T16:31:54.660Z
+Filling item field 2025-11-08T16:31:58.378Z
+Filling description field 2025-11-08T16:31:58.389Z
+Filling generic number field 2025-11-08T16:31:58.408Z
+Filling generic number field 2025-11-08T16:31:58.427Z
+Filling generic number field 2025-11-08T16:31:58.448Z
+Selecting tax category option 2025-11-08T16:31:58.465Z
+Clicking save button 2025-11-08T16:31:59.553Z
+Getting create confirmation text 2025-11-08T16:31:59.603Z
+Validating visibility of product: Elegant Ceramic Bacon 2025-11-08T16:31:59.959Z
+Filling item field 2025-11-08T16:32:00.931Z
+Clicking save button 2025-11-08T16:32:01.170Z
+Getting edit confirmation text 2025-11-08T16:32:01.239Z
+Getting create confirmation text 2025-11-08T16:32:04.884Z
+Logging out user 2025-11-08T16:32:04.886Z
