@@ -45,7 +45,7 @@ export class CreateClientsPage {
     private readonly idNumberField = '//dt[span[text()="ID Number"]]/following-sibling::dd//input[@type="text"]';
     private readonly vatNumberField = '//dt[span[text()="VAT Number"]]/following-sibling::dd//input[@type="text"]';
     private readonly websiteField = '//dt[span[text()="Website"]]/following-sibling::dd//input[@type="text"]';
-    private readonly phoneField = '//dt[span[text()="Phone"]]/following-sibling::dd//input[@type="text"]';
+    private readonly phoneField = '//*[@id="root"]/div/div[2]/div[3]/main/div[2]/div/div[2]/div[1]/div/form/div[2]/div[8]/dd/section/div/input';
     private readonly routingIdField = '//dt[span[text()="Routing ID"]]/following-sibling::dd//input[@type="text"]';
     private readonly validVatToggle = '//dt[span[text()="Valid VAT Number"]]/following-sibling::dd//button[@id*="headlessui-switch"]';
     private readonly taxExemptToggle = '//dt[span[text()="Tax Exempt"]]/following-sibling::dd//button[@id*="headlessui-switch"]';
@@ -362,6 +362,7 @@ export class CreateClientsPage {
      */
     async fillIdNumberField(idNumber: string): Promise<void> {
         console.log('Filling ID number field', new Date());
+        await this.page.locator(this.idNumberField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.idNumberField).fill(idNumber);
     }
 
@@ -379,6 +380,7 @@ export class CreateClientsPage {
      */
     async fillVatNumberField(vatNumber: string): Promise<void> {
         console.log('Filling VAT number field', new Date());
+        await this.page.locator(this.vatNumberField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.vatNumberField).fill(vatNumber);
     }
 
@@ -396,6 +398,7 @@ export class CreateClientsPage {
      */
     async fillWebsiteField(website: string): Promise<void> {
         console.log('Filling website field', new Date());
+        await this.page.locator(this.websiteField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.websiteField).fill(website);
     }
 
@@ -413,6 +416,7 @@ export class CreateClientsPage {
      */
     async fillPhoneField(phone: string): Promise<void> {
         console.log('Filling phone field', new Date());
+        await this.page.locator(this.phoneField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.phoneField).fill(phone);
     }
 
@@ -430,6 +434,7 @@ export class CreateClientsPage {
      */
     async fillRoutingIdField(routingId: string): Promise<void> {
         console.log('Filling routing ID field', new Date());
+        await this.page.locator(this.routingIdField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.routingIdField).fill(routingId);
     }
 
@@ -568,6 +573,7 @@ export class CreateClientsPage {
      */
     async fillEmailField(email: string): Promise<void> {
         console.log('Filling email field', new Date());
+        await this.page.locator(this.emailField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.emailField).fill(email);
     }
 
@@ -585,6 +591,7 @@ export class CreateClientsPage {
      */
     async fillContactPhoneField(phone: string): Promise<void> {
         console.log('Filling contact phone field', new Date());
+        await this.page.locator(this.contactPhoneField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.contactPhoneField).fill(phone);
     }
 
@@ -669,6 +676,7 @@ export class CreateClientsPage {
      */
     async fillBillingStreetField(street: string): Promise<void> {
         console.log('Filling billing street field', new Date());
+        await this.page.locator(this.billingStreetField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.billingStreetField).fill(street);
     }
 
@@ -686,6 +694,7 @@ export class CreateClientsPage {
      */
     async fillBillingAptField(apt: string): Promise<void> {
         console.log('Filling billing apt field', new Date());
+        await this.page.locator(this.billingAptField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.billingAptField).fill(apt);
     }
 
@@ -703,6 +712,7 @@ export class CreateClientsPage {
      */
     async fillBillingCityField(city: string): Promise<void> {
         console.log('Filling billing city field', new Date());
+        await this.page.locator(this.billingCityField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.billingCityField).fill(city);
     }
 
@@ -720,6 +730,7 @@ export class CreateClientsPage {
      */
     async fillBillingStateField(state: string): Promise<void> {
         console.log('Filling billing state field', new Date());
+        await this.page.locator(this.billingStateField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.billingStateField).fill(state);
     }
 
@@ -737,6 +748,7 @@ export class CreateClientsPage {
      */
     async fillBillingPostalCodeField(postalCode: string): Promise<void> {
         console.log('Filling billing postal code field', new Date());
+        await this.page.locator(this.billingPostalCodeField).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.locator(this.billingPostalCodeField).fill(postalCode);
     }
 
