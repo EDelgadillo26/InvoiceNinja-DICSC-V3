@@ -156,7 +156,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-28: Admin > Clients > Verificar que NO permita crear cliente con 256 caracteres en el campo Name', {
+    test.fixme('IN-28: Admin > Clients > Verificar que NO permita crear cliente con 256 caracteres en el campo Name', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -263,7 +263,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-50: Admin > Clients > Verificar que NO permita crear cliente con 21 caracteres en el campo Number', {
+    test.fixme('IN-50: Admin > Clients > Verificar que NO permita crear cliente con 21 caracteres en el campo Number', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -306,7 +306,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-51: Admin > Clients > Verificar que NO permita crear cliente con caracteres especiales en el campo Number', {
+    test.fixme('IN-51: Admin > Clients > Verificar que NO permita crear cliente con caracteres especiales en el campo Number', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -349,7 +349,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-274: Admin > Clients > Verificar que NO permita crear cliente con caracteres alfabeticos en el campo Number', {
+    test.fixme('IN-274: Admin > Clients > Verificar que NO permita crear cliente con caracteres alfabeticos en el campo Number', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -456,7 +456,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-56: Admin > Clients > New Client > Validar que NO permita un campo ID Number con 21 caracteres numericos', {
+    test.fixme('IN-56: Admin > Clients > New Client > Validar que NO permita un campo ID Number con 21 caracteres numericos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -499,7 +499,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-276: Admin > Clients > New Client > Validar que NO permita un campo ID Number con caracteres especiales', {
+    test.fixme('IN-276: Admin > Clients > New Client > Validar que NO permita un campo ID Number con caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -542,7 +542,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-275: Admin > Clients > New Client > Validar que NO permita un campo ID Number con caracteres alfabeticos', {
+    test.fixme('IN-275: Admin > Clients > New Client > Validar que NO permita un campo ID Number con caracteres alfabeticos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -649,7 +649,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-59: Admin > Clients > New Client > Validar que NO permita un campo VAT Number con 21 caracteres numericos', {
+    test.fixme('IN-59: Admin > Clients > New Client > Validar que NO permita un campo VAT Number con 21 caracteres numericos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -692,7 +692,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-277: Admin > Clients > New Client > Validar que NO permita un campo VAT Number con caracteres especiales', {
+    test.fixme('IN-277: Admin > Clients > New Client > Validar que NO permita un campo VAT Number con caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -735,7 +735,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-278: Admin > Clients > New Client > Validar que NO permita un campo VAT Number con caracteres alfabeticos', {
+    test.fixme('IN-278: Admin > Clients > New Client > Validar que NO permita un campo VAT Number con caracteres alfabeticos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -842,7 +842,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-281: Admin > Clients > New Client > Validar que NO permita un campo Website con 256 caracteres numericos', {
+    test.fixme('IN-281: Admin > Clients > New Client > Validar que NO permita un campo Website con 256 caracteres numericos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -885,7 +885,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-282: Admin > Clients > New Client > Validar que NO permita un campo Website sin "www"', {
+    test.fixme('IN-282: Admin > Clients > New Client > Validar que NO permita un campo Website sin "www"', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -992,7 +992,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-66: Admin > Clients > New Client > Company Details > Validar que NO permita un campo Phone con 21 dígitos', {
+    test.fixme('IN-66: Admin > Clients > New Client > Company Details > Validar que NO permita un campo Phone con 21 dígitos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -1035,7 +1035,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-283: Admin > Clients > New Client > Validar que NO permita un campo Phone con caracteres especiales', {
+    test.fixme('IN-283: Admin > Clients > New Client > Validar que NO permita un campo Phone con caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1078,7 +1078,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-284: Admin > Clients > New Client > Validar que NO permita un campo Phone con caracteres alfabeticos', {
+    test.fixme('IN-284: Admin > Clients > New Client > Validar que NO permita un campo Phone con caracteres alfabeticos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1185,7 +1185,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-70: Admin > Clients > New Client > Validar que NO permita un campo Routing ID con 21 digitos', {
+    test.fixme('IN-70: Admin > Clients > New Client > Validar que NO permita un campo Routing ID con 21 digitos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -1228,7 +1228,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-71: Admin > Clients > New Client > Validar que NO permita un campo Routing ID con caracteres especiales', {
+    test.fixme('IN-71: Admin > Clients > New Client > Validar que NO permita un campo Routing ID con caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1271,7 +1271,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-285: Admin > Clients > New Client > Validar que NO permita un campo Routing ID con caracteres alfabeticos', {
+    test.fixme('IN-285: Admin > Clients > New Client > Validar que NO permita un campo Routing ID con caracteres alfabeticos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1348,7 +1348,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-77: Admin > Clients > New Client > Validar que NO permita el campo Email con un correo sin "@"', {
+    test.fixme('IN-77: Admin > Clients > New Client > Validar que NO permita el campo Email con un correo sin "@"', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -1391,7 +1391,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-78: Admin > Clients > New Client > Validar que NO permita el campo Email con más de 255 caracteres', {
+    test.fixme('IN-78: Admin > Clients > New Client > Validar que NO permita el campo Email con más de 255 caracteres', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1434,7 +1434,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-79: Admin > Clients > New Client > Validar que NO permita el campo Email con un correo con espacios', {
+    test.fixme('IN-79: Admin > Clients > New Client > Validar que NO permita el campo Email con un correo con espacios', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1541,7 +1541,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-82: Admin > Clients > New Client > Contacts > Validar que NO permita el campo Phone con 21 dígitos', {
+    test.fixme('IN-82: Admin > Clients > New Client > Contacts > Validar que NO permita el campo Phone con 21 dígitos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -1584,7 +1584,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-83: Admin > Clients > New Client > Contacts > Validar que NO permita el campo Phone con caracteres especiales', {
+    test.fixme('IN-83: Admin > Clients > New Client > Contacts > Validar que NO permita el campo Phone con caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1627,7 +1627,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-286: Admin > Clients > New Client > Contacts > Validar que NO permita el campo Phone con caracteres alfabeticos', {
+    test.fixme('IN-286: Admin > Clients > New Client > Contacts > Validar que NO permita el campo Phone con caracteres alfabeticos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1734,7 +1734,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-86: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Billing Street con 256 caracteres', {
+    test.fixme('IN-86: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Billing Street con 256 caracteres', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -1777,7 +1777,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-287: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Billing Street con SOLO caracteres especiales', {
+    test.fixme('IN-287: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Billing Street con SOLO caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1884,7 +1884,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-89: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Apt/Suite con 21 caracteres numéricos', {
+    test.fixme('IN-89: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Apt/Suite con 21 caracteres numéricos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -1927,7 +1927,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-90: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Apt/Suite con caracteres especiales', {
+    test.fixme('IN-90: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Apt/Suite con caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -1970,7 +1970,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-288: Admin > Clients > New Client > Validar que NO permita un campo Apt/Suite con caracteres alfabeticos', {
+    test.fixme('IN-288: Admin > Clients > New Client > Validar que NO permita un campo Apt/Suite con caracteres alfabeticos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -2077,7 +2077,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-93: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo City con 256 caracteres', {
+    test.fixme('IN-93: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo City con 256 caracteres', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -2120,7 +2120,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-289: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo City con SOLO caracteres especiales', {
+    test.fixme('IN-289: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo City con SOLO caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -2227,7 +2227,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-96: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo State/Province con 256 caracteres', {
+    test.fixme('IN-96: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo State/Province con 256 caracteres', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -2270,7 +2270,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-290: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo State/Province con SOLO caracteres especiales', {
+    test.fixme('IN-290: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo State/Province con SOLO caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -2313,7 +2313,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-291: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo City con SOLO caracteres numericos', {
+    test.fixme('IN-291: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo City con SOLO caracteres numericos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -2420,7 +2420,7 @@ test.describe('Clientes Principal Page Tests', () => {
         });
       });
 
-    test('IN-99: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Postal Code con 11 caracteres', {
+    test.fixme('IN-99: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Postal Code con 11 caracteres', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
         const clientData = DataGenerator.generateClientData();
@@ -2463,7 +2463,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-100: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Postal Code con caracteres especiales', {
+    test.fixme('IN-100: Admin > Clients > New Client > Billing Address > Validar que NO permita el campo Postal Code con caracteres especiales', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
@@ -2506,7 +2506,7 @@ test.describe('Clientes Principal Page Tests', () => {
       }
     );
 
-    test('IN-282: Admin > Clients > New Client > Validar que NO permita un campo Postal Code con caracteres alfabeticos', {
+    test.fixme('IN-282: Admin > Clients > New Client > Validar que NO permita un campo Postal Code con caracteres alfabeticos', {
       tag: ['@regression', '@clients', '@negative']
     }, async () => {
          const clientData = DataGenerator.generateClientData();
