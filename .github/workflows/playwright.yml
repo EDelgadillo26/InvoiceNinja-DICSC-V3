@@ -1,15 +1,15 @@
 name: InvoiceNinja Tests
 on:
-  push:
-    branches: [ main ]
-  # pull_request:
+  # push:
   #   branches: [ main ]
+  pull_request:
+    branches: [ main, develop ]
   workflow_dispatch: # Permite ejecutar manualmente
     inputs:
       test_scope:
         description: 'Test scope to run'
         required: false
-        default: 'single'
+        default: 'smoke' #cambiar para ejecutar de manera predeterminada
         type: choice
         options:
         - single
@@ -90,23 +90,50 @@ jobs:
     - name: Determine test scope
       id: test-scope
       run: |
-        case "${{ github.event.inputs.test_scope }}" in
-          "smoke")
+        # Determinar scope basado en el contexto de ejecución
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          if [ "${{ github.base_ref }}" = "main" ]; then
+            echo "🎯 PR to main branch detected - Running SMOKE tests"
             echo "scope=smoke" >> $GITHUB_OUTPUT
-            ;;
-          "sanity")
+            echo "test_type=PR to main (Smoke Tests)" >> $GITHUB_OUTPUT
+          elif [ "${{ github.base_ref }}" = "develop" ]; then
+            echo "🔍 PR to develop branch detected - Running SANITY tests"
             echo "scope=sanity" >> $GITHUB_OUTPUT
-            ;;
-          "regression")
-            echo "scope=regression" >> $GITHUB_OUTPUT
-            ;;
-          "all")
-            echo "scope=all" >> $GITHUB_OUTPUT
-            ;;
-          *)
-            echo "scope=single" >> $GITHUB_OUTPUT
-            ;;
-        esac
+            echo "test_type=PR to develop (Sanity Tests)" >> $GITHUB_OUTPUT
+          else
+            echo "🚀 PR to other branch - Running SMOKE tests as default"
+            echo "scope=smoke" >> $GITHUB_OUTPUT
+            echo "test_type=PR to ${{ github.base_ref }} (Smoke Tests)" >> $GITHUB_OUTPUT
+          fi
+        elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          case "${{ github.event.inputs.test_scope }}" in
+            "smoke")
+              echo "scope=smoke" >> $GITHUB_OUTPUT
+              echo "test_type=Manual Execution (Smoke Tests)" >> $GITHUB_OUTPUT
+              ;;
+            "sanity")
+              echo "scope=sanity" >> $GITHUB_OUTPUT
+              echo "test_type=Manual Execution (Sanity Tests)" >> $GITHUB_OUTPUT
+              ;;
+            "regression")
+              echo "scope=regression" >> $GITHUB_OUTPUT
+              echo "test_type=Manual Execution (Regression Tests)" >> $GITHUB_OUTPUT
+              ;;
+            "all")
+              echo "scope=all" >> $GITHUB_OUTPUT
+              echo "test_type=Manual Execution (All Tests)" >> $GITHUB_OUTPUT
+              ;;
+            *)
+              echo "scope=single" >> $GITHUB_OUTPUT
+              echo "test_type=Manual Execution (Single Test)" >> $GITHUB_OUTPUT
+              ;;
+          esac
+        else
+          # Push to main - ejecutar smoke por defecto
+          echo "🚀 Push to main detected - Running SMOKE tests"
+          echo "scope=smoke" >> $GITHUB_OUTPUT
+          echo "test_type=Push to main (Smoke Tests)" >> $GITHUB_OUTPUT
+        fi
     
     - name: Run single test (IN-16 - Basic client creation)
       if: steps.test-scope.outputs.scope == 'single'
@@ -156,7 +183,7 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: playwright-report-${{ github.run_number }}
+        name: playwright-report-${{ steps.test-scope.outputs.scope }}-${{ github.run_number }}
         path: playwright-report/
         retention-days: 7
         
@@ -164,7 +191,7 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: allure-results-${{ github.run_number }}
+        name: allure-results-${{ steps.test-scope.outputs.scope }}-${{ github.run_number }}
         path: allure-results/
         retention-days: 7
         
@@ -172,7 +199,7 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: allure-report-${{ github.run_number }}
+        name: allure-report-${{ steps.test-scope.outputs.scope }}-${{ github.run_number }}
         path: allure-report/
         retention-days: 30
         
@@ -188,7 +215,14 @@ jobs:
       if: always()
       run: |
         echo "## 📊 Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Event Type**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          echo "- **PR**: #${{ github.event.number }} - ${{ github.event.pull_request.title }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Target Branch**: ${{ github.base_ref }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Source Branch**: ${{ github.head_ref }}" >> $GITHUB_STEP_SUMMARY
+        fi
+        echo "- **Test Type**: ${{ steps.test-scope.outputs.test_type }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Test Scope**: ${{ steps.test-scope.outputs.scope }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Run Number**: ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
         if [ -f "test-results/results.json" ]; then
@@ -196,7 +230,20 @@ jobs:
         fi
         if [ -f "allure-report/index.html" ]; then
           echo "- **Allure Report**: [View Online Report](https://edelgadillo26.github.io/InvoiceNinja-DICSC-V3/reports/${{ github.run_number }}/)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Artifacts**: Download 'allure-report-${{ github.run_number }}' artifact" >> $GITHUB_STEP_SUMMARY
+          echo "- **Artifacts**: Download 'allure-report-${{ steps.test-scope.outputs.scope }}-${{ github.run_number }}' artifact" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        # Agregar contexto específico del PR
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🎯 PR Testing Strategy" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.base_ref }}" = "main" ]; then
+            echo "- **Strategy**: Smoke tests executed for production readiness" >> $GITHUB_STEP_SUMMARY
+            echo "- **Coverage**: Core functionality validation" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ github.base_ref }}" = "develop" ]; then
+            echo "- **Strategy**: Sanity tests executed for development integration" >> $GITHUB_STEP_SUMMARY
+            echo "- **Coverage**: Basic functionality validation" >> $GITHUB_STEP_SUMMARY
+          fi
         fi
         
     - name: Deploy Allure Report to GitHub Pages

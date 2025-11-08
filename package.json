@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npx playwright test",
     "test:single": "npx playwright test --grep \"IN-16.*Crear Cliente con los campos minimos requeridos\"",
-    "test:boundary": "npx playwright test --grep @boundary",
+    "test:regression": "npx playwright test --grep @regression",
     "test:number-field": "npx playwright test --grep \"IN-48|IN-49|IN-50|IN-51\"",
     "test_Smoke": "npx playwright test --grep @smoke",
     "test_Login": "npx playwright test --grep @login",
