@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:17:05.054Z
+Validating EnriqueCompany client visibility 2025-11-08T21:17:06.707Z
+ID Number - Ordenamiento inicial detectado: none
+ID Number - No tiene ordenamiento inicial aplicado
+ID Number - Nuevo ordenamiento detectado: desc
+ID Number - Validación exitosa después del primer clic: desc
+ID Number - Datos encontrados (primeros 3): 26
+ID Number - Ordenamiento final detectado: asc
+ID Number - Validación exitosa del cambio bidireccional: asc
+ID Number - Se encontraron 1 registros
+ID Number - Datos de ejemplo: 26
+Logging out user 2025-11-08T21:17:11.871Z

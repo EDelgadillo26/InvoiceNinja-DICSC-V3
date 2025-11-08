@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:16:34.123Z
+Validating EnriqueCompany client visibility 2025-11-08T21:16:35.793Z
+Filling name field 2025-11-08T21:16:37.910Z
+Filling first name field 2025-11-08T21:16:38.224Z
+Filling last name field 2025-11-08T21:16:38.248Z
+Clicking save button 2025-11-08T21:16:38.273Z
+Getting create confirmation text 2025-11-08T21:16:40.356Z
+Validating Klocko, Kuvalis and Schowalter client visibility 2025-11-08T21:16:40.740Z
+Getting purge confirmation text 2025-11-08T21:16:46.360Z
+Logging out user 2025-11-08T21:16:47.154Z

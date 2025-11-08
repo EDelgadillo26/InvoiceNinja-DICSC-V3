@@ -1,0 +1,9 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:16:48.614Z
+Validating EnriqueCompany client visibility 2025-11-08T21:16:50.260Z
+Name - Ordenamiento inicial detectado: none
+Name - No tiene ordenamiento inicial aplicado
+Name - Nuevo ordenamiento detectado: none
+Name - Ordenamiento final detectado: none
+Name - Se encontraron 2 registros
+Name - Datos de ejemplo: EnriqueCompany, Stehr - Heller
+Logging out user 2025-11-08T21:16:55.426Z

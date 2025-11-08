@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:19:06.642Z
+Filling item field 2025-11-08T21:19:11.259Z
+Filling description field 2025-11-08T21:19:11.270Z
+Filling generic number field 2025-11-08T21:19:11.288Z
+Filling generic number field 2025-11-08T21:19:11.307Z
+Filling generic number field 2025-11-08T21:19:11.329Z
+Selecting tax category option 2025-11-08T21:19:11.347Z
+Clicking save button 2025-11-08T21:19:12.450Z
+Getting create confirmation text 2025-11-08T21:19:12.497Z
+Validating visibility of product: Fresh Wooden Sausages 2025-11-08T21:19:13.056Z
+Getting create confirmation text 2025-11-08T21:19:16.063Z
+Logging out user 2025-11-08T21:19:16.067Z

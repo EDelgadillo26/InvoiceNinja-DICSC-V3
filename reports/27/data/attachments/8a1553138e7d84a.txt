@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:15:50.167Z
+Validating EnriqueCompany client visibility 2025-11-08T21:15:51.948Z
+Filling name field 2025-11-08T21:15:54.062Z
+Filling first name field 2025-11-08T21:15:54.376Z
+Filling last name field 2025-11-08T21:15:54.401Z
+Clicking save button 2025-11-08T21:15:54.432Z
+Getting create confirmation text 2025-11-08T21:15:56.504Z
+Validating Hegmann - Roob client visibility 2025-11-08T21:15:57.038Z
+Getting archive confirmation text 2025-11-08T21:15:59.137Z
+Getting purge confirmation text 2025-11-08T21:16:02.499Z
+Logging out user 2025-11-08T21:16:03.298Z

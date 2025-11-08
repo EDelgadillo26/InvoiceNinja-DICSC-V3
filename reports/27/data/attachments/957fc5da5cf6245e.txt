@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:16:21.489Z
+Validating EnriqueCompany client visibility 2025-11-08T21:16:23.178Z
+Filling name field 2025-11-08T21:16:25.289Z
+Filling first name field 2025-11-08T21:16:25.607Z
+Filling last name field 2025-11-08T21:16:25.631Z
+Clicking save button 2025-11-08T21:16:25.664Z
+Getting create confirmation text 2025-11-08T21:16:27.731Z
+Validating Murazik - Considine client visibility 2025-11-08T21:16:28.136Z
+Getting purge confirmation text 2025-11-08T21:16:31.878Z
+Logging out user 2025-11-08T21:16:32.673Z

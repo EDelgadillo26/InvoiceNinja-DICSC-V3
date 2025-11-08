@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:19:17.995Z
+Filling item field 2025-11-08T21:19:22.540Z
+Filling description field 2025-11-08T21:19:22.550Z
+Filling generic number field 2025-11-08T21:19:22.567Z
+Filling generic number field 2025-11-08T21:19:22.625Z
+Filling generic number field 2025-11-08T21:19:22.645Z
+Selecting tax category option 2025-11-08T21:19:22.665Z
+Clicking save button 2025-11-08T21:19:23.763Z
+Getting create confirmation text 2025-11-08T21:19:23.815Z
+Validating visibility of product: Electronic Silk Car 2025-11-08T21:19:24.466Z
+Getting create confirmation text 2025-11-08T21:19:27.462Z
+Logging out user 2025-11-08T21:19:27.465Z

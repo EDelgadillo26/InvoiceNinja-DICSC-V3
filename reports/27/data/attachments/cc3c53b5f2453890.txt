@@ -1,0 +1,15 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:19:29.048Z
+Filling item field 2025-11-08T21:19:33.123Z
+Filling description field 2025-11-08T21:19:33.133Z
+Filling generic number field 2025-11-08T21:19:33.152Z
+Filling generic number field 2025-11-08T21:19:33.173Z
+Filling generic number field 2025-11-08T21:19:33.190Z
+Selecting tax category option 2025-11-08T21:19:33.208Z
+Clicking save button 2025-11-08T21:19:34.296Z
+Getting create confirmation text 2025-11-08T21:19:34.345Z
+Validating visibility of product: Luxurious Aluminum Shoes 2025-11-08T21:19:35.190Z
+Filling item field 2025-11-08T21:19:36.158Z
+Clicking save button 2025-11-08T21:19:36.450Z
+Getting edit confirmation text 2025-11-08T21:19:36.516Z
+Getting create confirmation text 2025-11-08T21:19:40.360Z
+Logging out user 2025-11-08T21:19:40.363Z

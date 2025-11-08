@@ -1,0 +1,14 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:18:34.371Z
+Validating EnriqueCompany client visibility 2025-11-08T21:18:36.251Z
+Filling name field 2025-11-08T21:18:38.349Z
+Filling first name field 2025-11-08T21:18:38.668Z
+Filling last name field 2025-11-08T21:18:38.691Z
+Clicking save button 2025-11-08T21:18:38.715Z
+Getting create confirmation text 2025-11-08T21:18:40.806Z
+Validating Mohr, Blick and Schumm client visibility 2025-11-08T21:18:41.341Z
+Filling name field 2025-11-08T21:18:43.473Z
+Getting name field value 2025-11-08T21:18:43.801Z
+Clicking save button 2025-11-08T21:18:43.835Z
+Getting edit confirmation text 2025-11-08T21:18:45.942Z
+Getting purge confirmation text 2025-11-08T21:18:47.822Z
+Logging out user 2025-11-08T21:18:48.619Z

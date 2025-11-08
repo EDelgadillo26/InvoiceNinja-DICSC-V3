@@ -1,0 +1,6 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:17:29.728Z
+Validating EnriqueCompany client visibility 2025-11-08T21:17:31.358Z
+Date Created - Ordenamiento inicial detectado: none
+Date Created - No tiene ordenamiento inicial aplicado
+Date Created - Nuevo ordenamiento detectado: desc
+Logging out user 2025-11-08T21:17:35.083Z

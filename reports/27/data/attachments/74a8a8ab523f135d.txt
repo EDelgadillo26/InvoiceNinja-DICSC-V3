@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-08T21:19:45.332Z
+Filling item field 2025-11-08T21:19:49.286Z
+Filling description field 2025-11-08T21:19:49.296Z
+Filling generic number field 2025-11-08T21:19:49.316Z
+Filling generic number field 2025-11-08T21:19:49.335Z
+Filling generic number field 2025-11-08T21:19:49.355Z
+Selecting tax category option 2025-11-08T21:19:49.373Z
+Clicking save button 2025-11-08T21:19:50.459Z
+Getting create confirmation text 2025-11-08T21:19:50.512Z
+Validating visibility of product: Tasty Steel Gloves 2025-11-08T21:19:53.171Z
+Getting create confirmation text 2025-11-08T21:19:55.276Z
+Logging out user 2025-11-08T21:19:55.279Z
