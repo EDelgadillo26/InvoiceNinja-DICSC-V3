@@ -2201,7 +2201,7 @@ test.describe('Clientes Principal Page Tests', () => {
       tag: ['@regression', '@clients']
     }, async () => {
         let clientData = DataGenerator.generateClientData();
-        const maxCharName = 'a'.repeat(255);
+        const maxCharName = 'o'.repeat(255);
         await test.step('Ir al modulo Clients y hacer clic en "Nuevo Cliente"', async () => {
           await userTab.BaseNavigationPage().clickClients();
           await userTab.Clients().clickNewClientButton();
@@ -2216,6 +2216,7 @@ test.describe('Clientes Principal Page Tests', () => {
         await test.step('Validar que el cliente aparece en la lista', async () => {
           await userTab.BaseNavigationPage().clickClients();
           await userTab.page.reload();
+          await userTab.page.waitForTimeout(2000);
           const existsClient = await userTab.Clients().isSpecificClientVisible(clientData.company.name);
           expect(existsClient).toBeTruthy();
         });
