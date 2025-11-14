@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:27:02.550Z
+Filling item field 2025-11-14T18:27:07.672Z
+Filling description field 2025-11-14T18:27:07.685Z
+Filling generic number field 2025-11-14T18:27:07.707Z
+Filling generic number field 2025-11-14T18:27:07.727Z
+Filling generic number field 2025-11-14T18:27:07.750Z
+Selecting tax category option 2025-11-14T18:27:07.769Z
+Clicking save button 2025-11-14T18:27:08.864Z
+Getting create confirmation text 2025-11-14T18:27:08.914Z
+Validating visibility of product: Sleek Bronze Bike 2025-11-14T18:27:09.473Z
+Logging out user 2025-11-14T18:27:24.622Z

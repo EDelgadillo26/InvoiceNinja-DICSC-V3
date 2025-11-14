@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:26:36.480Z
+Filling item field 2025-11-14T18:26:41.779Z
+Filling description field 2025-11-14T18:26:41.803Z
+Filling generic number field 2025-11-14T18:26:41.847Z
+Filling generic number field 2025-11-14T18:26:41.888Z
+Filling generic number field 2025-11-14T18:26:41.928Z
+Selecting tax category option 2025-11-14T18:26:41.980Z
+Clicking save button 2025-11-14T18:26:43.119Z
+Getting create confirmation text 2025-11-14T18:26:43.169Z
+Validating visibility of product: Handcrafted Silk Fish 2025-11-14T18:26:43.972Z
+Logging out user 2025-11-14T18:26:59.141Z

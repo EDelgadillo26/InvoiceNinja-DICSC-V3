@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:28:42.372Z
+Filling item field 2025-11-14T18:28:47.510Z
+Filling description field 2025-11-14T18:28:47.523Z
+Filling generic number field 2025-11-14T18:28:47.543Z
+Filling generic number field 2025-11-14T18:28:47.562Z
+Filling generic number field 2025-11-14T18:28:47.583Z
+Selecting tax category option 2025-11-14T18:28:47.603Z
+Clicking save button 2025-11-14T18:28:48.693Z
+Getting create confirmation text 2025-11-14T18:28:48.741Z
+Validating visibility of product: Oriental Metal Towels 2025-11-14T18:28:49.633Z
+Logging out user 2025-11-14T18:29:04.782Z

@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:23:23.150Z
+Validating EnriqueCompany client visibility 2025-11-14T18:23:25.326Z
+Filling name field 2025-11-14T18:23:27.422Z
+Filling first name field 2025-11-14T18:23:27.714Z
+Filling last name field 2025-11-14T18:23:27.738Z
+Clicking save button 2025-11-14T18:23:27.764Z
+Getting create confirmation text 2025-11-14T18:23:29.847Z
+Validating Greenholt, Stoltenberg and Hyatt client visibility 2025-11-14T18:23:30.369Z
+Getting archive confirmation text 2025-11-14T18:23:32.494Z
+Getting purge confirmation text 2025-11-14T18:23:37.561Z
+Logging out user 2025-11-14T18:23:38.358Z

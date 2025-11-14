@@ -1,0 +1,14 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:25:38.790Z
+Validating EnriqueCompany client visibility 2025-11-14T18:25:41.071Z
+Filling name field 2025-11-14T18:25:43.182Z
+Filling first name field 2025-11-14T18:25:43.474Z
+Filling last name field 2025-11-14T18:25:43.518Z
+Clicking save button 2025-11-14T18:25:43.546Z
+Getting create confirmation text 2025-11-14T18:25:45.623Z
+Validating Von, Bosco and Harris client visibility 2025-11-14T18:25:46.271Z
+Filling name field 2025-11-14T18:25:48.450Z
+Getting name field value 2025-11-14T18:25:48.687Z
+Clicking save button 2025-11-14T18:25:48.692Z
+Getting edit confirmation text 2025-11-14T18:25:50.772Z
+Getting purge confirmation text 2025-11-14T18:25:52.588Z
+Logging out user 2025-11-14T18:25:53.389Z

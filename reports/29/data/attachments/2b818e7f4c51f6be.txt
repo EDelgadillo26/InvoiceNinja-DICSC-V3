@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:29:07.374Z
+Filling item field 2025-11-14T18:29:13.056Z
+Filling description field 2025-11-14T18:29:13.086Z
+Filling generic number field 2025-11-14T18:29:13.131Z
+Filling generic number field 2025-11-14T18:29:13.170Z
+Filling generic number field 2025-11-14T18:29:13.208Z
+Selecting tax category option 2025-11-14T18:29:13.248Z
+Clicking save button 2025-11-14T18:29:14.380Z
+Getting create confirmation text 2025-11-14T18:29:14.438Z
+Validating visibility of product: Oriental Bronze Keyboard 2025-11-14T18:29:15.255Z
+Logging out user 2025-11-14T18:29:30.421Z

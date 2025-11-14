@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:29:33.782Z
+Filling item field 2025-11-14T18:29:38.950Z
+Filling description field 2025-11-14T18:29:38.962Z
+Filling generic number field 2025-11-14T18:29:38.982Z
+Filling generic number field 2025-11-14T18:29:39.004Z
+Filling generic number field 2025-11-14T18:29:39.025Z
+Selecting tax category option 2025-11-14T18:29:39.043Z
+Clicking save button 2025-11-14T18:29:40.138Z
+Getting create confirmation text 2025-11-14T18:29:40.190Z
+Validating visibility of product: Oriental Wooden Fish 2025-11-14T18:29:40.750Z
+Logging out user 2025-11-14T18:29:55.895Z

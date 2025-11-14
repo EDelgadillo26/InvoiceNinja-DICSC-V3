@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:30:02.777Z
+Filling item field 2025-11-14T18:30:07.062Z
+Filling description field 2025-11-14T18:30:07.075Z
+Filling generic number field 2025-11-14T18:30:07.093Z
+Filling generic number field 2025-11-14T18:30:07.114Z
+Filling generic number field 2025-11-14T18:30:07.135Z
+Selecting tax category option 2025-11-14T18:30:07.153Z
+Clicking save button 2025-11-14T18:30:08.252Z
+Getting create confirmation text 2025-11-14T18:30:08.304Z
+Validating visibility of product: Electronic Steel Gloves 2025-11-14T18:30:10.895Z
+Getting create confirmation text 2025-11-14T18:30:13.021Z
+Logging out user 2025-11-14T18:30:13.023Z

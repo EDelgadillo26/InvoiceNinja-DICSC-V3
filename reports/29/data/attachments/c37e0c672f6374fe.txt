@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:23:07.694Z
+Validating EnriqueCompany client visibility 2025-11-14T18:23:09.863Z
+Filling name field 2025-11-14T18:23:11.972Z
+Filling first name field 2025-11-14T18:23:12.784Z
+Filling last name field 2025-11-14T18:23:12.811Z
+Clicking save button 2025-11-14T18:23:12.844Z
+Getting create confirmation text 2025-11-14T18:23:14.916Z
+Validating Kuhlman, Harvey and Keebler client visibility 2025-11-14T18:23:15.467Z
+Getting archive confirmation text 2025-11-14T18:23:17.584Z
+Getting purge confirmation text 2025-11-14T18:23:20.895Z
+Logging out user 2025-11-14T18:23:21.692Z

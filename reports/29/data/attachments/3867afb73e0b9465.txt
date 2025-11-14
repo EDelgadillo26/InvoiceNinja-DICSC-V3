@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:28:17.803Z
+Filling item field 2025-11-14T18:28:22.958Z
+Filling description field 2025-11-14T18:28:22.971Z
+Filling generic number field 2025-11-14T18:28:22.991Z
+Filling generic number field 2025-11-14T18:28:23.014Z
+Filling generic number field 2025-11-14T18:28:23.035Z
+Selecting tax category option 2025-11-14T18:28:23.057Z
+Clicking save button 2025-11-14T18:28:24.142Z
+Getting create confirmation text 2025-11-14T18:28:24.193Z
+Validating visibility of product: Incredible Aluminum Tuna 2025-11-14T18:28:24.759Z
+Logging out user 2025-11-14T18:28:39.902Z

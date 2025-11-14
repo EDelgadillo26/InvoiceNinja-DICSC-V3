@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:27:51.757Z
+Filling item field 2025-11-14T18:27:57.074Z
+Filling description field 2025-11-14T18:27:57.100Z
+Filling generic number field 2025-11-14T18:27:57.142Z
+Filling generic number field 2025-11-14T18:27:57.186Z
+Filling generic number field 2025-11-14T18:27:57.238Z
+Selecting tax category option 2025-11-14T18:27:57.293Z
+Clicking save button 2025-11-14T18:27:58.381Z
+Getting create confirmation text 2025-11-14T18:27:58.433Z
+Validating visibility of product: Recycled Ceramic Shirt 2025-11-14T18:27:59.209Z
+Logging out user 2025-11-14T18:28:14.377Z

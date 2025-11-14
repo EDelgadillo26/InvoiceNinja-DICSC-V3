@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:26:11.803Z
+Filling item field 2025-11-14T18:26:16.872Z
+Filling description field 2025-11-14T18:26:16.883Z
+Filling generic number field 2025-11-14T18:26:16.903Z
+Filling generic number field 2025-11-14T18:26:16.922Z
+Filling generic number field 2025-11-14T18:26:16.941Z
+Selecting tax category option 2025-11-14T18:26:16.962Z
+Clicking save button 2025-11-14T18:26:18.066Z
+Getting create confirmation text 2025-11-14T18:26:18.115Z
+Validating visibility of product: Modern Ceramic Pizza 2025-11-14T18:26:18.671Z
+Logging out user 2025-11-14T18:26:33.822Z

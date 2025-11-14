@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T18:27:27.208Z
+Filling item field 2025-11-14T18:27:32.334Z
+Filling description field 2025-11-14T18:27:32.346Z
+Filling generic number field 2025-11-14T18:27:32.369Z
+Filling generic number field 2025-11-14T18:27:32.390Z
+Filling generic number field 2025-11-14T18:27:32.413Z
+Selecting tax category option 2025-11-14T18:27:32.432Z
+Clicking save button 2025-11-14T18:27:33.528Z
+Getting create confirmation text 2025-11-14T18:27:33.577Z
+Validating visibility of product: Modern Metal Cheese 2025-11-14T18:27:34.133Z
+Logging out user 2025-11-14T18:27:49.285Z
