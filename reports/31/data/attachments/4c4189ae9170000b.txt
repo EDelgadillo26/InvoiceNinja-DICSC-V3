@@ -1,0 +1,12 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:56:26.841Z
+Validating EnriqueCompany client visibility 2025-11-14T21:56:28.549Z
+Date Created - Ordenamiento inicial detectado: none
+Date Created - No tiene ordenamiento inicial aplicado
+Date Created - Nuevo ordenamiento detectado: desc
+Date Created - Validación exitosa después del primer clic: desc
+Date Created - Datos encontrados (primeros 3): 14/Nov/2025
+Date Created - Ordenamiento final detectado: asc
+Date Created - Validación exitosa del cambio bidireccional: asc
+Date Created - Se encontraron 1 registros
+Date Created - Datos de ejemplo: 14/Nov/2025
+Logging out user 2025-11-14T21:56:33.710Z

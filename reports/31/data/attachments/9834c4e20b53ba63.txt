@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:53:14.006Z
+Validating EnriqueCompany client visibility 2025-11-14T21:53:16.422Z
+Filling name field 2025-11-14T21:53:18.544Z
+Filling first name field 2025-11-14T21:53:18.760Z
+Filling last name field 2025-11-14T21:53:18.786Z
+Clicking save button 2025-11-14T21:53:18.821Z
+Getting create confirmation text 2025-11-14T21:53:20.906Z
+Validating Harber and Sons client visibility 2025-11-14T21:53:21.460Z
+Getting archive confirmation text 2025-11-14T21:53:23.569Z
+Logging out user 2025-11-14T21:53:35.305Z

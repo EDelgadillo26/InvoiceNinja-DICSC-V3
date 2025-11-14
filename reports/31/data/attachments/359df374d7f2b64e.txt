@@ -1,0 +1,9 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:52:26.953Z
+Filling name field 2025-11-14T21:52:28.677Z
+Filling first name field 2025-11-14T21:52:28.917Z
+Filling last name field 2025-11-14T21:52:28.944Z
+Clicking save button 2025-11-14T21:52:28.979Z
+Getting create confirmation text 2025-11-14T21:52:31.058Z
+Validating Von - McDermott client visibility 2025-11-14T21:52:31.557Z
+Getting archive confirmation text 2025-11-14T21:52:33.672Z
+Logging out user 2025-11-14T21:52:45.424Z

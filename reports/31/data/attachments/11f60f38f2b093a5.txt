@@ -1,0 +1,15 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:58:50.248Z
+Filling item field 2025-11-14T21:58:54.160Z
+Filling description field 2025-11-14T21:58:54.175Z
+Filling generic number field 2025-11-14T21:58:54.193Z
+Filling generic number field 2025-11-14T21:58:54.210Z
+Filling generic number field 2025-11-14T21:58:54.230Z
+Selecting tax category option 2025-11-14T21:58:54.248Z
+Clicking save button 2025-11-14T21:58:55.337Z
+Getting create confirmation text 2025-11-14T21:58:55.387Z
+Validating visibility of product: Incredible Gold Chicken 2025-11-14T21:58:55.857Z
+Filling item field 2025-11-14T21:58:56.788Z
+Clicking save button 2025-11-14T21:58:57.012Z
+Getting edit confirmation text 2025-11-14T21:58:57.072Z
+Getting create confirmation text 2025-11-14T21:59:00.721Z
+Logging out user 2025-11-14T21:59:00.724Z

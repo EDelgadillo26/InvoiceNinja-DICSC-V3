@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:54:29.065Z
+Validating EnriqueCompany client visibility 2025-11-14T21:54:31.434Z
+Filling name field 2025-11-14T21:54:33.560Z
+Filling first name field 2025-11-14T21:54:33.780Z
+Filling last name field 2025-11-14T21:54:33.809Z
+Clicking save button 2025-11-14T21:54:33.840Z
+Getting create confirmation text 2025-11-14T21:54:35.937Z
+Validating Swift LLC client visibility 2025-11-14T21:54:36.482Z
+Client Swift LLC was not found after creation. 2025-11-14T21:54:38.485Z
+Logging out user 2025-11-14T21:54:38.600Z

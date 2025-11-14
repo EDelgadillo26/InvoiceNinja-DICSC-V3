@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:52:47.925Z
+Validating EnriqueCompany client visibility 2025-11-14T21:52:50.590Z
+Filling name field 2025-11-14T21:52:52.840Z
+Filling first name field 2025-11-14T21:52:53.120Z
+Filling last name field 2025-11-14T21:52:53.250Z
+Clicking save button 2025-11-14T21:52:53.313Z
+Getting create confirmation text 2025-11-14T21:52:55.429Z
+Validating Kiehn Group client visibility 2025-11-14T21:52:56.333Z
+Getting archive confirmation text 2025-11-14T21:52:58.498Z
+Logging out user 2025-11-14T21:53:10.579Z

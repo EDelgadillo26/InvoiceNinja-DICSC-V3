@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:54:03.311Z
+Validating EnriqueCompany client visibility 2025-11-14T21:54:05.942Z
+Filling name field 2025-11-14T21:54:08.177Z
+Filling first name field 2025-11-14T21:54:08.462Z
+Filling last name field 2025-11-14T21:54:08.547Z
+Clicking save button 2025-11-14T21:54:08.601Z
+Getting create confirmation text 2025-11-14T21:54:10.721Z
+Validating Fay Inc client visibility 2025-11-14T21:54:11.510Z
+Client Fay Inc was not found after creation. 2025-11-14T21:54:13.539Z
+Logging out user 2025-11-14T21:54:13.691Z

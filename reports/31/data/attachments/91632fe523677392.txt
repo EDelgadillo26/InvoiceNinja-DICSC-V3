@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:57:46.969Z
+Validating EnriqueCompany client visibility 2025-11-14T21:57:49.528Z
+Filling name field 2025-11-14T21:57:51.733Z
+Filling first name field 2025-11-14T21:57:51.977Z
+Filling last name field 2025-11-14T21:57:52.072Z
+Clicking save button 2025-11-14T21:57:52.127Z
+Getting create confirmation text 2025-11-14T21:57:54.227Z
+Validating O'Reilly - Sanford client visibility 2025-11-14T21:57:54.909Z
+Client O'Reilly - Sanford was not found after creation. 2025-11-14T21:57:56.927Z
+Logging out user 2025-11-14T21:57:57.049Z

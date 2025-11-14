@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:56:51.970Z
+Validating EnriqueCompany client visibility 2025-11-14T21:56:54.274Z
+Filling name field 2025-11-14T21:56:56.381Z
+Filling first name field 2025-11-14T21:56:56.594Z
+Filling last name field 2025-11-14T21:56:56.621Z
+Clicking save button 2025-11-14T21:56:56.645Z
+Getting create confirmation text 2025-11-14T21:56:58.740Z
+Validating Dietrich and Sons client visibility 2025-11-14T21:56:59.237Z
+Client Dietrich and Sons was not found after creation. 2025-11-14T21:57:01.241Z
+Logging out user 2025-11-14T21:57:01.376Z

@@ -1,0 +1,12 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:58:28.245Z
+Filling item field 2025-11-14T21:58:32.666Z
+Filling description field 2025-11-14T21:58:32.680Z
+Filling generic number field 2025-11-14T21:58:32.699Z
+Filling generic number field 2025-11-14T21:58:32.719Z
+Filling generic number field 2025-11-14T21:58:32.737Z
+Selecting tax category option 2025-11-14T21:58:32.755Z
+Clicking save button 2025-11-14T21:58:33.841Z
+Getting create confirmation text 2025-11-14T21:58:33.899Z
+Validating visibility of product: Luxurious Concrete Ball 2025-11-14T21:58:34.356Z
+Getting create confirmation text 2025-11-14T21:58:37.372Z
+Logging out user 2025-11-14T21:58:37.376Z

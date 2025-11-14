@@ -1,0 +1,12 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:59:05.409Z
+Filling item field 2025-11-14T21:59:09.232Z
+Filling description field 2025-11-14T21:59:09.244Z
+Filling generic number field 2025-11-14T21:59:09.261Z
+Filling generic number field 2025-11-14T21:59:09.279Z
+Filling generic number field 2025-11-14T21:59:09.297Z
+Selecting tax category option 2025-11-14T21:59:09.319Z
+Clicking save button 2025-11-14T21:59:10.404Z
+Getting create confirmation text 2025-11-14T21:59:10.455Z
+Validating visibility of product: Fresh Steel Soap 2025-11-14T21:59:12.947Z
+Getting create confirmation text 2025-11-14T21:59:15.053Z
+Logging out user 2025-11-14T21:59:15.055Z

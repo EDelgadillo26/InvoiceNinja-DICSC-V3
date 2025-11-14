@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:55:32.208Z
+Validating EnriqueCompany client visibility 2025-11-14T21:55:34.514Z
+Filling name field 2025-11-14T21:55:36.639Z
+Filling first name field 2025-11-14T21:55:36.859Z
+Filling last name field 2025-11-14T21:55:36.889Z
+Clicking save button 2025-11-14T21:55:36.920Z
+Getting create confirmation text 2025-11-14T21:55:39.017Z
+Validating Schowalter - Rau client visibility 2025-11-14T21:55:39.580Z
+Client Schowalter - Rau was not found after creation. 2025-11-14T21:55:41.587Z
+Logging out user 2025-11-14T21:55:41.714Z

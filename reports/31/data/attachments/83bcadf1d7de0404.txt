@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:54:16.999Z
+Validating EnriqueCompany client visibility 2025-11-14T21:54:19.389Z
+Filling name field 2025-11-14T21:54:21.515Z
+Filling first name field 2025-11-14T21:54:21.728Z
+Filling last name field 2025-11-14T21:54:21.757Z
+Clicking save button 2025-11-14T21:54:21.789Z
+Getting create confirmation text 2025-11-14T21:54:23.882Z
+Validating Reichert, Little and Lockman client visibility 2025-11-14T21:54:24.389Z
+Client Reichert, Little and Lockman was not found after creation. 2025-11-14T21:54:26.394Z
+Logging out user 2025-11-14T21:54:26.516Z

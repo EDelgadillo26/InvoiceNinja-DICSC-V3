@@ -1,0 +1,12 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:56:43.373Z
+Validating EnriqueCompany client visibility 2025-11-14T21:56:45.032Z
+Website - Ordenamiento inicial detectado: none
+Website - No tiene ordenamiento inicial aplicado
+Website - Nuevo ordenamiento detectado: desc
+Website - Validación exitosa después del primer clic: desc
+Website - Datos encontrados (primeros 3): 
+Website - Ordenamiento final detectado: asc
+Website - Validación exitosa del cambio bidireccional: asc
+Website - Se encontraron 0 registros
+Website - Columna sin datos visibles
+Logging out user 2025-11-14T21:56:50.191Z

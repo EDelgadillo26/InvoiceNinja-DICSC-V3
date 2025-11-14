@@ -1,0 +1,12 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:58:39.211Z
+Filling item field 2025-11-14T21:58:44.044Z
+Filling description field 2025-11-14T21:58:44.054Z
+Filling generic number field 2025-11-14T21:58:44.074Z
+Filling generic number field 2025-11-14T21:58:44.095Z
+Filling generic number field 2025-11-14T21:58:44.113Z
+Selecting tax category option 2025-11-14T21:58:44.133Z
+Clicking save button 2025-11-14T21:58:45.226Z
+Getting create confirmation text 2025-11-14T21:58:45.275Z
+Validating visibility of product: Elegant Cotton Ball 2025-11-14T21:58:45.768Z
+Getting create confirmation text 2025-11-14T21:58:48.824Z
+Logging out user 2025-11-14T21:58:48.827Z

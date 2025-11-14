@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:55:18.559Z
+Validating EnriqueCompany client visibility 2025-11-14T21:55:21.136Z
+Filling name field 2025-11-14T21:55:23.346Z
+Filling first name field 2025-11-14T21:55:23.621Z
+Filling last name field 2025-11-14T21:55:23.695Z
+Clicking save button 2025-11-14T21:55:23.800Z
+Getting create confirmation text 2025-11-14T21:55:25.902Z
+Validating Howe and Sons client visibility 2025-11-14T21:55:26.712Z
+Client Howe and Sons was not found after creation. 2025-11-14T21:55:28.731Z
+Logging out user 2025-11-14T21:55:28.869Z

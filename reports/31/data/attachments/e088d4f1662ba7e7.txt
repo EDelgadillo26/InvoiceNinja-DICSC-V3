@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:57:17.423Z
+Validating EnriqueCompany client visibility 2025-11-14T21:57:19.791Z
+Filling name field 2025-11-14T21:57:21.918Z
+Filling first name field 2025-11-14T21:57:22.141Z
+Filling last name field 2025-11-14T21:57:22.167Z
+Clicking save button 2025-11-14T21:57:22.191Z
+Getting create confirmation text 2025-11-14T21:57:24.271Z
+Validating Trantow, Windler and Hauck client visibility 2025-11-14T21:57:24.789Z
+Client Trantow, Windler and Hauck was not found after creation. 2025-11-14T21:57:26.794Z
+Logging out user 2025-11-14T21:57:26.925Z

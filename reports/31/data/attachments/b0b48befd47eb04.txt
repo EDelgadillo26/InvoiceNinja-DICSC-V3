@@ -1,0 +1,10 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:57:35.816Z
+Validating EnriqueCompany client visibility 2025-11-14T21:57:37.597Z
+Filling name field 2025-11-14T21:57:39.694Z
+Filling first name field 2025-11-14T21:57:39.907Z
+Filling last name field 2025-11-14T21:57:39.932Z
+Clicking save button 2025-11-14T21:57:39.958Z
+Getting create confirmation text 2025-11-14T21:57:42.047Z
+Validating Rolfson, Botsford and Hintz client visibility 2025-11-14T21:57:42.396Z
+Client Rolfson, Botsford and Hintz was not found after creation. 2025-11-14T21:57:44.399Z
+Logging out user 2025-11-14T21:57:44.529Z

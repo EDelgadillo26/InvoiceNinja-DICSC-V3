@@ -1,0 +1,12 @@
+Logging in with email: edelgadillo2004@gmail.com 2025-11-14T21:56:10.262Z
+Validating EnriqueCompany client visibility 2025-11-14T21:56:11.968Z
+Balance - Ordenamiento inicial detectado: none
+Balance - No tiene ordenamiento inicial aplicado
+Balance - Nuevo ordenamiento detectado: desc
+Balance - Validación exitosa después del primer clic: desc
+Balance - Datos encontrados (primeros 3): Bs 0.00
+Balance - Ordenamiento final detectado: asc
+Balance - Validación exitosa del cambio bidireccional: asc
+Balance - Se encontraron 1 registros
+Balance - Datos de ejemplo: Bs 0.00
+Logging out user 2025-11-14T21:56:17.126Z
