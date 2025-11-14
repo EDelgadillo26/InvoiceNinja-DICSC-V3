@@ -17,7 +17,7 @@ export class LoginPage {
 
   //Selector para logOut
   private accountMenu = 'div.flex.items-center.space-x-3 > span.text-sm';
-  private accountMenuButton = '//button[contains(@class,"flex") and .//span[contains(text(),"DelgadilloPED")]]';
+  private accountMenuButton = '//button[contains(@class,"flex") and .//span[contains(text(),"DelgadilloPER")]]';
   private logoutButton = '//span[contains(text(), "Log Out")]';
 
 
