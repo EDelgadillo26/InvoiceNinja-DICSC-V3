@@ -388,5 +388,4 @@ test('IN-XXX: Módulo > Funcionalidad > Descripción específica', {
 ✅ Passed: 73
 ❌ Failed: 55
 ```
-
 *Para estadísticas actualizadas, ver el último reporte de Allure o GitHub Actions.*
