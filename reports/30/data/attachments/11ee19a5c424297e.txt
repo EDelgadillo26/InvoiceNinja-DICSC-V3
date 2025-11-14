@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:26:15.089Z
+Filling item field 2025-11-14T19:26:19.228Z
+Filling description field 2025-11-14T19:26:19.237Z
+Filling generic number field 2025-11-14T19:26:19.256Z
+Filling generic number field 2025-11-14T19:26:19.274Z
+Filling generic number field 2025-11-14T19:26:19.291Z
+Selecting tax category option 2025-11-14T19:26:19.308Z
+Clicking save button 2025-11-14T19:26:20.401Z
+Getting create confirmation text 2025-11-14T19:26:20.451Z
+Validating visibility of product: Oriental Cotton Tuna 2025-11-14T19:26:22.942Z
+Getting create confirmation text 2025-11-14T19:26:25.067Z
+Logging out user 2025-11-14T19:26:25.069Z

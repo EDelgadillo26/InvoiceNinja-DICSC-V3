@@ -1,0 +1,14 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:25:02.937Z
+Validating EnriqueCompany client visibility 2025-11-14T19:25:05.314Z
+Filling name field 2025-11-14T19:25:07.431Z
+Filling first name field 2025-11-14T19:25:07.741Z
+Filling last name field 2025-11-14T19:25:07.763Z
+Clicking save button 2025-11-14T19:25:07.787Z
+Getting create confirmation text 2025-11-14T19:25:09.850Z
+Validating Casper - Zieme client visibility 2025-11-14T19:25:10.363Z
+Filling name field 2025-11-14T19:25:12.546Z
+Getting name field value 2025-11-14T19:25:12.781Z
+Clicking save button 2025-11-14T19:25:12.788Z
+Getting edit confirmation text 2025-11-14T19:25:14.883Z
+Getting purge confirmation text 2025-11-14T19:25:16.646Z
+Logging out user 2025-11-14T19:25:17.446Z

@@ -1,0 +1,11 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:22:34.390Z
+Validating EnriqueCompany client visibility 2025-11-14T19:22:36.544Z
+Filling name field 2025-11-14T19:22:38.647Z
+Filling first name field 2025-11-14T19:22:38.972Z
+Filling last name field 2025-11-14T19:22:38.995Z
+Clicking save button 2025-11-14T19:22:39.024Z
+Getting create confirmation text 2025-11-14T19:22:41.105Z
+Validating Leuschke Group client visibility 2025-11-14T19:22:41.589Z
+Getting archive confirmation text 2025-11-14T19:22:43.714Z
+Getting purge confirmation text 2025-11-14T19:22:47.036Z
+Logging out user 2025-11-14T19:22:47.846Z

@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:25:35.996Z
+Filling item field 2025-11-14T19:25:40.809Z
+Filling description field 2025-11-14T19:25:40.821Z
+Filling generic number field 2025-11-14T19:25:40.839Z
+Filling generic number field 2025-11-14T19:25:40.858Z
+Filling generic number field 2025-11-14T19:25:40.876Z
+Selecting tax category option 2025-11-14T19:25:40.896Z
+Clicking save button 2025-11-14T19:25:41.988Z
+Getting create confirmation text 2025-11-14T19:25:42.040Z
+Validating visibility of product: Intelligent Granite Shirt 2025-11-14T19:25:42.530Z
+Getting create confirmation text 2025-11-14T19:25:45.487Z
+Logging out user 2025-11-14T19:25:45.490Z

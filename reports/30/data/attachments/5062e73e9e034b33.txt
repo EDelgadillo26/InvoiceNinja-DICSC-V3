@@ -1,0 +1,17 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:24:55.844Z
+Validating EnriqueCompany client visibility 2025-11-14T19:24:58.870Z
+Filling billing address 2025-11-14T19:25:00.987Z
+Clicking Billing Address address tab 2025-11-14T19:25:01.330Z
+Filling billing street field 2025-11-14T19:25:01.345Z
+Filling billing apt field 2025-11-14T19:25:01.354Z
+Filling billing city field 2025-11-14T19:25:01.366Z
+Filling billing state field 2025-11-14T19:25:01.376Z
+Filling billing postal code field 2025-11-14T19:25:01.384Z
+Clicking Shipping Address address tab 2025-11-14T19:25:01.396Z
+Clicking Copy button 2025-11-14T19:25:01.432Z
+Getting shipping street field value 2025-11-14T19:25:01.490Z
+Getting shipping apt/suite field value 2025-11-14T19:25:01.500Z
+Getting shipping city field value 2025-11-14T19:25:01.506Z
+Getting shipping state field value 2025-11-14T19:25:01.511Z
+Getting shipping postal code field value 2025-11-14T19:25:01.518Z
+Logging out user 2025-11-14T19:25:01.525Z

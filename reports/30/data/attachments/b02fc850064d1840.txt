@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:25:47.384Z
+Filling item field 2025-11-14T19:25:52.213Z
+Filling description field 2025-11-14T19:25:52.223Z
+Filling generic number field 2025-11-14T19:25:52.241Z
+Filling generic number field 2025-11-14T19:25:52.258Z
+Filling generic number field 2025-11-14T19:25:52.276Z
+Selecting tax category option 2025-11-14T19:25:52.294Z
+Clicking save button 2025-11-14T19:25:53.386Z
+Getting create confirmation text 2025-11-14T19:25:53.437Z
+Validating visibility of product: Bespoke Plastic Salad 2025-11-14T19:25:54.174Z
+Getting create confirmation text 2025-11-14T19:25:57.122Z
+Logging out user 2025-11-14T19:25:57.124Z

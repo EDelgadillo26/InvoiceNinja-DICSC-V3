@@ -1,0 +1,12 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:24:08.072Z
+Validating EnriqueCompany client visibility 2025-11-14T19:24:10.178Z
+Paid to Date - Ordenamiento inicial detectado: none
+Paid to Date - No tiene ordenamiento inicial aplicado
+Paid to Date - Nuevo ordenamiento detectado: desc
+Paid to Date - Validación exitosa después del primer clic: desc
+Paid to Date - Datos encontrados (primeros 3): $ 0.00
+Paid to Date - Ordenamiento final detectado: asc
+Paid to Date - Validación exitosa del cambio bidireccional: asc
+Paid to Date - Se encontraron 1 registros
+Paid to Date - Datos de ejemplo: $ 0.00
+Logging out user 2025-11-14T19:24:15.356Z

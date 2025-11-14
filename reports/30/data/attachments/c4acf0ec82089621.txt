@@ -1,0 +1,53 @@
+Logging in with email: edelgadillo@gmail.com 2025-11-14T19:25:23.696Z
+Logging out user 2025-11-14T19:25:24.864Z
+Logout failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('//button[contains(@class,"flex") and .//span[contains(text(),"DelgadilloPEF")]]') to be visible
+
+    at LoginPage.logOutUser (/home/runner/work/InvoiceNinja-DICSC-V3/InvoiceNinja-DICSC-V3/pages/login/loginPage.ts:77:23)
+    at /home/runner/work/InvoiceNinja-DICSC-V3/InvoiceNinja-DICSC-V3/tests/login/login.spec.ts:30:7 {
+  name: 'TimeoutError',
+  [Symbol(step)]: {
+    location: {
+      file: '/home/runner/work/InvoiceNinja-DICSC-V3/InvoiceNinja-DICSC-V3/pages/login/loginPage.ts',
+      line: 77,
+      column: 23,
+      function: 'LoginPage.logOutUser'
+    },
+    category: 'pw:api',
+    title: `Wait for selector locator('//button[contains(@class,"flex") and .//span[contains(text(),"DelgadilloPEF")]]')`,
+    apiName: 'page.waitForSelector',
+    params: {
+      selector: '//button[contains(@class,"flex") and .//span[contains(text(),"DelgadilloPEF")]]',
+      state: 'visible',
+      timeout: 10000
+    },
+    group: undefined,
+    stepId: 'pw:api@34',
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@34',
+      _title: `Wait for selector locator('//button[contains(@class,"flex") and .//span[contains(text(),"DelgadilloPEF")]]')`,
+      _parentStep: [TestStepInfoImpl],
+      skip: [Function (anonymous)]
+    },
+    complete: [Function: complete],
+    endWallTime: 1763148335867,
+    error: {
+      message: 'TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.\n' +
+        'Call log:\n' +
+        `\x1B[2m  - waiting for locator('//button[contains(@class,"flex") and .//span[contains(text(),"DelgadilloPEF")]]') to be visible\x1B[22m\n`,
+      stack: 'TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.\n' +
+        'Call log:\n' +
+        `\x1B[2m  - waiting for locator('//button[contains(@class,"flex") and .//span[contains(text(),"DelgadilloPEF")]]') to be visible\x1B[22m\n` +
+        '\n' +
+        '    at LoginPage.logOutUser (/home/runner/work/InvoiceNinja-DICSC-V3/InvoiceNinja-DICSC-V3/pages/login/loginPage.ts:77:23)\n' +
+        '    at /home/runner/work/InvoiceNinja-DICSC-V3/InvoiceNinja-DICSC-V3/tests/login/login.spec.ts:30:7',
+      cause: undefined
+    }
+  }
+}

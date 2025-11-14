@@ -1,0 +1,4 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:22:20.081Z
+Validating EnriqueCompany client visibility 2025-11-14T19:22:23.178Z
+Validating EnriqueCompany client visibility 2025-11-14T19:22:25.281Z
+Logging out user 2025-11-14T19:22:27.288Z

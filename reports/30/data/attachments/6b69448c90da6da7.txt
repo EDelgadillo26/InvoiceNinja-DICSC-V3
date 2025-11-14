@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:24:42.934Z
+Validating EnriqueCompany client visibility 2025-11-14T19:24:45.656Z
+Filling name field 2025-11-14T19:24:47.760Z
+Filling first name field 2025-11-14T19:24:48.059Z
+Filling last name field 2025-11-14T19:24:48.084Z
+Clicking save button 2025-11-14T19:24:48.111Z
+Getting create confirmation text 2025-11-14T19:24:50.182Z
+Validating Gibson, Bergstrom and Beatty client visibility 2025-11-14T19:24:50.689Z
+Getting purge confirmation text 2025-11-14T19:24:53.182Z
+Logging out user 2025-11-14T19:24:53.975Z

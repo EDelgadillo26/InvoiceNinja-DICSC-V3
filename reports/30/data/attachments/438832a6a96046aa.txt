@@ -1,0 +1,9 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:24:34.007Z
+Validating EnriqueCompany client visibility 2025-11-14T19:24:36.043Z
+Website - Ordenamiento inicial detectado: none
+Website - No tiene ordenamiento inicial aplicado
+Website - Nuevo ordenamiento detectado: none
+Website - Ordenamiento final detectado: none
+Website - Se encontraron 1 registros
+Website - Datos de ejemplo: www.EDelgadillo2002.com
+Logging out user 2025-11-14T19:24:41.161Z

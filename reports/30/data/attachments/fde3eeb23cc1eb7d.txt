@@ -1,0 +1,15 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:25:58.551Z
+Filling item field 2025-11-14T19:26:02.728Z
+Filling description field 2025-11-14T19:26:02.738Z
+Filling generic number field 2025-11-14T19:26:02.756Z
+Filling generic number field 2025-11-14T19:26:02.773Z
+Filling generic number field 2025-11-14T19:26:02.789Z
+Selecting tax category option 2025-11-14T19:26:02.806Z
+Clicking save button 2025-11-14T19:26:03.902Z
+Getting create confirmation text 2025-11-14T19:26:03.952Z
+Validating visibility of product: Small Cotton Table 2025-11-14T19:26:04.461Z
+Filling item field 2025-11-14T19:26:05.384Z
+Clicking save button 2025-11-14T19:26:05.700Z
+Getting edit confirmation text 2025-11-14T19:26:05.769Z
+Getting create confirmation text 2025-11-14T19:26:09.969Z
+Logging out user 2025-11-14T19:26:09.972Z

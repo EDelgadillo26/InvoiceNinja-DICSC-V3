@@ -1,0 +1,10 @@
+Logging in with email: EDelgadillo2002@gmail.com 2025-11-14T19:23:05.606Z
+Validating EnriqueCompany client visibility 2025-11-14T19:23:07.667Z
+Filling name field 2025-11-14T19:23:09.777Z
+Filling first name field 2025-11-14T19:23:10.074Z
+Filling last name field 2025-11-14T19:23:10.098Z
+Clicking save button 2025-11-14T19:23:10.124Z
+Getting create confirmation text 2025-11-14T19:23:12.188Z
+Validating Erdman, Kuphal and Heaney client visibility 2025-11-14T19:23:12.669Z
+Getting purge confirmation text 2025-11-14T19:23:16.450Z
+Logging out user 2025-11-14T19:23:17.249Z
