@@ -19,7 +19,6 @@ test.describe('Products Principal Page Tests', () => {
 
   test.beforeEach(async ({  }) => {
     await userTab.Login().loginToInvoiceNinja();
-
     // if (!staticDataExist) {
     //   await userTab.BaseNavigationPage().clickClients();
     //   const existsClientStatic = await userTab.Clients().isSpecificClientVisible('EnriqueCompany');
