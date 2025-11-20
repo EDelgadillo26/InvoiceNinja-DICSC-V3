@@ -1,0 +1,10 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:57:44.887Z
+Validating EnriqueCompany client visibility 2025-11-20T04:57:47.665Z
+Filling name field 2025-11-20T04:57:49.879Z
+Filling first name field 2025-11-20T04:57:50.177Z
+Filling last name field 2025-11-20T04:57:50.234Z
+Clicking save button 2025-11-20T04:57:50.282Z
+Getting create confirmation text 2025-11-20T04:57:52.403Z
+Validating Romaguera, O'Reilly and Wehner client visibility 2025-11-20T04:57:53.147Z
+Client Romaguera, O'Reilly and Wehner was not found after creation. 2025-11-20T04:57:55.166Z
+Logging out user 2025-11-20T04:57:55.317Z

@@ -1,0 +1,10 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:53:22.805Z
+Validating EnriqueCompany client visibility 2025-11-20T04:53:25.694Z
+Filling name field 2025-11-20T04:53:27.934Z
+Filling first name field 2025-11-20T04:53:28.293Z
+Filling last name field 2025-11-20T04:53:28.345Z
+Clicking save button 2025-11-20T04:53:28.428Z
+Getting create confirmation text 2025-11-20T04:53:30.558Z
+Validating Murphy - Hauck client visibility 2025-11-20T04:53:31.401Z
+Getting archive confirmation text 2025-11-20T04:53:33.540Z
+Logging out user 2025-11-20T04:53:45.908Z

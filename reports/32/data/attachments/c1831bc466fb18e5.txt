@@ -1,0 +1,12 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:59:49.350Z
+Filling item field 2025-11-20T04:59:53.144Z
+Filling description field 2025-11-20T04:59:53.153Z
+Filling generic number field 2025-11-20T04:59:53.170Z
+Filling generic number field 2025-11-20T04:59:53.189Z
+Filling generic number field 2025-11-20T04:59:53.207Z
+Selecting tax category option 2025-11-20T04:59:53.224Z
+Clicking save button 2025-11-20T04:59:54.297Z
+Getting create confirmation text 2025-11-20T04:59:54.348Z
+Validating visibility of product: Luxurious Bronze Bike 2025-11-20T04:59:56.831Z
+Getting create confirmation text 2025-11-20T04:59:58.928Z
+Logging out user 2025-11-20T04:59:58.931Z

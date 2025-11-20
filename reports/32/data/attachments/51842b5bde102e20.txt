@@ -1,0 +1,10 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:57:58.768Z
+Validating EnriqueCompany client visibility 2025-11-20T04:58:01.364Z
+Filling name field 2025-11-20T04:58:03.489Z
+Filling first name field 2025-11-20T04:58:03.825Z
+Filling last name field 2025-11-20T04:58:03.856Z
+Clicking save button 2025-11-20T04:58:03.888Z
+Getting create confirmation text 2025-11-20T04:58:05.969Z
+Validating Dooley, Dare and Ryan client visibility 2025-11-20T04:58:06.540Z
+Client Dooley, Dare and Ryan was not found after creation. 2025-11-20T04:58:08.544Z
+Logging out user 2025-11-20T04:58:08.694Z

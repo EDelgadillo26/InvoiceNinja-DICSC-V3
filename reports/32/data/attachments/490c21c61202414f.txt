@@ -1,0 +1,10 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:56:12.314Z
+Validating EnriqueCompany client visibility 2025-11-20T04:56:14.753Z
+Filling name field 2025-11-20T04:56:16.879Z
+Filling first name field 2025-11-20T04:56:17.206Z
+Filling last name field 2025-11-20T04:56:17.232Z
+Clicking save button 2025-11-20T04:56:17.257Z
+Getting create confirmation text 2025-11-20T04:56:19.341Z
+Validating Grant - Becker client visibility 2025-11-20T04:56:19.916Z
+Client Grant - Becker was not found after creation. 2025-11-20T04:56:21.923Z
+Logging out user 2025-11-20T04:56:22.064Z

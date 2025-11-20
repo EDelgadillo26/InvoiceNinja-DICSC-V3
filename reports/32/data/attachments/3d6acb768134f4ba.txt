@@ -1,0 +1,10 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:55:19.885Z
+Validating EnriqueCompany client visibility 2025-11-20T04:55:22.639Z
+Filling name field 2025-11-20T04:55:24.843Z
+Filling first name field 2025-11-20T04:55:25.132Z
+Filling last name field 2025-11-20T04:55:25.206Z
+Clicking save button 2025-11-20T04:55:25.259Z
+Getting create confirmation text 2025-11-20T04:55:27.375Z
+Validating Crona - Bruen client visibility 2025-11-20T04:55:28.083Z
+Client Crona - Bruen was not found after creation. 2025-11-20T04:55:30.112Z
+Logging out user 2025-11-20T04:55:30.254Z

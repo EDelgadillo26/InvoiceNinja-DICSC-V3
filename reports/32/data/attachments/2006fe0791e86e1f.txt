@@ -1,0 +1,12 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:59:11.893Z
+Filling item field 2025-11-20T04:59:16.498Z
+Filling description field 2025-11-20T04:59:16.512Z
+Filling generic number field 2025-11-20T04:59:16.534Z
+Filling generic number field 2025-11-20T04:59:16.556Z
+Filling generic number field 2025-11-20T04:59:16.577Z
+Selecting tax category option 2025-11-20T04:59:16.597Z
+Clicking save button 2025-11-20T04:59:17.685Z
+Getting create confirmation text 2025-11-20T04:59:17.736Z
+Validating visibility of product: Frozen Bronze Chicken 2025-11-20T04:59:18.285Z
+Getting create confirmation text 2025-11-20T04:59:21.283Z
+Logging out user 2025-11-20T04:59:21.286Z

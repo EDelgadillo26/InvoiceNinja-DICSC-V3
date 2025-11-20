@@ -1,0 +1,10 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:53:49.520Z
+Validating EnriqueCompany client visibility 2025-11-20T04:53:52.221Z
+Filling name field 2025-11-20T04:53:54.336Z
+Filling first name field 2025-11-20T04:53:54.656Z
+Filling last name field 2025-11-20T04:53:54.684Z
+Clicking save button 2025-11-20T04:53:54.711Z
+Getting create confirmation text 2025-11-20T04:53:56.796Z
+Validating Barrows, Bogisich and Dooley client visibility 2025-11-20T04:53:57.436Z
+Getting archive confirmation text 2025-11-20T04:53:59.544Z
+Logging out user 2025-11-20T04:54:11.737Z

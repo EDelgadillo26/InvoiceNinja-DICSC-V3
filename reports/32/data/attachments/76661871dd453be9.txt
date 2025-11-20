@@ -1,0 +1,12 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:59:23.166Z
+Filling item field 2025-11-20T04:59:27.974Z
+Filling description field 2025-11-20T04:59:27.984Z
+Filling generic number field 2025-11-20T04:59:28.003Z
+Filling generic number field 2025-11-20T04:59:28.025Z
+Filling generic number field 2025-11-20T04:59:28.044Z
+Selecting tax category option 2025-11-20T04:59:28.077Z
+Clicking save button 2025-11-20T04:59:29.167Z
+Getting create confirmation text 2025-11-20T04:59:29.219Z
+Validating visibility of product: Gorgeous Silk Shirt 2025-11-20T04:59:29.776Z
+Getting create confirmation text 2025-11-20T04:59:32.766Z
+Logging out user 2025-11-20T04:59:32.769Z

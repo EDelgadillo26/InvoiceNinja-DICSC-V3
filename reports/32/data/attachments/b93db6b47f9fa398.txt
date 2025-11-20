@@ -1,0 +1,12 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:57:15.354Z
+Validating EnriqueCompany client visibility 2025-11-20T04:57:17.029Z
+Last Login - Ordenamiento inicial detectado: none
+Last Login - No tiene ordenamiento inicial aplicado
+Last Login - Nuevo ordenamiento detectado: desc
+Last Login - Validación exitosa después del primer clic: desc
+Last Login - Datos encontrados (primeros 3): 
+Last Login - Ordenamiento final detectado: asc
+Last Login - Validación exitosa del cambio bidireccional: asc
+Last Login - Se encontraron 0 registros
+Last Login - Columna sin datos visibles
+Logging out user 2025-11-20T04:57:22.186Z

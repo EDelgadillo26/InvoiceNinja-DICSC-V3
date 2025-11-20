@@ -1,0 +1,12 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:57:07.059Z
+Validating EnriqueCompany client visibility 2025-11-20T04:57:08.765Z
+Date Created - Ordenamiento inicial detectado: none
+Date Created - No tiene ordenamiento inicial aplicado
+Date Created - Nuevo ordenamiento detectado: desc
+Date Created - Validación exitosa después del primer clic: desc
+Date Created - Datos encontrados (primeros 3): 14/Nov/2025
+Date Created - Ordenamiento final detectado: asc
+Date Created - Validación exitosa del cambio bidireccional: asc
+Date Created - Se encontraron 1 registros
+Date Created - Datos de ejemplo: 14/Nov/2025
+Logging out user 2025-11-20T04:57:13.937Z

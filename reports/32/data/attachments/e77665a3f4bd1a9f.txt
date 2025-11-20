@@ -1,0 +1,17 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:58:11.198Z
+Validating EnriqueCompany client visibility 2025-11-20T04:58:13.697Z
+Filling billing address 2025-11-20T04:58:15.858Z
+Clicking Billing Address address tab 2025-11-20T04:58:16.187Z
+Filling billing street field 2025-11-20T04:58:16.209Z
+Filling billing apt field 2025-11-20T04:58:16.218Z
+Filling billing city field 2025-11-20T04:58:16.228Z
+Filling billing state field 2025-11-20T04:58:16.240Z
+Filling billing postal code field 2025-11-20T04:58:16.263Z
+Clicking Shipping Address address tab 2025-11-20T04:58:16.274Z
+Clicking Copy button 2025-11-20T04:58:16.311Z
+Getting shipping street field value 2025-11-20T04:58:16.364Z
+Getting shipping apt/suite field value 2025-11-20T04:58:16.374Z
+Getting shipping city field value 2025-11-20T04:58:16.381Z
+Getting shipping state field value 2025-11-20T04:58:16.387Z
+Getting shipping postal code field value 2025-11-20T04:58:16.393Z
+Logging out user 2025-11-20T04:58:16.399Z

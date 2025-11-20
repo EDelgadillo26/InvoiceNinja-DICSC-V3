@@ -1,0 +1,15 @@
+Logging in with email: diplotest@gmail.com 2025-11-20T04:59:34.212Z
+Filling item field 2025-11-20T04:59:38.139Z
+Filling description field 2025-11-20T04:59:38.152Z
+Filling generic number field 2025-11-20T04:59:38.172Z
+Filling generic number field 2025-11-20T04:59:38.194Z
+Filling generic number field 2025-11-20T04:59:38.212Z
+Selecting tax category option 2025-11-20T04:59:38.230Z
+Clicking save button 2025-11-20T04:59:39.333Z
+Getting create confirmation text 2025-11-20T04:59:39.382Z
+Validating visibility of product: Fantastic Cotton Bacon 2025-11-20T04:59:39.776Z
+Filling item field 2025-11-20T04:59:40.755Z
+Clicking save button 2025-11-20T04:59:41.054Z
+Getting edit confirmation text 2025-11-20T04:59:41.128Z
+Getting create confirmation text 2025-11-20T04:59:44.713Z
+Logging out user 2025-11-20T04:59:44.716Z
